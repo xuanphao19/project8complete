@@ -1,0 +1,9 @@
+<svg id="product23svg" viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M14.4019 4.5C15.5566 2.5 18.4434 2.5 19.5981 4.5L29.1244 21C30.2791 23 28.8357 25.5 26.5263 25.5H7.47372C5.16432 25.5 3.72094 23 4.87564 21L14.4019 4.5Z" fill="#F94545"/>
+  <path d="M14.4019 4.5C15.5566 2.5 18.4434 2.5 19.5981 4.5L29.1244 21C30.2791 23 28.8357 25.5 26.5263 25.5H7.47372C5.16432 25.5 3.72094 23 4.87564 21L14.4019 4.5Z" fill="white" fill-opacity="0.3"/>
+  <path d="M23.7 19H13.3C12.582 19 12 19.5756 12 20.2857V26.7143C12 27.4244 12.582 28 13.3 28H23.7C24.418 28 25 27.4244 25 26.7143V20.2857C25 19.5756 24.418 19 23.7 19Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M33 19H28C27.4477 19 27 19.582 27 20.3V30.7C27 31.418 27.4477 32 28 32H33C33.5523 32 34 31.418 34 30.7V20.3C34 19.582 33.5523 19 33 19Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M30.5 22.5H30.51" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M15 32H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18.5 28V32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
