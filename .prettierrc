@@ -17,14 +17,5 @@
   "trailingComma": "all",
   "useTabs": false,
   "html.format.extraLiners": "body",
-  "vueIndentScriptAndStyle": false,
-  "overrides": [
-    {
-      "files": ["publicRoutes.tsx", "index.html", "App.jsx"],
-      "options": {
-        "htmlWhitespaceSensitivity": "css",
-        "singleAttributePerLine": false
-      }
-    }
-  ]
+  "vueIndentScriptAndStyle": false
 }
