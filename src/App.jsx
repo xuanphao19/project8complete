@@ -1,41 +1,41 @@
-import { useState } from "react";
-import reactLogo from "./assets/favicon.ico";
-import viteLogo from "./assets/favicon.ico";
-import "./App.css";
+import { useEffect, useMemo } from "react";
+import { createRoutesFromElements as routers } from "react-router-dom";
+import { createBrowserRouter as create, RouterProvider } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { Loading as Spinner } from "@/component";
+import protectedRoute from "./routes/protectedRoute";
+import publicRoute from "./routes/publicRoutes";
+import nested from "./routes/router.tsx";
+import { removePreloader, selectElement } from "@/utils";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { user, theme } = useSelector((state) => state.app);
+  const isVip = user && user.isVip;
+
+  const pages = useMemo(() => {
+    return isVip ? [...protectedRoute, ...publicRoute] : [...publicRoute];
+  }, [isVip]);
+
+  useEffect(() => {
+    removePreloader(".spinner");
+  }, []);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    if (html && theme.theme && theme.theme !== html.getAttribute("data-bs-theme")) {
+      html.setAttribute("data-bs-theme", theme.theme);
+    }
+  }, [theme.theme]);
+
+  const routerNested = useMemo(() => create(routers(nested(isVip, pages))), [isVip, pages]);
+
   return (
-    <>
-      <div>
-        <a
-          href="https://vitejs.dev"
-          target="_blank">
-          <img
-            src={viteLogo}
-            className="logo"
-            alt="Vite logo"
-          />
-        </a>
-        <a
-          href="https://react.dev"
-          target="_blank">
-          <img
-            src={reactLogo}
-            className="logo react"
-            alt="React logo"
-          />
-        </a>
+    routerNested && (
+      <div id="app" className="app bg-body">
+        <RouterProvider router={routerNested} fallbackElement={<Spinner />} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    )
   );
 }
 

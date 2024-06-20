@@ -1,14 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>project8 Complete</title>
   </head>
 
   <body>
     <div id="root"></div>
+    <div class="spinner">
+      <style>
+        .spinner {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          translate: -50% -50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 200px;
+          height: 200px;
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><radialGradient id="a8" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset="0" stop-color="%230CC6FF"></stop><stop offset=".3" stop-color="%230CC6FF" stop-opacity=".9"></stop><stop offset=".6" stop-color="%230CC6FF" stop-opacity=".6"></stop><stop offset=".8" stop-color="%230CC6FF" stop-opacity=".3"></stop><stop offset="1" stop-color="%230CC6FF" stop-opacity="0"></stop></radialGradient><circle transform-origin="center" fill="none" stroke="url(%23a8)" stroke-width="15" stroke-linecap="round" stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="1" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform></circle><circle transform-origin="center" fill="none" opacity=".2" stroke="%230CC6FF" stroke-width="15" stroke-linecap="round" cx="100" cy="100" r="70"></circle></svg>');
+          background-repeat: no-repeat;
+          transform: scaleX(-1);
+        }
+        .spinner .csvg {
+          color: #0cc6ff;
+          font-size: 24px !important;
+          transform: scaleX(-1);
+        }
+      </style>
+      <div class="csvg">Loading...!</div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

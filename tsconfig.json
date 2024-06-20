@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*", ""],
+      "routes/*": ["./src/routes/*"],
+      "@component/*": ["./src/component/*"],
+      "@common/*": ["./src/component/common/*"]
+    }
+  }
+}

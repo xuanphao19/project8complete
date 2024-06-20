@@ -20,14 +20,7 @@
   "vueIndentScriptAndStyle": false,
   "overrides": [
     {
-      "files": ["publicRoutes.tsx"],
-      "options": {
-        "htmlWhitespaceSensitivity": "css",
-        "singleAttributePerLine": false
-      }
-    },
-    {
-      "files": ["index.html"],
+      "files": ["publicRoutes.tsx", "index.html", "App.jsx"],
       "options": {
         "htmlWhitespaceSensitivity": "css",
         "singleAttributePerLine": false

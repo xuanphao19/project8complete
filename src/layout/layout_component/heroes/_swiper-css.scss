@@ -1,0 +1,103 @@
+// .swiper {
+//   border-radius: 1.2rem;
+//   overflow: hidden;
+//   padding-top: calc(28vh + 2vw);
+//   box-shadow: 1px 1px 111px 1px rgba(13, 110, 253, 0.22);
+//   .title {
+//     padding: 0 !important;
+//   }
+//   & .swiper-wrapper {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     min-height: 100% !important;
+//     height: 100% !important;
+//   }
+
+//   .carousel,
+//   & content div {
+//     height: inherit;
+//     height: 100%;
+//     padding: 0;
+//     min-height: 100%;
+//   }
+//   .carousel {
+//     margin: 0;
+//     padding: 0;
+//     overflow: hidden;
+//   }
+//   .carousel3,
+//   .carousel1 {
+//     background: url("src/assets/images/Ve-tranh-thuy-mac.jpg") no-repeat center 40% / cover;
+//   }
+//   .carousel4,
+//   .carousel6 {
+//     background: url("src/assets/images/hero-bgr.jpg") no-repeat center center / cover;
+//   }
+//   & .carousel2 {
+//     background: url("src/assets/images/hero-bgr1.jpg") no-repeat center center / cover;
+//   }
+//   & .carousel5 {
+//     background: url("src/assets/images/coffee5.jpg") no-repeat center center / cover;
+//   }
+//   .title {
+//    
+//     text-shadow: -2px 4px 6px black;
+//     text-transform: uppercase;
+//   }
+//   .hero-bgr-right {
+//     .coffee {
+//       width: 48%;
+//       right: 20%;
+//       bottom: 14%;
+//       object-fit: scale-down;
+//       filter: drop-shadow(-50px 30px 80px #f6652cbf);
+//     }
+//     .coffee-bg4,
+//     .coffee0 {
+//       filter: drop-shadow(-50px 30px 80px #f6652cbf) drop-shadow(-6px 4px 4px rgba(0, 0, 0, 0.597)) invert(1);
+//     }
+//     .coffee3,
+//     .coffee-bg2,
+//     .coffee-bg3,
+//     .coffee-bg0 {
+//       filter: drop-shadow(-50px 30px 80px rgba(95, 224, 255, 0.839)) drop-shadow(-6px 4px 4px rgba(0, 0, 0, 0.471));
+//     }
+//     .coffee5,
+//     .coffee-bg1 {
+//       filter: drop-shadow(-50px 30px 80px rgba(248, 192, 186, 0.839)) drop-shadow(-6px 4px 4px rgba(0, 0, 0, 0.471));
+//     }
+//   }
+//   .right-item {
+//     overflow-y: clip;
+//   }
+// }
+// .swiper-pagination {
+//   display: flex;
+//   align-items: center;
+//   justify-content: start;
+//   position: absolute;
+//   width: 100%;
+//   height: 20px;
+//   bottom: 20px;
+//   z-index: 99999;
+//   margin-left: 50px;
+//   gap: 2px;
+//   .swiper-pagination-bullet {
+//     display: inline-flex;
+//     height: 6px;
+//     width: 30px;
+//     background: blue;
+//     border-radius: 999px;
+//   }
+// }
+// .swiper-button {
+//   height: 30px;
+//   width: 30px;
+//   z-index: 99999;
+// }
+// .swiper-button-prev:after,
+// .swiper-button-next:after {
+//   width: 20px;
+//   color: #f6652cbf;
+// }
