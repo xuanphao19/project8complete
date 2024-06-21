@@ -1,11 +1,11 @@
 // router.tsx
-import React from "react";
-import { Route } from "react-router-dom";
+import React from 'react';
+import { Route } from 'react-router-dom';
 
-import { layoutSwitcher } from "@/layout";
-import Root, { loader as rootLoader } from "./Root";
+import { layoutSwitcher } from '@/layout';
+import Root, { loader as rootLoader } from './Root';
 
-import { HomePage, InviteLogIn, ErrorPages, Welcome } from "@/pages";
+import { HomePage, InviteLogIn, ErrorPages, Welcome } from '@/pages';
 
 interface UI {
   id?: string;
@@ -23,16 +23,17 @@ interface UI {
 const nestedRoutes = (isVip: boolean, data: UI[]): JSX.Element => {
   return (
     <Route
-      id="root"
-      path={"/"}
+      id='root'
+      path={'/'}
       element={<Root />}
-      errorElement={<ErrorPages />}
-      loader={rootLoader}>
+      // errorElement={<ErrorPages />}
+      loader={rootLoader}
+    >
       {data.map((page, i) => {
         const Layouts: React.JSX.Element = layoutSwitcher(page.layout);
         const childrenPages = isVip && page.children && page.children;
         const Pages = page.component;
-        const path = !page.access ? page.path : page.access === "private" && isVip ? page.path : "";
+        const path = !page.access ? page.path : page.access === 'private' && isVip ? page.path : '';
         const loader = page.loader;
         const action = page.action;
         return (
@@ -41,7 +42,8 @@ const nestedRoutes = (isVip: boolean, data: UI[]): JSX.Element => {
             id={page.id ? `layouts-${page.id}` : null}
             element={Layouts}
             loader={loader}
-            action={action}>
+            action={action}
+          >
             <Route
               index={true}
               element={<HomePage />}
@@ -49,19 +51,20 @@ const nestedRoutes = (isVip: boolean, data: UI[]): JSX.Element => {
             <Route
               id={page.id ? `${page.id}` : `${page.path}`}
               path={path}
-              errorElement={<ErrorPages />}
+              // errorElement={<ErrorPages />}
               element={<Pages />}
               loader={loader}
-              action={page.action}>
+              action={page.action}
+            >
               {childrenPages && generateRoutes(childrenPages)}
             </Route>
           </Route>
         );
       })}
-      <Route
+      {/* <Route
         path="*"
         element={!isVip ? <InviteLogIn /> : <Welcome />}
-      />
+      /> */}
     </Route>
   );
 };
@@ -76,7 +79,8 @@ const generateRoutes = (childrenPages: UI[]): JSX.Element[] => {
         path={page.path}
         element={<Page />}
         loader={page.loader}
-        action={page.action}>
+        action={page.action}
+      >
         {page.children && generateRoutes(page.children)}
       </Route>
     );
