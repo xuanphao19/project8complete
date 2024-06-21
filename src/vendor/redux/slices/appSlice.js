@@ -15,10 +15,28 @@ import { updatedData } from '@/vendor/';
 //   data: data.productsData.Grocery,
 // };
 
+const initialState = {
+  favorites: [],
+  cart: [],
+  user: {},
+  theme: {},
+  data: [],
+  status: 'idle',
+  error: null,
+};
+
 const appSlice = createSlice({
   name: 'app',
-  initialState: await fetchGlobalsData(),
+  initialState,
   reducers: {
+    setInitialData: (state, action) => {
+      state.favorites = action.payload.favoritesData;
+      state.cart = action.payload.cartData;
+      state.user = action.payload.userData;
+      state.theme = action.payload.themeData;
+      state.data = action.payload.productsData.Grocery;
+      state.status = 'succeeded';
+    },
     toggleTheme: (state) => {
       state.theme = state.theme === 'light' ? 'dark' : 'light';
     },
@@ -108,6 +126,7 @@ export const {
   toggleTheme,
   setTheme,
   updatedProducts,
+  setInitialData,
 } = appSlice.actions;
 
 export default appSlice.reducer;

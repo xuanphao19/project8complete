@@ -24,7 +24,7 @@ const HeaderSites = ({
   const favorites = useSelector((state: RootState) => state.app.favorites);
   const [exactPath, setExactPath] = useState(matchPath);
   const [favoriteData, setFavoriteData] = useState();
-  const user = useSelector((state: RootState) => state.app.userData);
+  const user = useSelector((state: RootState) => state.app.user);
   const [isVip, setIsVip] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>('');
   const [avatarUrl, setAvatarUrl] = useState<string>('');

@@ -12,6 +12,7 @@ export {
   toggleTheme,
   setTheme,
   updatedProducts,
+  setInitialData,
 } from './redux/slices/appSlice';
 export { RootState } from './redux/store';
 export { default as ReactMagnifier } from './reactMagnifier/ReactMagnifier';
