@@ -1,8 +1,8 @@
-import axios from "axios";
-import { createGlobalsData, getData } from "@/vendor/";
-import { getRandomItems } from "@/utils";
+import axios from 'axios';
+import { createGlobalsData, getData } from '@/vendor/';
+import { getRandomItems } from '@/utils';
 
-const dataURL = "/src/api/storage.json";
+const dataURL = '/src/api/storage.json';
 
 // Load data from file or API
 const loadProductDataFromFile = async () => {
@@ -16,7 +16,7 @@ const getGlobalsData = async () => {
     const data = await loadProductDataFromFile();
     return data;
   } catch (error) {
-    console.error("Failed to load data from file:", error);
+    console.error('Failed to load data from file:', error);
     // Fallback to fetching data from the API
     return axios.get(dataURL);
   }
@@ -29,7 +29,7 @@ const fetchGlobalsData = async () => {
 
     return localeData;
   } catch (error) {
-    console.error("Failed to fetchGlobalsData from file fetch.js:", error);
+    console.error('Failed to fetchGlobalsData from file fetch.js:', error);
   }
 };
 
@@ -38,7 +38,7 @@ const fetchLoaderRootData = async () => {
     const localeData = await createGlobalsData();
     return localeData;
   } catch (error) {
-    console.error("Failed to fetchGlobalsData from file fetch.js:", error);
+    console.error('Failed to fetchGlobalsData from file fetch.js:', error);
   }
 };
 
@@ -47,22 +47,22 @@ const fetchData = async (key, id, quantity = 0) => {
     const data = await getData(key, id, quantity);
     return data;
   } catch (error) {
-    console.error("Failed to fetchData from file fetch.js:", error);
+    console.error('Failed to fetchData from file fetch.js:', error);
   }
 };
 
-const fetchRandomItems = async (key = "productsData", quantity = 1) => {
+const fetchRandomItems = async (key = 'productsData', quantity = 1) => {
   try {
     const data = await getData(key);
     let dataRandom;
     if (data) {
       dataRandom = await getRandomItems(quantity, data.Grocery);
     } else {
-      "Not found data of" + key;
+      'Not found data of' + key;
     }
     return dataRandom;
   } catch (error) {
-    console.error("Failed to fetchData from file fetch.js:", error);
+    console.error('Failed to fetchData from file fetch.js:', error);
   }
 };
 
