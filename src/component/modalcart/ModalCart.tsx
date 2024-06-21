@@ -61,7 +61,7 @@ const ContentModalCart = memo(({ data, handleOnHide }: { data?: any; handleOnHid
                 src={
                   i === 1
                     ? 'https://files.fullstack.edu.vn/f8-prod/user_avatars/36050/649fc3c653f2c.png'
-                    : `/src/assets/images/product/product${product.id}.png`
+                    : `./src/assets/images/product/product${product.id}.png`
                 }
                 contentClass='w-100 px-2 d-flex flex-column justify-content-between flex-grow-1'
                 cardTitle={() => <h3 className='card-title py-3 fs-4 fw-normal'>{`${product.name}`}</h3>}

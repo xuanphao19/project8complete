@@ -11,7 +11,6 @@ const keys = [USER_KEY, THEME_KEY, PRODUCTS_KEY, FAVORITES_KEY, CART_KEY];
 
 /* ==== GlobalsData ===== */
 const createGlobalsData = async (data) => {
-  console.log(data, 'in createGlobalsData');
   try {
     const localeDataPromises = keys.map(async (key) => {
       await fakeNetwork(key);

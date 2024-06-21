@@ -1,13 +1,12 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
-import { AutoScrollToTop } from "@/utils";
-import { BackToTop } from "@/component/";
-import { fetchLoaderRootData } from "@/api";
+import { AutoScrollToTop } from '@/utils';
+import { BackToTop } from '@/component/';
+import { fetchLoaderRootData } from '@/api';
 
 export const loader = async () => {
-  const data = await fetchLoaderRootData();
-
+  const data = await fetchLoaderRootData(); 
   return data;
 };
 
