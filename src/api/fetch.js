@@ -2,13 +2,23 @@ import axios from 'axios';
 import { createGlobalsData, getData } from '@/vendor/';
 import { getRandomItems } from '@/utils';
 
-const dataURL = '/src/api/storage.json';
-
+const dataURL = '/storage.json';
+// const dataURL = '/src/api/storage.json';
+// https://project8complete.vercel.app/src/api/storage.json  404 (Not Found)
 // Load data from file or API
+
 const loadProductDataFromFile = async () => {
-  const response = await fetch(dataURL);
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(dataURL);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch globals data:', error);
+    return null;
+  }
 };
 
 const getGlobalsData = async () => {
