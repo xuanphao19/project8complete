@@ -35,7 +35,7 @@ const ProductResults = () => {
                   thumbClass="position-relative pt-100 rounded-top-5"
                   linkClass="position-absolute inset-full flex-center p-4 border-bottom"
                   imgClass="object-fit-contain rounded-4"
-                  src={`/src/assets/images/product/product${product.id}.png`}
+                  src={`/assets/images/product/product${product.id}.png`}
                   contentClass="w-100 py-4 d-flex flex-column justify-content-between flex-grow-1"
                   cardTitle={() => <h3 className="card-title text-body text-opacity-75">{`${product.desc}`}</h3>}
                   cardBody={() => (

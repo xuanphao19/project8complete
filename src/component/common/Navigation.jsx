@@ -40,7 +40,7 @@ const Navigation = ({ type = "nav", links, navClass, className, itemClass, linkC
           icons = link.id && (
             <Image
               className={iconClass}
-              src={`/src/assets/images/product/product${link.id}.png`}
+              src={`/assets/images/product/product${link.id}.png`}
             />
           );
           return (

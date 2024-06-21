@@ -50,7 +50,7 @@ const ProductFastFilter = () => {
                     className="fast-result flex-center w-100 rounded-4 bg-secondary-subtle shadow-sm">
                     <span className="thumb bg-body p-3">
                       <Image
-                        src={`/src/assets/images/product/product${product.id}.png`}
+                        src={`/assets/images/product/product${product.id}.png`}
                         alt="Image"
                       />
                     </span>
