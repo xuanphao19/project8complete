@@ -28,7 +28,7 @@ const ProductDetails = () => {
   return (
     <Fragment>
       <MainSection
-        id='product-details'
+        id='details'
         name='section'
         className=''
       >

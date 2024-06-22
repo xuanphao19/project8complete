@@ -2,3 +2,5 @@ export { DownloadButton, DownloadPage, NotFoundPage, ErrorPages, UploadPage } fr
 export { Welcome, InviteLogIn, HomePage } from "./home";
 
 export * as HomePages from "./home";
+export { ProductPage } from "./products";
+export { ContactPage } from "./contact";

@@ -4,8 +4,10 @@ import { Form, useFetcher, useMatch } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 import { TippyModal } from "@/vendor";
-import { dataInput, cityName } from "@/api";
+import { cityName } from "@/api";
 import { IconSvg, FormInput, FormInputSelect } from "@/component/";
+
+const dataInput = [];
 
 const UpdateAddress = forwardRef(({ children, newContent }, ref) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

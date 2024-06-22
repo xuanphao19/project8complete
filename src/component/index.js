@@ -12,8 +12,9 @@ export {
   MenuLists,
   MultiLevelMenu,
   AvatarUploader,
-} from "./common";
-export { FormInput, InputRangeDouble, FormInputSelect, multiUseCheckbox, CountProducts } from "./comp_form/";
-export { ViewFavourite as FavouritePage, FavouriteModal } from "./favourite";
-export { ModalCartDetail, ModalCartBtn, ModalCart } from "./modalcart";
-export { CategoriesCards } from "./cards";
+  ContactInfo,
+} from './common';
+export { FormInput, InputRangeDouble, FormInputSelect, multiUseCheckbox, CountProducts } from './comp_form/';
+export { ViewFavourite as FavouritePage, FavouriteModal } from './favourite';
+export { ModalCartDetail, ModalCartBtn, ModalCart } from './modalcart';
+export { CategoriesCards } from './cards';

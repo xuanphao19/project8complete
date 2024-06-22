@@ -1,4 +1,6 @@
-export { default as ProductPage, ProductHeader } from "./ProductPage";
+// export { default as ProductPage, ProductHeader } from "./ProductPage";
+export { default as ProductPage } from "./ProductPage";
+
 export { default as NavSidebar } from "./NavSidebar";
 export { loader as loaderProduct } from "./ProductPage";
 export { loader as loaderFastFilter } from "./ProductFastFilter";

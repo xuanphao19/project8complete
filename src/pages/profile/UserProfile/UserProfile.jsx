@@ -1,5 +1,5 @@
 // // UserProfile.js
-import React, { useState, useEffect, memo, useCallback, useRef } from 'react';
+import React, { useState, useEffect, memo, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Row from 'react-bootstrap/Row';
@@ -40,7 +40,7 @@ const UserProfile = memo(() => {
   const navigate = useNavigate();
   const refUpdate = useRef(null);
   const refUpdateAddress = useRef(null);
-  const { user, theme } = useSelector((state) => state.app);
+  const { theme } = useSelector((state) => state.app);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -296,23 +296,3 @@ const UserProfile = memo(() => {
 });
 
 export default UserProfile;
-
-// /*
-// Ảnh Đại Diện:
-// Hình ảnh đại diện của người dùng để tạo sự cá nhân hóa.
-
-// Thông Tin Cá Nhân:
-// Hiển thị thông tin chi tiết về người dùng như tên, địa chỉ email, ngày sinh, và các thông tin khác.
-
-// Chức Năng Chỉnh Sửa:
-// Các nút hoặc tùy chọn để người dùng có thể chỉnh sửa thông tin cá nhân của mình.
-
-// Quản Lý Tài Khoản:
-// Các chức năng quản lý tài khoản như đổi mật khẩu, cài đặt bảo mật, hoặc quản lý cài đặt.
-
-// Lịch Sử Giao Dịch (nếu là trang thương mại điện tử):
-// Hiển thị lịch sử giao dịch và đơn hàng của người dùng.
-
-// Cài Đặt Ngôn Ngữ và Khu Vực:
-// Các tùy chọn liên quan đến ngôn ngữ và khu vực hiển thị.
-// */

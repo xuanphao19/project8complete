@@ -38,7 +38,7 @@ body {
 .offcanvas-backdrop.show {
   z-index: 99999999999 !important;
 }
-.offcanvas[role="dialog"] {
+.offcanvas[role='dialog'] {
   z-index: 999999999999 !important;
 }
 ::after,
@@ -126,8 +126,8 @@ section {
   display: block;
 }
 section,
-[id^="section"],
-[class^="section"] {
+[id^='section'],
+[class^='section'] {
   width: 100%;
 }
 img,
@@ -223,7 +223,7 @@ input[data-autocompleted] {
   opacity: 1;
   visibility: visible;
 }
-[role="link"],
+[role='link'],
 .icon-btn {
   cursor: pointer;
   z-index: 999;
@@ -537,7 +537,7 @@ input[data-autocompleted] {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 99;
+  z-index: 9;
   background-color: rgba(var(--bs-black-rgb), var(--bs-bg-opacity)) !important;
 }
 .anchor-point {
@@ -593,7 +593,7 @@ body {
 .group-items .thumb {
   --body-bg-rgb: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important;
 }
-[data-bs-theme="dark"] body {
+[data-bs-theme='dark'] body {
   --filter-form-shadow: rgba(0, 0, 0, 0.8);
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
 }

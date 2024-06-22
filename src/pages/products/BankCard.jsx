@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 
 import { IconSvg, FormInput } from "@/component/";
-import { dataPayment } from "@/api/";
+// import { dataPayment } from "@/api/";
+const dataPayment = [];
 
 const BankCard = ({ className, onClick }) => {
   const lastNameRef = useRef(null);

@@ -10,6 +10,7 @@ import { Outlet, useLocation, Link } from "react-router-dom";
 
 import { MainSection } from "@/component";
 import { Heroes } from "@/layout";
+import { ContactPage } from "@/pages";
 
 const Home = () => {
   const location = useLocation();
@@ -37,13 +38,12 @@ const Home = () => {
           />
           {/* <ProductFastFilter /> */}
           {exactly && (
-            <div className="product-navigation d-lg-none d-flex mb-4 mt-3 bg-secondary bg-opacity-25 border-opacity-25 border-primary rounded-3">
+            <div className="product-navigation d-lg-none d-flex mb-4 mt-3 bg-secondary bg-opacity-25 border-opacity-25 border-primary rounded-3 vh-70">
               {/* <NavSidebar groupClass="d-flex gap-2 py-2" /> */}
             </div>
           )}
-          <div className="outlet-home">
-            <Outlet />
-          </div>
+          <div className="d-flex mb-4 mt-3 bg-secondary bg-opacity-25 border-opacity-25 border-primary rounded-3 vh-60">1</div>
+          <Outlet />
         </div>
       </MainSection>
       <Link
@@ -55,6 +55,7 @@ const Home = () => {
         className="d-flex justify-content-center w-100 p-3 bg-secondary">
         the docs at reactrouter.com.
       </Link>
+      <ContactPage />
     </Fragment>
   );
 };

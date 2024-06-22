@@ -1,16 +1,15 @@
-import { useEffect, useMemo } from 'react';
-import { createRoutesFromElements as routers } from 'react-router-dom';
-import { createBrowserRouter as create, RouterProvider } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useMemo } from "react";
+import { createRoutesFromElements as routers } from "react-router-dom";
+import { createBrowserRouter as create, RouterProvider } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { setInitialData } from '@/vendor';
-import { fetchGlobalsData } from '@/api';
-
-import { Loading as Spinner } from '@/component';
-import protectedRoute from './routes/protectedRoute';
-import publicRoute from './routes/publicRoutes';
-import nested from './routes/router.tsx';
-import { removePreloader } from '@/utils';
+import { setInitialData } from "@/vendor";
+import { fetchGlobalsData } from "@/api";
+import { Loading as Spinner } from "@/component";
+import protectedRoute from "./routes/protectedRoute";
+import publicRoute from "./routes/publicRoutes";
+import nested from "./routes/router.tsx";
+import { removePreloader } from "@/utils";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,13 +21,12 @@ function App() {
         const data = await fetchGlobalsData();
         dispatch(setInitialData(data));
       } catch (error) {
-        console.error('Failed to fetch initial data:', error);
+        console.error("Failed to fetch initial data:", error);
       }
     };
-
-    fetchData();
-    // if (status === 'idle') {
-    // }
+    if (status === "idle") {
+      fetchData();
+    }
   }, []);
 
   const isVip = user && user?.isVip;
@@ -37,13 +35,13 @@ function App() {
   }, [isVip]);
 
   useEffect(() => {
-    removePreloader('.spinner');
+    removePreloader(".spinner");
   }, []);
 
   useEffect(() => {
     const html = document.documentElement;
-    if (html && theme.theme && theme.theme !== html.getAttribute('data-bs-theme')) {
-      html.setAttribute('data-bs-theme', theme.theme);
+    if (html && theme.theme && theme.theme !== html.getAttribute("data-bs-theme")) {
+      html.setAttribute("data-bs-theme", theme.theme);
     }
   }, [theme.theme]);
 
@@ -52,9 +50,8 @@ function App() {
   return (
     routerNested && (
       <div
-        id='app'
-        className='app bg-body'
-      >
+        id="app"
+        className="app bg-body">
         <RouterProvider
           router={routerNested}
           fallbackElement={<Spinner />}

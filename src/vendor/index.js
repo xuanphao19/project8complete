@@ -1,5 +1,5 @@
-export { default as TippyModal } from './tippy/TippyModalCustom';
-export { default as saveUserAuth, createGlobalsData, getData, clearData, updatedData, removeProducts } from './localforage/localforageDb';
+export { default as TippyModal, TippyCustom, setNewReference, closeModal } from "./tippy/TippyModalCustom";
+export { default as saveUserAuth, createGlobalsData, getData, clearData, updatedData, removeProducts } from "./localforage/localforageDb";
 export {
   updatedFavorite,
   toggleFavorite,
@@ -13,6 +13,6 @@ export {
   setTheme,
   updatedProducts,
   setInitialData,
-} from './redux/slices/appSlice';
-export { RootState } from './redux/store';
-export { default as ReactMagnifier } from './reactMagnifier/ReactMagnifier';
+} from "./redux/slices/appSlice";
+export { RootState } from "./redux/store";
+export { default as ReactMagnifier } from "./reactMagnifier/ReactMagnifier";

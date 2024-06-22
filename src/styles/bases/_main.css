@@ -269,16 +269,20 @@ body:has(#header-site [data-tippy-root] .header-modal) {
   padding: 0.6rem;
 }
 
-#header-site:has([data-tippy-root] .header-modal) .header-inner {
-  position: relative;
+.tippy-content.modal-header-menu {
+  width: calc(100vw - 10vw);
+  margin-left: 5vw !important;
 }
 
-[data-tippy-root]:has(.header-modal) {
-  width: 100%;
-  transform: translate(0, 52px) !important;
+#header-site [data-tippy-root] {
+  filter: drop-shadow(-2px -1px 2px rgba(0, 0, 0, 0.154));
 }
 
-[data-tippy-root]:has(.header-modal) .header-menu-modal {
+#header-site [data-tippy-root] .svg-icon[name="arrow-up-triangle"]:hover {
+  opacity: 1 !important;
+}
+
+[data-tippy-root]:has(.header-modal) .modal-header-menu {
   box-shadow: 0px 0px 4px 1px var(--bs-dark-border-subtle), 0px 40px 90px 20px var(--dropdown-shadow-color), inset 0px 0px 1px 1px var(--bs-tertiary-bg);
 }
 
@@ -287,13 +291,13 @@ body:has(#header-site [data-tippy-root] .header-modal) {
   top: -0.2rem;
   font-size: 5rem;
   color: var(--color-arrow);
-  left: var(--data-x) !important;
 }
 
 [data-tippy-root]:has(.header-modal) .modal-content,
 [data-tippy-root]:has(.header-modal) .menu-column {
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 [data-tippy-root]:has(.header-modal) .modal-content::-webkit-scrollbar,

@@ -8,7 +8,8 @@ import { Image } from '@/assets/images';
 import { ConfirmDelete } from './order_status/ModalUpdateAddress';
 import { updatedFavorite } from '@/vendor';
 import BankCard from './BankCard';
-import { IconSvg, FormInputSelect, CountProducts, Loading } from '@/component/';
+import { CountProducts, MainSection } from '@/component';
+import { IconSvg, FormInputSelect, Loading } from '@/component/';
 
 const action = async ({ request }) => {
   const dataAction = await request.json();
@@ -126,13 +127,15 @@ const ProductCheckout = memo(() => {
   };
 
   return (
-    <React.Fragment>
+    <MainSection
+      id='checkout'
+      className='container d-flex py-6'
+      name='section'
+    >
       <Row className='product-checkout gx-5'>
         <Col className='col-xl-8 mb-5'>
           <div className={`${!matchPay ? 'px-5 py-3 bg-secondary-subtle rounded-5 shadow' : ''}`}>
-            <div className='outlet-product-checkout'>
-              <Outlet />
-            </div>
+            <Outlet />
             {!matchPay && (
               <div className=''>
                 {products.length > 0 &&
@@ -353,7 +356,7 @@ const ProductCheckout = memo(() => {
       </Row>
 
       {!matchPay && <div className='card-tooltip mb-5 p-3 fs-1 bg-black bg-opacity-03 rounded-4 shadow'>Xem thêm mặt hàng cùng khoảng giá:</div>}
-    </React.Fragment>
+    </MainSection>
   );
 });
 

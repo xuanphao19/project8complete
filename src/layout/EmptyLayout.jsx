@@ -1,12 +1,10 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const EmptyLayout = ({ children }) => {
   return (
     <React.Fragment>
-      <div className="empty-outlet">
-        <Outlet />
-      </div>
+      <Outlet />
       {children}
     </React.Fragment>
   );
