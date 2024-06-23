@@ -1,25 +1,6 @@
 import React, { Fragment, useRef, useState, useLayoutEffect, useCallback, memo, useImperativeHandle, forwardRef } from "react";
 import Tippy from "@tippyjs/react/headless";
-
 import { IconSvg } from "@/component";
-
-const TippyModalCustom = forwardRef(({ content, className, children, ...props }, ref) => {
-  return (
-    <Tippy
-      ref={ref}
-      render={(attrs) => (
-        <div
-          className={className}
-          tabIndex="-1"
-          {...attrs}>
-          {content}
-        </div>
-      )}
-      {...props}>
-      {children && children}
-    </Tippy>
-  );
-});
 
 const TippyCustom = forwardRef(
   (
@@ -110,7 +91,6 @@ const TippyCustom = forwardRef(
                   data-popper-arrow
                   className={`tippy-arrow z-3 ${arrowClass}`}>
                   <IconSvg
-                    style={{ color: "var(--color-arrow)", fontSize: "5rem", top: "-2px" }}
                     className="arrow position-relative"
                     link="arrow-up-triangle"
                   />
@@ -144,12 +124,11 @@ const closeModal = (event, tippyReference, attr) => {
   if (tippyReference && modal) tippyReference[modal]?.hide();
   else tippyReference?.hide();
 };
-
 const setNewReference = (tippyReference, reference, modal) => {
   // Khởi tạo tham chiếu mới cho Popper
   tippyReference[reference]?.getReference(modal);
   tippyReference[reference]?.show();
 };
 
-export { TippyCustom, closeModal, setNewReference };
-export default memo(TippyModalCustom);
+export { closeModal, setNewReference };
+export default memo(TippyCustom);

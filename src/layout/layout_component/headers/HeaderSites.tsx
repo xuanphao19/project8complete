@@ -1,12 +1,13 @@
-import React, { memo, useRef, useState, ReactElement } from "react";
-import { useCallback, useEffect, ReactNode, MouseEvent } from "react";
+import React, { memo, useRef, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { RootState } from "@/vendor/redux/store";
-import { Logo, Avatar, Header, ModalAvatar, FavouriteModal, ModalCartBtn, ModalCart } from "@/component";
+import { Logo, Avatar, Header } from "@/component";
+import { ModalAvatar, FavouriteBtn, ModalCartBtn } from "@/component";
 import { handleListenerEvent, getElement, findRelatives } from "@/utils";
 import HeaderMenu from "./HeaderMenu";
+import { ThemeSwitch } from "@/themes";
 
 const HeaderSites = ({ isLSOP = ["/", "/about"], distance = 80 }) => {
   const { pathname } = useLocation();
@@ -77,16 +78,23 @@ const HeaderSites = ({ isLSOP = ["/", "/about"], distance = 80 }) => {
           <Logo />
           <HeaderMenu />
         </div>
+
         <div className="header-control d-flex align-items-center ms-auto">
+          {!isVip && <ThemeSwitch className="header-btn-theme fs-1" />}
           <div className="header-control flex-center gap-3">
             <BtnRegister />
             <BtnLogin />
-            <div className="d-flex align-items-center gap-3">
+
+            <div className="d-flex align-items-center gap-4">
               <div className="d-flex align-items-center">
-                <FavouriteModal data={favoriteData} />
-                <ModalCart data={favoriteData}>
-                  <ModalCartBtn className="position-relative d-flex align-items-center ps-xl-2 border border-start-0 rounded-end-3 bg-body shadow-sm" />
-                </ModalCart>
+                <FavouriteBtn
+                  data={favoriteData}
+                  className="d-flex align-items-center border border-end-0 rounded-start-3 bg-body shadow-sm h-100"
+                />
+                <ModalCartBtn
+                  data={favoriteData}
+                  className="position-relative d-flex align-items-center ps-xl-2 border border-start-0 rounded-end-3 bg-body shadow-sm"
+                />
               </div>
 
               <ModalAvatar avatarUrl={avatarUrl}>
@@ -95,7 +103,7 @@ const HeaderSites = ({ isLSOP = ["/", "/about"], distance = 80 }) => {
                   isVip={isVip}
                   src={avatarUrl}
                   userID={userId}
-                  className="fs-11"
+                  className="header-avatar"
                 />
               </ModalAvatar>
             </div>

@@ -1,8 +1,18 @@
+import React from "react";
+import { MainSection } from "@/component";
+import { HeaderSite } from "./layout_component";
+
 const SingleHeader = ({ children }) => {
   return (
-    <div className="">
-      <h1>SingleHeader</h1> {children}
-    </div>
+    <React.Fragment>
+      <HeaderSite />
+      <MainSection
+        id="single"
+        name="main"
+        className="p-6">
+        {children}
+      </MainSection>
+    </React.Fragment>
   );
 };
 

@@ -1,11 +1,11 @@
-import { F8Db } from '@/config';
-import { getWifeNeighbors } from '@/utils';
+import { F8Db } from "@/config";
+import { getWifeNeighbors } from "@/utils";
 
-const USER_KEY = 'userData';
-const THEME_KEY = 'themeData';
-const PRODUCTS_KEY = 'productsData';
-const FAVORITES_KEY = 'favoritesData';
-const CART_KEY = 'cartData';
+const USER_KEY = "userData";
+const THEME_KEY = "themeData";
+const PRODUCTS_KEY = "productsData";
+const FAVORITES_KEY = "favoritesData";
+const CART_KEY = "cartData";
 
 const keys = [USER_KEY, THEME_KEY, PRODUCTS_KEY, FAVORITES_KEY, CART_KEY];
 
@@ -30,7 +30,7 @@ const createGlobalsData = async (data) => {
 
     return localeData;
   } catch (error) {
-    console.error('Error createGlobalsData:', error);
+    console.error("Error createGlobalsData:", error);
     return null;
   }
 };
@@ -51,23 +51,32 @@ const getData = async (key = PRODUCTS_KEY, id = 0, quantity) => {
     return null;
   }
 };
-/* ======  Updated Data ===== */
-const updatedData = async (key, updates, id) => {
-  await fakeNetwork(key);
-  let data = await F8Db.getItem(key);
-  let item;
-  if (id) {
-    item = data.find((item) => item.id === id);
-  } else item = data;
-  if (!item) throw new Error('No found data for', id);
-  Object.assign(item, updates);
 
-  if (key === 'favoritesData') {
-    await set(key, updates);
-  } else {
-    await set(key, data);
+/* ======  Updated Data ===== */
+
+const updatedData = async (key, updates, id) => {
+  try {
+    await fakeNetwork(key);
+    let data = await F8Db.getItem(key);
+    let item;
+
+    if (id) {
+      item = data.find((item) => item.id === id);
+    } else item = data;
+
+    if (!item && id) throw new Error(`No data found for id: ${id} ⭐`);
+    if (item) Object.assign(item, updates);
+
+    if (key === "favoritesData") {
+      await set(key, updates);
+    } else if (key && data) {
+      await set(key, data);
+    }
+    return item;
+  } catch (error) {
+    console.error(`Error updating data for key: ${key}`, error);
+    throw error;
   }
-  return item;
 };
 /* ======  Remove Products  ===== */
 const removeProducts = async (key, id) => {
@@ -75,13 +84,13 @@ const removeProducts = async (key, id) => {
   try {
     const data = await getData();
     const products = await getData(key);
-    if (!data || !products) throw new Error('Data not found');
+    if (!data || !products) throw new Error("Data not found");
     // Cập nhật danh sách Grocery và favorites
     const updatedGrocery = data.Grocery.map((item) => (item.id === +id ? { ...item, isLiked: false } : item));
     const updatedProduct = products.filter((item) => item.id !== +id);
 
     // Lưu dữ liệu đã cập nhật vào localforage removed successfully
-    await set('productsData', { ...data, Grocery: updatedGrocery });
+    await set("productsData", { ...data, Grocery: updatedGrocery });
     await set(key, updatedProduct);
   } catch (error) {
     console.error(`Error removing from removeProducts:`, error);
@@ -92,7 +101,7 @@ const clearData = async (key) => {
   try {
     await F8Db.removeItem(key);
   } catch (error) {
-    console.error('Error clearing data:', error);
+    console.error("Error clearing data:", error);
   }
 };
 /* ===== UserAuth ===== */
@@ -101,16 +110,16 @@ const clearUserAuth = async () => {
   try {
     await F8Db.removeItem(USER_KEY);
   } catch (error) {
-    console.error('Error clearing user auth:', error);
+    console.error("Error clearing user auth:", error);
   }
 };
 /* ===== saveUserAuth ===== */
 const saveUserAuth = async (user) => {
   try {
-    user.loginAt = `${new Date().toLocaleTimeString('vi-VN')}/${new Date().toLocaleDateString('vi-VN')}`;
+    user.loginAt = `${new Date().toLocaleTimeString("vi-VN")}/${new Date().toLocaleDateString("vi-VN")}`;
     await set(USER_KEY, user);
   } catch (error) {
-    console.error('Error saving user auth:', error);
+    console.error("Error saving user auth:", error);
   }
 };
 /* ====== set item to local ===== */

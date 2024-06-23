@@ -1,7 +1,6 @@
 // Welcome.jsx
 import React, { Fragment } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Dashboard from "./Dashboard.jsx";
 
 const Welcome = () => {
   return (

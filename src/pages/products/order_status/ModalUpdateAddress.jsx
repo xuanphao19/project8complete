@@ -3,7 +3,7 @@ import { useRef, forwardRef, useCallback, memo } from "react";
 import { Form, useFetcher, useMatch } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
-import { TippyModal } from "@/vendor";
+import { TippyCustom } from "@/vendor";
 import { cityName } from "@/api";
 import { IconSvg, FormInput, FormInputSelect } from "@/component/";
 
@@ -31,7 +31,7 @@ const UpdateAddress = forwardRef(({ children, newContent }, ref) => {
   }, []);
 
   return (
-    <TippyModal
+    <TippyCustom
       ref={refTippy}
       className="modal-address w-100 h-100 flex-center"
       visible={isModalOpen}
@@ -55,7 +55,7 @@ const UpdateAddress = forwardRef(({ children, newContent }, ref) => {
         {isModalOpen && <div className="overlay bg-opacity-50"></div>}
         {children}
       </div>
-    </TippyModal>
+    </TippyCustom>
   );
 });
 
@@ -232,7 +232,7 @@ const ConfirmDelete = ({ id, message = "", label = "Delete", action, children })
   };
 
   return (
-    <TippyModal
+    <TippyCustom
       className="modal-address modal-destroy w-100 h-100 flex-center"
       visible={showModal}
       arrow="false"
@@ -279,7 +279,7 @@ const ConfirmDelete = ({ id, message = "", label = "Delete", action, children })
         {showModal && <div className="overlay"></div>}
         {children}
       </div>
-    </TippyModal>
+    </TippyCustom>
   );
 };
 

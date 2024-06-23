@@ -6,6 +6,7 @@ import { getRandomNumber, getRandomItems } from "@/utils";
 const HeaderMenuContent = memo(({ id, name, data, handleHideMenu }) => {
   const refModal = useRef(null);
   const grocery = useMemo(() => data && [...data.Grocery], [data]);
+  const [value, setValue] = useState("");
   const [newData, setNewData] = useState({ data1: [], data2: [], data3: [], data4: [] });
 
   const getRandomData = useCallback(
@@ -28,22 +29,26 @@ const HeaderMenuContent = memo(({ id, name, data, handleHideMenu }) => {
     }
   }, [name]);
 
+  useEffect(() => {
+    grocery && value && setNewData(getRandomData(5, 7, 8, 5));
+  }, [grocery, value]);
+
   const handleClickItemMenu = useCallback(
     (event) => {
       const itemLink = event.target.closest(".item-link");
       const elTitle = event.target.closest(".title");
       if (itemLink) {
+        setValue(itemLink.textContent);
         const listGroup = itemLink.closest(".list-group");
         listGroup?.querySelector(".active")?.classList.remove("active");
         itemLink.classList.add("active");
-        grocery && setNewData(getRandomData(5, 7, 8, 5));
       } else if (elTitle) {
         elTitle.classList.toggle("open-sub-menu");
       } else {
         handleHideMenu();
       }
     },
-    [grocery],
+    [value],
   );
 
   const renderMenuLists = useCallback(

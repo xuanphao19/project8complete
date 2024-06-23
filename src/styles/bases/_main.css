@@ -202,7 +202,7 @@ body:has(.change-height) main#main-site {
 
 /* navigation nav */
 .nav-site > li {
-  z-index: 9999999;
+  z-index: 9999;
 }
 
 .nav-site > li a::after,
@@ -251,6 +251,8 @@ body:has(.change-height) main#main-site {
   transition: opacity 0.2s linear, width 0.4s linear;
 }
 
+#header-site .header-control .header-avatar,
+#header-site .header-control .header-btn-theme,
 #header-site .header-control .card-icon {
   width: 4.6rem;
   height: 4.6rem;
@@ -262,35 +264,30 @@ body:has(#header-site [data-tippy-root] .header-modal) {
   overflow-y: hidden;
 }
 
-#header-site .header-btn-theme,
 #header-site .toggle-menu {
   width: 40px;
   height: 40px;
   padding: 0.6rem;
 }
 
-.tippy-content.modal-header-menu {
-  width: calc(100vw - 10vw);
-  margin-left: 5vw !important;
+[data-tippy-root] #arrow.tippy-arrow {
+  top: -0.3rem;
+  font-size: 5rem;
+  color: var(--color-arrow);
 }
 
-#header-site [data-tippy-root] {
-  filter: drop-shadow(-2px -1px 2px rgba(0, 0, 0, 0.154));
-}
-
-#header-site [data-tippy-root] .svg-icon[name="arrow-up-triangle"]:hover {
+[data-tippy-root] .svg-icon[name="arrow-up-triangle"]:hover {
   opacity: 1 !important;
 }
 
-[data-tippy-root]:has(.header-modal) .modal-header-menu {
-  box-shadow: 0px 0px 4px 1px var(--bs-dark-border-subtle), 0px 40px 90px 20px var(--dropdown-shadow-color), inset 0px 0px 1px 1px var(--bs-tertiary-bg);
+.tippy-content {
+  filter: drop-shadow(0px 0px 20px var(--filter-form-shadow));
 }
 
-[data-tippy-root]:has(.header-modal) .tippy-arrow,
-[data-tippy-root]:has(.header-modal) #arrow {
-  top: -0.2rem;
-  font-size: 5rem;
-  color: var(--color-arrow);
+.tippy-content.modal-header-menu {
+  box-shadow: 0px 0px 4px 1px var(--bs-dark-border-subtle), 0px 40px 90px 20px var(--dropdown-shadow-color), inset 0px 0px 1px 1px var(--bs-tertiary-bg);
+  width: calc(100vw - 10vw);
+  margin-left: 5vw !important;
 }
 
 [data-tippy-root]:has(.header-modal) .modal-content,
@@ -338,10 +335,6 @@ body:has(#header-site [data-tippy-root] .header-modal) {
   padding-left: 1rem !important;
 }
 
-.modal-avatar {
-  filter: drop-shadow(0px 0px 20px var(--filter-form-shadow));
-}
-
 .modal-avatar .modal-avatar-arrow {
   top: -2.8rem;
 }
@@ -354,29 +347,21 @@ body:has(#header-site [data-tippy-root] .header-modal) {
   background: var(--bs-gradient);
 }
 
-/* ====  multi-level-menu  === */
-.multi-level-menu .active {
-  background: unset;
-  background-color: var(--bs-success-bg-subtle) !important;
-  opacity: 1;
-}
-
-.multi-level-menu .active svg {
-  fill: var(--bs-success-bg-subtle) !important;
-}
-
-.multi-level-menu .multi-menu.active ~ .multi-menu {
-  display: none;
-}
-
 #header-site:has([data-tippy-root] .modal-cart-header) .modal-arrow,
 #header-site:has([data-tippy-root] .modal-favourite) .modal-arrow {
   top: -2.8rem;
 }
 
-.modal-favourite,
-.modal-cart-header {
-  filter: drop-shadow(0px 10px 40px var(--filter-form-shadow));
+body:has(div[data-tippy-root] .modal-video-detail) {
+  overflow: hidden;
+}
+
+div[data-tippy-root]:has(.modal-video-detail) {
+  position: fixed !important;
+  inset: unset !important;
+  transform: unset !important;
+  top: 0 !important;
+  left: 0 !important;
 }
 
 .cart-btn::before {
@@ -565,6 +550,21 @@ input#password[type="text"] + .custom-control label {
   translate: 0 -2px;
 }
 
+/* ====  multi-level-menu  === */
+.multi-level-menu .active {
+  background: unset;
+  background-color: var(--bs-success-bg-subtle) !important;
+  opacity: 1;
+}
+
+.multi-level-menu .active svg {
+  fill: var(--bs-success-bg-subtle) !important;
+}
+
+.multi-level-menu .multi-menu.active ~ .multi-menu {
+  display: none;
+}
+
 /* ** section-home */
 #footer [name="TikTok-icon-color"] {
   transform: translateY(-50%) rotate(10deg);
@@ -579,16 +579,4 @@ body:has(.contact.active) #section-contact {
   margin-top: 30px;
   margin-top: 50px;
   margin-top: 40px;
-}
-
-body:has(div[data-tippy-root] .modal-video-detail) {
-  overflow: hidden;
-}
-
-div[data-tippy-root]:has(.modal-video-detail) {
-  position: fixed !important;
-  inset: unset !important;
-  transform: unset !important;
-  top: 0 !important;
-  left: 0 !important;
 }

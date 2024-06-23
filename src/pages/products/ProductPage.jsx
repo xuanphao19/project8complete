@@ -146,7 +146,7 @@ const ProductPage = memo(() => {
       id="product"
       className="container py-6"
       name="section">
-      Em là Product Pages
+      <div className="vh-100">Em là Product Pages</div>
       {/* {pathname.match("/products") && (
         <React.Fragment>
           {!pathname.includes("details") && (

@@ -1,8 +1,7 @@
 // src/routers/PublicRoute.js
 
-import { HomePages, ProductPage } from "@/pages";
-import { Welcome, ContactPage } from "@/pages";
-const { HomePage, Testimonials } = HomePages;
+import { HomePage, Welcome, InviteLogIn, ProductPage } from "@/pages";
+import { ContactPage } from "@/pages";
 const { home, login, register, forgotpw, team, about, testimonials, history, products, contact } = routesConfig;
 import { routesConfig } from "@/config";
 import { loginAction } from "@/pages";
@@ -19,14 +18,9 @@ interface UI {
 }
 
 const publicRoute: UI[] = [
-  {
-    id: "home",
-    path: home,
-    access: "public",
-    component: HomePage,
-  },
+  { id: "home", path: home, access: "public", component: HomePage },
   { id: "", path: contact, access: "private", component: ContactPage },
-  { id: "", path: testimonials, component: Testimonials, layout: null },
+  { id: "", path: testimonials, component: InviteLogIn, layout: "default" },
   { id: "products*", path: "/products/*", component: ProductPage },
   { id: "about*", path: "/about/*", component: Welcome },
 ];

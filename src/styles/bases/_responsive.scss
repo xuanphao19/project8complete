@@ -31,6 +31,7 @@
       overflow-x: hidden !important;
       & .menu-column {
         overflow-y: unset !important;
+        overflow-x: unset !important;
         height: auto !important;
       }
     }
@@ -133,6 +134,13 @@
 @media screen and (min-width: 1200px) {
   .group-items.fast-filter .card-contain:nth-child(3) {
     display: block !important;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .tippy-content.modal-header-menu {
+    max-width: 1280px;
+    margin-left: calc((100vw - 1280px) * 0.5) !important;
   }
 }
 

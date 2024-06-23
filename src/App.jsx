@@ -24,19 +24,14 @@ function App() {
         console.error("Failed to fetch initial data:", error);
       }
     };
-    if (status === "idle") {
-      fetchData();
-    }
+    if (status === "idle") fetchData();
+    removePreloader(".spinner");
   }, []);
 
   const isVip = user && user?.isVip;
   const pages = useMemo(() => {
     return isVip ? [...protectedRoute, ...publicRoute] : [...publicRoute];
   }, [isVip]);
-
-  useEffect(() => {
-    removePreloader(".spinner");
-  }, []);
 
   useEffect(() => {
     const html = document.documentElement;

@@ -14,7 +14,6 @@ import { ContactPage } from "@/pages";
 
 const Home = () => {
   const location = useLocation();
-  // const { NavSidebar, ProductFastFilter } = ProductPages;
   const exactly = location.pathname.includes("/fastfilter");
 
   return (
@@ -25,7 +24,7 @@ const Home = () => {
         name="section">
         {exactly && (
           <div className="nav-sidebar col-lg-3 d-none d-lg-flex flex-column me-3 rounded-3 bg-secondary bg-opacity-25 border-opacity-25 border-primary">
-            {/* <NavSidebar /> */}
+            {/* <ProductNavSidebar /> */}
           </div>
         )}
         <div className="home-content w-100">
@@ -42,7 +41,7 @@ const Home = () => {
               {/* <NavSidebar groupClass="d-flex gap-2 py-2" /> */}
             </div>
           )}
-          <div className="d-flex mb-4 mt-3 bg-secondary bg-opacity-25 border-opacity-25 border-primary rounded-3 vh-60">1</div>
+          <div className="flex-center mb-4 mt-3 bg-secondary bg-opacity-25 border-opacity-25 border-primary rounded-3 vh-60">Chờ Em!</div>
           <Outlet />
         </div>
       </MainSection>

@@ -3,7 +3,7 @@ import { Link, useLocation, useParams, useRouteLoaderData } from "react-router-d
 import { Row, Col, Form, Button, Modal } from "react-bootstrap";
 
 import { fetchData } from "@/api";
-import { TippyModal } from "@/vendor/";
+import { TippyCustom } from "@/vendor/";
 import { Image } from "@/assets/images/";
 import { getRandomItems } from "@/utils";
 import { IconSvg, InputRangeDouble } from "@/component/";
@@ -71,7 +71,7 @@ const ProductFastFilter = () => {
           <span>Total LavAzza:</span>
           <span className="total shadow fs-4 fw-medium fst-italic ms-3 py-2 px-4 text-bg-primary rounded-3">{total}</span>
         </span>
-        <TippyModal
+        <TippyCustom
           className="modal-filter-product my-4 w-100 rounded-5 bg-dark-subtle"
           visible={showModal}
           arrow="true"
@@ -91,7 +91,7 @@ const ProductFastFilter = () => {
               link="Filter"
             />
           </div>
-        </TippyModal>
+        </TippyCustom>
       </div>
     </Fragment>
   );

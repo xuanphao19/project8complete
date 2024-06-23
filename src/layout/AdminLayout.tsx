@@ -6,8 +6,8 @@ const AdminLayout = ({ children }): React.JSX.Element => {
   return (
     <MainSection
       id="admin"
-      className="container d-flex py-6"
-      name="section">
+      name="section"
+      className="container d-flex py-6">
       <div className="">
         <h1>Chào mừng bạn đến Admin Layout !!!</h1>
         <Navigation

@@ -1,1 +1,1 @@
-export { default as ViewFavourite, FavouriteModal } from "./ViewFavourite";
+export { default as ViewFavourite, FavouriteModal, FavouriteBtn } from "./ViewFavourite";

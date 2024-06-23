@@ -119,7 +119,7 @@ const HeaderMenu = memo(() => {
                   <span className="item-text">{item.label}</span>
                   <IconSvg
                     link="chevron-down"
-                    className="icon-link 🌺"
+                    className="icon-link"
                   />
                 </a>
               </li>
@@ -128,6 +128,7 @@ const HeaderMenu = memo(() => {
             <TippyCustom
               ref={(el) => setRef("tippy3", el)}
               isTriggerClick={true}
+              offset={[0, 4]}
               appendTo={fulcrum}
               className="header-modal modal-header-menu rounded-5 px-5 ps-md-4 pe-md-5 py-5 bg-body"
               content={content}
@@ -205,7 +206,8 @@ const HeaderMenu = memo(() => {
               <li className="nav-item position-relative">
                 <Link
                   className={`nav-link fw-medium d-none d-sm-flex align-items-center gap-3 py-3 px-4 z-3 text-body-emphasis`}
-                  to={"about"}>
+                  to={"about"}
+                  onClick={handleCloseCanvas}>
                   About
                 </Link>
               </li>
@@ -218,15 +220,3 @@ const HeaderMenu = memo(() => {
 });
 
 export default HeaderMenu;
-/*
-link1 tương ứng là #section1
-link2 tương ứng là #section2
-link3 tương ứng là #section3
-link4 tương ứng là #section4
-.....
-Bài toán đặt ra là:
-Khi khi cuộn trang đến section nào thì active ở
-link đó hoặc khi click vào link nào thì link đó active
-
-
-*/

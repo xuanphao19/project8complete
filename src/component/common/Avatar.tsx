@@ -1,35 +1,34 @@
-import React, { forwardRef, useRef, useState, useEffect, useCallback, memo } from "react";
+import React, { forwardRef, useRef, useState, useEffect, useCallback, memo, FC } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/vendor/redux/store";
 
 import { routesConfig } from "@/config";
 import { Image } from "@/assets/images";
-import { TippyModal } from "@/vendor/";
+import { TippyCustom } from "@/vendor/";
 import { IconSvg } from "@/component/";
+import { ThemeSwitch } from "@/themes";
 const { profile } = routesConfig;
 
 const Avatar = memo(
   forwardRef(({ isVip, src, className }: { isVip: boolean; src: string; className: string }, ref?: React.LegacyRef<HTMLSpanElement>) => {
     // if (!!userID && authed) // Xác thực Admin!
     return (
-      <React.Fragment>
-        {isVip && (
-          <span
-            ref={ref}
-            className={`avatar flex-center${className ? ` ${className}` : ""}`}>
-            <Image
-              className="ratio-1x1 p-2 rounded-pill d-flex hover-8"
-              src={src}
-            />
-          </span>
-        )}
-      </React.Fragment>
+      isVip && (
+        <span
+          ref={ref}
+          className={`avatar flex-center${className ? ` ${className}` : ""}`}>
+          <Image
+            className="ratio-1x1 rounded-pill d-flex hover-8"
+            src={src}
+          />
+        </span>
+      )
     );
   }),
 );
 
-const ContentModalAvatar = memo(({ src, handleOnHide }: { src?: string; handleOnHide?: any }): React.JSX.Element => {
+const ContentModalAvatar = memo(({ src, onHide }: { src?: string; onHide?: FC }): React.JSX.Element => {
   const [avatar, setAvatar] = useState<string>("");
   const BtnLogOut = "div";
 
@@ -38,11 +37,11 @@ const ContentModalAvatar = memo(({ src, handleOnHide }: { src?: string; handleOn
   }, [src]);
 
   return (
-    <div className="modal-avatar-content tippy-content d-flex flex-column gap-3 fs-3 px-5 py-5">
+    <div className="modal-avatar-content d-flex flex-column gap-3 fs-3">
       <div className="user-menus d-flex align-items-center p-3 shadow-sm">
         <Link to="/profile">
           <img
-            onClick={handleOnHide}
+            onClick={onHide}
             className="avatar fs-13 rounded-3 d-flex"
             src={avatar}
           />
@@ -54,9 +53,9 @@ const ContentModalAvatar = memo(({ src, handleOnHide }: { src?: string; handleOn
       </div>
       <Link
         to={profile}
-        onClick={handleOnHide}
+        onClick={onHide}
         className="user-menu d-flex align-items-center justify-content-between p-3 shadow-sm">
-        <span className="">User profile</span>
+        <span className="fs-4">User profile</span>
         <IconSvg
           className="fs-2 text-success"
           link="Admin"
@@ -65,20 +64,26 @@ const ContentModalAvatar = memo(({ src, handleOnHide }: { src?: string; handleOn
 
       <Link
         to="products/checkout"
-        onClick={handleOnHide}
+        onClick={onHide}
         className="user-menu d-flex align-items-center justify-content-between p-3 shadow-sm">
-        <span className="">Favourite list</span>
+        <span className="fs-4">Favourite list</span>
         <IconSvg
           className="fs-2"
           link="heart2"
         />
       </Link>
 
+      <span onClick={onHide}>
+        <ThemeSwitch className="user-theme-mode user-menu fs-1 d-flex align-items-center justify-content-between p-3 shadow-sm">
+          <span className="fs-4">Dark mode</span>
+        </ThemeSwitch>
+      </span>
+
       <Link
         to=""
-        onClick={handleOnHide}
+        onClick={onHide}
         className="user-menu d-flex align-items-center justify-content-between p-3 shadow-sm">
-        <span className="">Settings</span>
+        <span className="fs-4">Settings</span>
         <IconSvg
           className="fs-2 text-warning"
           link="setting"
@@ -86,17 +91,10 @@ const ContentModalAvatar = memo(({ src, handleOnHide }: { src?: string; handleOn
       </Link>
 
       <BtnLogOut
-        onClick={handleOnHide}
-        className="fs-3 mt-4 py-3 px-4 btn-outline-primary"
-      />
-      <div
-        className="modal-avatar-arrow"
-        data-popper-arrow>
-        <IconSvg
-          style={{ fontSize: "40px", color: "rgba(var(--bs-body-bg-rgb),var(--bs-bg-opacity))" }}
-          link="arrow-up-triangle"
-        />
-      </div>
+        onClick={onHide}
+        className="fs-3 mt-4 py-3 px-4 btn btn-outline-primary">
+        BtnLogOut
+      </BtnLogOut>
     </div>
   );
 });
@@ -105,27 +103,27 @@ const ModalAvatar = memo(({ children, avatarUrl }: { children: any; avatarUrl: s
   const user = useSelector((state: RootState) => state.app.user);
   const refAvatar = useRef(null);
 
-  const handleOnHide = useCallback(() => {
-    refAvatar.current._tippy.hide();
-  }, [refAvatar.current]);
+  const handleOnHide = useCallback(() => refAvatar.current.hide(), [refAvatar]);
 
   return (
-    <TippyModal
+    <TippyCustom
       ref={refAvatar}
-      className="modal-avatar mt-2 rounded-4 bg-body"
+      className="modal-avatar mt-2 ⭐ rounded-4 bg-body"
       arrow="true"
-      offset={[20, 10]}
+      offset={[30, 2]}
       delay={[0, 200]}
       interactive="true"
       placement="bottom-end"
+      arrowClass="d-flex align-items-start"
+      appendTo={document.querySelector(".header-inner")}
       content={
         <ContentModalAvatar
           src={avatarUrl}
-          handleOnHide={handleOnHide}
+          onHide={handleOnHide}
         />
       }>
-      <span>{children}</span>
-    </TippyModal>
+      <div className="avatar-ctrl">{children}</div>
+    </TippyCustom>
   );
 });
 
