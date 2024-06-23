@@ -1,27 +1,27 @@
 import React, { Fragment } from "react";
-import { useCallback, useRef, useState, useEffect, memo, useMemo } from "react";
+import { useCallback, useRef, useState, useEffect, memo } from "react";
 import { Link, useLocation, useRouteLoaderData } from "react-router-dom";
 import { Offcanvas } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 import HeaderMenuContent from "./HeaderModal";
-import { mapNav, findElementParent, handleListenerEvent, selectElement } from "@/utils";
+import { mapNav, handleListenerEvent, selectElement } from "@/utils";
 import { TippyCustom, setNewReference, closeModal } from "@/vendor";
-
 import { IconSvg } from "@/component";
 
 const HeaderMenu = memo(() => {
   const tippyRef = useRef({});
   const refMobile = useRef(null);
   const refMenuPc = useRef(null);
+  const { pathname } = useLocation();
   const [content, setContent] = useState(null);
   const [fulcrum, setFulcrum] = useState(null);
+  const [contact, setContact] = useState(null);
 
-  const user = useSelector((state) => state.app.user);
   const [userId, setUserId] = useState("");
   const [isVip, setIsVip] = useState(false);
-  const { pathname } = useLocation();
-  const [contact, setContact] = useState(null);
+  const user = useSelector((state) => state.app.user);
+  const [activeLink, setActiveLink] = useState("link2");
   const [showCanvas, setShowCanvas] = useState(false);
   const { productsData } = useRouteLoaderData("root");
   const [data, setData] = useState(productsData);
@@ -43,48 +43,37 @@ const HeaderMenu = memo(() => {
   }, [user]);
 
   useEffect(() => {
-    const linkContact = selectElement(".contact");
-    linkContact && linkContact.classList.remove("active");
-    const contact = selectElement("#section-contact");
-    const elActive = selectElement(".active");
-    setContact(contact);
-    setFulcrum(() => document.querySelector(".header-inner"));
+    selectElement(".active")?.classList.remove("active");
+    const activeElement = selectElement(`#${activeLink}`);
+    activeElement?.classList.add("active");
+  }, [activeLink]);
 
+  useEffect(() => {
+    setFulcrum(() => selectElement(".header-inner"));
+    const contactSection = selectElement("#section-contact");
+    setContact(contactSection);
     const handleScrollActive = () => {
-      if (contact && window.scrollY > contact.offsetTop - 80) {
-        handleActive(".contact");
-      } else {
-        elActive?.classList.add("active");
-        linkContact?.classList.remove("active");
-      }
+      const { offsetTop, offsetHeight } = contactSection;
+      const scrollPosition = window.scrollY + window.innerHeight * 0.2;
+      if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+        setActiveLink(selectElement(".contact")?.id);
+      } else setActiveLink("link3");
     };
-
-    if (pathname === "/contact") {
-      handleActive(".contact");
-    } else {
-      !elActive && handleActive(".default-active");
-      handleListenerEvent(true, "scroll", handleScrollActive);
+    if (pathname !== "/contact") {
+      const contactActive = selectElement(".contact.active");
+      contactActive && setActiveLink("link1");
+      contactSection && handleListenerEvent(true, "scroll", handleScrollActive);
     }
+
     return () => {
       handleListenerEvent(false, "scroll", handleScrollActive);
     };
   }, [pathname]);
 
-  const handleActive = (selector, event) => {
-    let el = null;
-    if (event) el = findElementParent(event.target, selector);
-    else el = selectElement(selector);
-    let els = refMobile.current ?? refMenuPc.current.querySelector(".active");
-
-    if (els) els.classList.remove("active");
-    el && el.classList.add("active");
-    return el;
-  };
-
   const handleOpenModal = (event) => {
     event.preventDefault();
     const modal = event.currentTarget;
-    handleActive(".nav-link", event);
+    setActiveLink(modal?.id);
     const reference = modal?.getAttribute("data-reference");
     setNewReference(tippyRef.current, reference, modal);
     setContent(
@@ -97,7 +86,6 @@ const HeaderMenu = memo(() => {
     );
     handleCloseCanvas();
   };
-
   const handleCloseModal = useCallback(
     (event) => {
       closeModal(event, tippyRef.current, "tippy3");
@@ -125,9 +113,7 @@ const HeaderMenu = memo(() => {
                 <a
                   id={item.id}
                   href="#!"
-                  className={`nav-link d-flex align-items-center gap-3 py-3 px-4 z-3 text-body-emphasis${
-                    item.active ? ` active default-active` : ""
-                  }`}
+                  className={`nav-link d-flex align-items-center gap-3 py-3 px-4 z-3 text-body-emphasis${item.active ? ` active` : ""}`}
                   data-reference="tippy3"
                   onClick={handleOpenModal}>
                   <span className="item-text">{item.label}</span>
@@ -148,7 +134,9 @@ const HeaderMenu = memo(() => {
             />
 
             {isVip && (
-              <li className="nav-item d-none d-lg-flex fw-medium">
+              <li
+                className="nav-item d-none d-lg-flex fw-medium"
+                onClick={() => setActiveLink("link4")}>
                 <Link
                   id="link4"
                   to={contact ? "#section-contact" : "contact"}
@@ -230,3 +218,15 @@ const HeaderMenu = memo(() => {
 });
 
 export default HeaderMenu;
+/*
+link1 tương ứng là #section1
+link2 tương ứng là #section2
+link3 tương ứng là #section3
+link4 tương ứng là #section4
+.....
+Bài toán đặt ra là:
+Khi khi cuộn trang đến section nào thì active ở
+link đó hoặc khi click vào link nào thì link đó active
+
+
+*/
