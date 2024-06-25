@@ -279,13 +279,3 @@ const BtnLogOut = ({ className, onClick }) => {
 
 export { BtnLogOut, BtnLogin, action };
 export default Login;
-// logout action slogan
-
-// cấu trúc Header Navigator: Logo - Nav - Control
-// #header.header>.container>(a.logo>(img+span.brand{slogan})^(div.navigator>ul.nav>li.nav-item*>a.nav-link)(.header-control>span.heart+span.notification+span.avatar))
-
-// cấu trúc Header Search: Logo - Search - Control
-// #header.header>.container>(a.logo>img[alt="logo"]+span.brand{slogan})(div.header-search>input[type="text"].search)(div.header-control>span.btn.login+span.btn.logout)
-
-// Cấu trúc Navigation sidebar:
-// .nav-bar>.nav-menu{menu_title}+.nav-list>a.nav-item*>span.nav-icon+span.nav-text

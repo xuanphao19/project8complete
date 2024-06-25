@@ -77,34 +77,36 @@ const HeaderSites = ({ isLSOP = ["/", "/about"], distance = 80 }) => {
           <HeaderMenu />
         </div>
 
-        <div className="header-control d-flex align-items-center ms-auto">
-          {!isVip && <ThemeSwitch className="header-btn-theme fs-1" />}
-          <div className="header-control flex-center gap-3">
+        <div className={`header-control d-inline-flex align-items-center ms-auto`}>
+          {!isVip && <ThemeSwitch className="header-btn-theme me-3 fs-1" />}
+          <div className="header-ctrl flex-center gap-3">
             <BtnRegister />
             <BtnLogin />
 
-            <div className="d-flex align-items-center gap-4">
-              <div className="d-flex align-items-center">
-                <FavouriteBtn
-                  data={favoriteData}
-                  className="d-flex align-items-center border border-end-0 rounded-start-3 bg-body shadow-sm h-100"
-                />
-                <ModalCartBtn
-                  data={favoriteData}
-                  className="position-relative d-flex align-items-center ps-xl-2 border border-start-0 rounded-end-3 bg-body shadow-sm"
-                />
-              </div>
+            {isVip && (
+              <div className="d-flex align-items-center gap-4">
+                <div className="d-flex align-items-center">
+                  <FavouriteBtn
+                    data={favoriteData}
+                    className="d-flex align-items-center border border-end-0 rounded-start-3 bg-body shadow-sm h-100"
+                  />
+                  <ModalCartBtn
+                    data={favoriteData}
+                    className="position-relative d-flex align-items-center ps-xl-2 border border-start-0 rounded-end-3 bg-body shadow-sm"
+                  />
+                </div>
 
-              <ModalAvatar avatarUrl={avatarUrl}>
-                <Avatar
-                  ref={avatarRef}
-                  isVip={isVip}
-                  src={avatarUrl}
-                  userID={userId}
-                  className="header-avatar"
-                />
-              </ModalAvatar>
-            </div>
+                <ModalAvatar avatarUrl={avatarUrl}>
+                  <Avatar
+                    ref={avatarRef}
+                    isVip={isVip}
+                    src={avatarUrl}
+                    userID={userId}
+                    className="header-avatar"
+                  />
+                </ModalAvatar>
+              </div>
+            )}
           </div>
         </div>
       </div>

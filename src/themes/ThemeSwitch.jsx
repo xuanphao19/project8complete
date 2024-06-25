@@ -47,7 +47,7 @@ const ThemeSwitch = ({ className, children }) => {
   return (
     <span
       onClick={handleClickChangeTheme}
-      className={`cursor-pointer flex-center ${theme && theme.iconFill}${className ? ` ${className}` : ""}`}>
+      className={`theme-switch cursor-pointer flex-center ${theme && theme.iconFill}${className ? ` ${className}` : ""}`}>
       {children}
       <IconSvg
         ref={iconRef}

@@ -9,12 +9,14 @@ import { IconSvg, CategoriesCards } from "@/component/";
 
 const FavouriteBtn = memo(
   forwardRef(({ data, className }: { className?: string; data: any }, ref?: React.LegacyRef<HTMLSpanElement>) => {
+    const user = useSelector((state: RootState) => state.app.user);
     const [total, setTotal] = useState(0);
+    const isVip = user && user.isVip;
 
     useEffect(() => {
       if (!!data) setTotal(data.length);
     }, [data]);
-
+    if (!isVip) return null;
     return (
       <div className={`favourite-btn${className ? ` ${className}` : ""}`}>
         <FavouriteModal data={data}>

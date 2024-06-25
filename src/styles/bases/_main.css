@@ -251,12 +251,14 @@ body:has(.change-height) main#main-site {
   transition: opacity 0.2s linear, width 0.4s linear;
 }
 
+#header-site .header-control .theme-switch,
 #header-site .header-control .header-avatar,
 #header-site .header-control .header-btn-theme,
 #header-site .header-control .card-icon {
   width: 4.6rem;
   height: 4.6rem;
   outline: transparent;
+  flex-shrink: 0;
 }
 
 /* Header Modal Menu */

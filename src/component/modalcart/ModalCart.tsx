@@ -9,6 +9,11 @@ import { IconSvg, CategoriesCards } from "@/component/";
 
 const ModalCartBtn = memo(
   forwardRef(({ className, data }: { className?: string; data: any }, ref?: React.LegacyRef<HTMLSpanElement>) => {
+    const user = useSelector((state: RootState) => state.app.user);
+    const isVip = user && user.isVip;
+
+    if (!isVip) return null;
+
     return (
       <div className={`cart-btn d-none d-sm-flex${className ? ` ${className}` : ""}`}>
         <ModalCart data={data}>
