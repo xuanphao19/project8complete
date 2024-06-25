@@ -20,10 +20,17 @@ const RegisterPage = () => {
   const formRef = useRef(null);
   const dispatch = useDispatch();
   const { home, login } = routesConfig;
-  const [emailAdd, setEmailAdd] = useState({ email: "", message: "i-💔-f8!" });
   const user = useSelector((s) => s.app.user);
+
+  const [error, setError] = useState("");
+  const [isConfirmed, setIsConfirmed] = useState(false);
   const [userInfo, setUserInfo] = useState({});
-  const [subInfo, setSubInfo] = useState({ reminder: "", isNotRobot: false, isAgreeTerms: false });
+  const [subInfo, setSubInfo] = useState({
+    reminder: "",
+    isNotRobot: false,
+    isAgreeTerms: false,
+    message: "i-💔-F8!",
+  });
 
   const reference = useMemo(() => {
     const newInfo = {};
@@ -69,8 +76,9 @@ const RegisterPage = () => {
 
   const handleReset = (event) => {
     event.preventDefault();
-    setUserInfo({});
-    setSubInfo({ reminder: "", message: "", isNotRobot: false, isAgreeTerms: false });
+    setIsConfirmed(false);
+    setUserInfo(initialUserState);
+    setSubInfo({ reminder: "", isNotRobot: false, isAgreeTerms: false, message: "" });
   };
 
   const handleSubmitRegister = async (event) => {
@@ -82,8 +90,9 @@ const RegisterPage = () => {
       try {
         const formData = new FormData(event.currentTarget);
         const data = {
-          // Create a new instance of the form
           email: formData.get("email"),
+          firstName: formData.get("firstName"),
+          lastName: formData.get("lastName"),
           username: formData.get("username"),
           password: formData.get("password"),
           gender: formData.get("gender"),
@@ -91,18 +100,15 @@ const RegisterPage = () => {
         if (data) {
           const result = await registerNewUser(data.email, data.password);
           if (result.register.success) {
-            // isVip: true, Chỉ set khi Login success!
-            setEmailAdd({ email: result.user.email, message: result.register.message });
+            setUserInfo((prev) => ({ ...prev, ...data, email: result.user.email }));
+            setSubInfo((prev) => ({ ...prev, message: result.register.message }));
             handleToggleToast();
-            // dispatch(register(data));
-            formRef.current.reset();
           }
         }
-        // Xử lý phản hồi thành công
       } catch (error) {
-        // Hiển thị thông báo lỗi!
-        formRef.current.reset();
+        setError(error);
         console.log("Đăng ký thất bại:", error);
+        formRef.current.reset();
       }
     }
   };
@@ -132,8 +138,10 @@ const RegisterPage = () => {
       ));
   };
 
-  const resetToastState = (state) => {
-    if (state === false) setEmailAdd({});
+  const resetState = (state) => {
+    if (state === false) {
+      formRef.current.reset();
+    }
   };
 
   const handleToggleToast = () => {
@@ -142,26 +150,39 @@ const RegisterPage = () => {
 
   const gotoEmailAdd = () => {
     handleToggleToast();
+    setIsConfirmed(true);
   };
+
+  useEffect(() => {
+    if (isConfirmed) {
+      dispatch(register(userInfo));
+    }
+  }, [isConfirmed]);
 
   return (
     <MainSection
       id="register"
       name="content"
       className="flex-center mx-auto">
+      {error && (
+        <div className="error-message">
+          <p>{error.code}</p>
+          <p>{error.message}</p>
+        </div>
+      )}
       <DreamsFly
         ref={toastRef}
         showForever={true}
         variant="success"
         direction=""
         className="flex-center p-5 rounded-4 border border-2"
-        resetState={resetToastState}>
+        resetState={resetState}>
         <div className="rounded-4 py-4 px-5">
-          <div className="py-2 mb-5 fs-4">{emailAdd.message}</div>
+          <div className="py-2 mb-5 fs-4">{subInfo.message}</div>
           <Row className="row-col-2">
             <Col className="">
               <OpenYourMail
-                email={emailAdd.email}
+                email={userInfo.email}
                 onClose={gotoEmailAdd}
               />
             </Col>
