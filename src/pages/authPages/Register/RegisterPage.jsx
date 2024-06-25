@@ -1,25 +1,29 @@
 // Mã hóa ký tự đặc biệt : encodeURIComponent(value) // => code!
+
 import React, { useRef, useState } from "react";
 import { useEffect, useMemo, useCallback } from "react";
-import { Row, Col, Form, Button, Alert } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useFetcher } from "react-router-dom";
 
-import { register } from "@/vendor";
-import { handleQuickTestForm, verifyInputForm } from "@/utils";
-import { MainSection, FormInput, IconSvg } from "@/component";
-import { formFields, initialUserState, genderOptions, socialRegister } from "@/api";
+import { registerNewUser, OpenYourMail, DreamsFly } from "@/service";
 
-const registerFieldLeft = ["firstName", "lastName", "username"];
-const registerFieldRight = ["email", "password", "confirmPassword"];
+import { register } from "@/vendor";
+import { routesConfig } from "@/config";
+import { handleQuickTestForm, validateForm } from "@/utils";
+import { MainSection, FormInput, IconSvg } from "@/component";
+import { formFields, registerFieldLeft, registerFieldRight, initialUserState, genderOptions, socialRegister } from "@/api";
 
 const RegisterPage = () => {
+  const toastRef = useRef(null);
   const fetcher = useFetcher();
   const formRef = useRef(null);
   const dispatch = useDispatch();
+  const { home, login } = routesConfig;
+  const [emailAdd, setEmailAdd] = useState({ email: "", message: "i-💔-f8!" });
   const user = useSelector((s) => s.app.user);
   const [userInfo, setUserInfo] = useState({});
-  const [subInfo, setSubInfo] = useState({ reminder: "", sentToEmail: "", isNotRobot: false, isAgreeTerms: false });
+  const [subInfo, setSubInfo] = useState({ reminder: "", isNotRobot: false, isAgreeTerms: false });
 
   const reference = useMemo(() => {
     const newInfo = {};
@@ -32,6 +36,10 @@ const RegisterPage = () => {
   useEffect(() => {
     setUserInfo(reference.newInfo);
   }, [reference]);
+
+  useEffect(() => {
+    // user && console.log(user);
+  }, [user]);
 
   const handleChange = useCallback((name, value) => {
     if (name === "isNotRobot") {
@@ -61,36 +69,41 @@ const RegisterPage = () => {
 
   const handleReset = (event) => {
     event.preventDefault();
-    event.stopPropagation();
-    console.log(event.currentTarget, "str2");
-    // pwRef.current.type = "password";
-    // cfpwRef.current.type = "password";
+    setUserInfo({});
+    setSubInfo({ reminder: "", message: "", isNotRobot: false, isAgreeTerms: false });
   };
 
   const handleSubmitRegister = async (event) => {
     event.preventDefault();
-    if (verifyInputForm(formRef.current)) {
-      console.error("Ồ no! Em chưa nếm được gì!");
+    if (validateForm(formRef.current)) {
+      console.error("⛔Ồ... No!!!!!!!!😡");
       return;
     } else {
-      // Reset and Xử lý logic Register:
-      const formSubmit = new FormData(event.currentTarget);
-      const data = {
-        email: formSubmit.get("email"),
-        username: formSubmit.get("username"),
-        password: formSubmit.get("password"),
-      };
-      console.log("Form submitted:", data, register);
       try {
-        const response = await fetcher.data;
+        const formData = new FormData(event.currentTarget);
+        const data = {
+          // Create a new instance of the form
+          email: formData.get("email"),
+          username: formData.get("username"),
+          password: formData.get("password"),
+          gender: formData.get("gender"),
+        };
+        if (data) {
+          const result = await registerNewUser(data.email, data.password);
+          if (result.register.success) {
+            // isVip: true, Chỉ set khi Login success!
+            setEmailAdd({ email: result.user.email, message: result.register.message });
+            handleToggleToast();
+            // dispatch(register(data));
+            formRef.current.reset();
+          }
+        }
         // Xử lý phản hồi thành công
-        // (ví dụ: chuyển hướng đến trang đăng nhập)
-        console.log("Đăng ký thành công!", fetcher);
       } catch (error) {
-        // Xử lý lỗi (ví dụ: hiển thị thông báo lỗi)
+        // Hiển thị thông báo lỗi!
+        formRef.current.reset();
         console.log("Đăng ký thất bại:", error);
       }
-      formRef.current.reset();
     }
   };
 
@@ -110,7 +123,7 @@ const RegisterPage = () => {
           value={userInfo[field.id]}
           classGroup={`${"⭐"}`}
           classLabel="🌺"
-          classFormCtrl="fs-4 border-dark rounded-4 i💔f8"
+          classFormCtrl="register-input fs-4 border-dark border-opacity-50 rounded-3 i💔f8"
           classIcon={field.classIcon}
           onFocus={handleFocus}
           onChange={handleChange}
@@ -119,25 +132,61 @@ const RegisterPage = () => {
       ));
   };
 
+  const resetToastState = (state) => {
+    if (state === false) setEmailAdd({});
+  };
+
+  const handleToggleToast = () => {
+    resetToastState(false);
+    toastRef.current?.toggleToast();
+  };
+
+  const gotoEmailAdd = () => {
+    handleToggleToast();
+  };
+
   return (
     <MainSection
       id="register"
       name="content"
-      className="flex-center mx-auto user-select-none">
+      className="flex-center mx-auto">
+      <DreamsFly
+        ref={toastRef}
+        showForever={true}
+        variant="success"
+        direction=""
+        className="flex-center p-5 rounded-4 border border-2"
+        resetState={resetToastState}>
+        <div className="rounded-4 py-4 px-5">
+          <div className="py-2 mb-5 fs-4">{emailAdd.message}</div>
+          <Row className="row-col-2">
+            <Col className="">
+              <OpenYourMail
+                email={emailAdd.email}
+                onClose={gotoEmailAdd}
+              />
+            </Col>
+            <Col className="">
+              <Link
+                to="/"
+                className="goto-home btn flex-center btn-outline-warning w-100 p-3 fs-5"
+                onClick={handleToggleToast}>
+                Xác Thực Sau!
+              </Link>
+            </Col>
+          </Row>
+        </div>
+      </DreamsFly>
+
       <fetcher.Form
         action="/api/users"
         method="post"
         ref={formRef}
-        className="form-wraps p-5 pe-4 rounded-5 bg-body position-relative"
+        className="form-wraps p-5 pe-4 rounded-5 bg-body position-relative user-select-none"
         onSubmit={handleSubmitRegister}
         onReset={handleReset}>
         <Row className="d-flex pt-2 w-100">
           <h1 className="mx-auto pb-4 fs-2 text-center text-uppercase ">Đăng ký tài khoản</h1>
-          {subInfo.sentToEmail && (
-            <Alert variant="success">
-              Chúc mừng bạn đẵ đăng ký thành công tài khoản! Một email xác nhận đã được gửi cho bạn. Vui lòng kiểm tra hòm thư và làm theo hướng dẫn.
-            </Alert>
-          )}
           <Col
             className="mx-auto pb-0 px-5"
             xs={11}
@@ -252,23 +301,25 @@ const RegisterPage = () => {
             xs={11}
             md={6}>
             <Link
-              className="btn btn-outline-primary flex-center pb-2 fs-3 fst-italic fw-medium"
-              to="/login">
+              type="button"
+              // to={`/${login}`}
+              to={"/"}
+              className="btn btn-outline-primary flex-center pb-2 fs-3 fst-italic fw-medium w-100">
               Đã có Account
             </Link>
           </Col>
-          <div className="mx-auto px-5 p-md-0">
+          <div className="register-ctrl position-relative mx-auto px-5 p-md-0">
             <div className="d-flex gap-4 mt-3 px-5">
               <span className="fs-4 text-danger">Lưu ý Quan trọng: </span>
               <Link
                 className="fs-4 fst-italic"
-                to="/dashboard">
+                to={`/${"dashboard"}`}>
                 Điều khoản sử dụng!
               </Link>
             </div>
             <Link
               className="fs-4 px-5 p-1 mb-4 fst-italic"
-              to="/">
+              to={`${home}`}>
               Tôi muốn quay lại trang chủ!
             </Link>
           </div>
@@ -277,16 +328,19 @@ const RegisterPage = () => {
     </MainSection>
   );
 };
-export default RegisterPage;
 
-export const BtnRegister = () => {
+const BtnRegister = () => {
+  const { register: registerRouter } = routesConfig;
   const user = useSelector((state) => state.app.user);
-  if (user && user.isVip) return;
+
+  if (user && user.isVip) return null;
   return (
     <Link
-      to="/register"
+      to={`/${registerRouter}`}
       className={"btn btn-register text btn-outline-success flex-center d-none d-sm-flex fs-4 py-3 px-5"}>
       Register
     </Link>
   );
 };
+export { BtnRegister };
+export default RegisterPage;

@@ -364,6 +364,7 @@ div[data-tippy-root]:has(.modal-video-detail) {
   filter: grayscale(0);
   transition: all 0.2s ease-in-out;
 }
+
 /* End navigation nav */
 
 /* Login register forgotPw Page */
@@ -469,6 +470,10 @@ input#password[type="text"] + .custom-control label {
   color: #0d6efd;
 }
 
+.form-control:focus,
+.register-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0) !important;
+}
 .content-register .brands,
 .content-login .brands {
   & .svg-icon {

@@ -35,7 +35,7 @@ const UpdateAddress = forwardRef(({ children, newContent }, ref) => {
       ref={refTippy}
       className="modal-address w-100 h-100 flex-center"
       visible={isModalOpen}
-      arrow="false"
+      arrow={false}
       interactive="true"
       onClickOutside={toggleModal}
       appendTo={document.body}
@@ -235,9 +235,9 @@ const ConfirmDelete = ({ id, message = "", label = "Delete", action, children })
     <TippyCustom
       className="modal-address modal-destroy w-100 h-100 flex-center"
       visible={showModal}
-      arrow="false"
+      arrow={false}
       maxWidth="100"
-      interactive="true"
+      interactive
       onClickOutside={toggleModal}
       appendTo={document.body}
       content={

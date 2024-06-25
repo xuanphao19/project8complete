@@ -76,7 +76,7 @@ const handleQuickTestForm = (isError: any, Obj: any, Arr: any) => {
 };
 
 const validateForm = (element: any) => {
-  return element.querySelector(".error");
+  return element?.querySelector(".error");
 };
 
 export { verifyInput, handleQuickTestForm, validateForm };

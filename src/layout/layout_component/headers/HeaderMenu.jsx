@@ -128,6 +128,7 @@ const HeaderMenu = memo(() => {
             <TippyCustom
               ref={(el) => setRef("tippy3", el)}
               isTriggerClick={true}
+              arrow={true}
               offset={[0, 4]}
               appendTo={fulcrum}
               className="header-modal modal-header-menu rounded-5 px-5 ps-md-4 pe-md-5 py-5 bg-body"

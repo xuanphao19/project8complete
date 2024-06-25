@@ -512,6 +512,11 @@ input#password[type="text"] + .custom-control label {
   color: #0d6efd;
 }
 
+.form-control:focus,
+.register-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0) !important;
+}
+
 .content-register .brands .svg-icon,
 .content-login .brands .svg-icon {
   width: 2.6rem;

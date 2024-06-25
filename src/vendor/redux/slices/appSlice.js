@@ -5,7 +5,6 @@ import { updatedData } from "@/vendor/";
 /*
 
 */
-
 const initialState = {
   favorites: [],
   cart: [],
@@ -39,13 +38,15 @@ const appSlice = createSlice({
     },
 
     register: (state, action) => {
-      const { username, password } = action.payload;
-      const existingUser = state.users.find((user) => user.username === username);
+      const { email } = action.payload;
+      const existingUser = state.user.email === email;
+
       if (!existingUser) {
-        state.users.push({ username, password });
-        state.user = { username };
+        const newUser = { ...state.user, ...action.payload };
+        state.user = newUser;
+        updatedData("userData", newUser);
       } else {
-        // Xử lý khi người dùng đã tồn tại!
+        // Xử lý User đã tồn tại!
       }
     },
     login: (state, action) => {

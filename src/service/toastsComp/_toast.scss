@@ -1,0 +1,198 @@
+/* Toast.css */
+/* overscroll-behavior: contain => khi cuộn không cuộn cả bên ngoài */
+
+.fulcrum {
+  display: flex;
+  width: max-content;
+  cursor: pointer;
+}
+
+.wrapper .item.car {
+  color: red;
+}
+
+.toast-container {
+  --duration: 500ms;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 9999999;
+  pointer-events: auto;
+}
+
+.popup-toast {
+  position: fixed;
+  top: 3.2rem;
+  right: 3.2rem;
+  width: Min(50rem, 100%);
+  background-clip: padding-box;
+  opacity: 0;
+  transform: translateX(0) translateY(0);
+  transition: opacity 300ms, transform 300ms;
+  z-index: 9999999;
+
+  &.warning {
+    color: #d88700;
+    background: #fff8ed;
+  }
+  &.success {
+    color: #00985f;
+    background: #ecfff8;
+  }
+  &.danger {
+    color: #c50000;
+    background: #ffe3e3;
+  }
+}
+
+.popup-toast {
+  &.center {
+    position: absolute;
+    max-width: max-content;
+    height: max-content;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    transition: opacity 300ms, transform 300ms;
+    animation: opacity-in var(--duration, 0.3s) linear forwards;
+  }
+
+  &.appear-top {
+    animation: slide-in-top var(--duration, 0.3s) ease-in-out forwards, opacity-in var(--duration, 0.3s) linear forwards;
+  }
+  &.appear-right {
+    animation: slide-in-right var(--duration, 0.3s) ease-in-out forwards, opacity-in var(--duration, 0.3s) linear forwards;
+  }
+  &.appear-bottom {
+    animation: slide-in-bottom var(--duration, 0.3s) ease-in-out forwards, opacity-in var(--duration, 0.3s) linear forwards;
+  }
+  &.appear-left {
+    animation: slide-in-left var(--duration, 0.3s) ease-in-out forwards, opacity-in var(--duration, 0.3s) linear forwards;
+  }
+  &.appear-top-right {
+    animation: slide-in-top-right var(--duration, 0.3s) ease-in-out forwards, opacity-in var(--duration, 0.3s) linear forwards;
+  }
+  &.appear-bottom-right {
+    animation: slide-in-bottom-right var(--duration, 0.3s) ease-in-out forwards, opacity-in var(--duration, 0.3s) linear forwards;
+  }
+  &.appear-top-left {
+    animation: slide-in-top-left var(--duration, 0.3s) ease-in-out forwards, opacity-in var(--duration, 0.3s) linear forwards;
+  }
+  &.appear-bottom-left {
+    animation: slide-in-bottom-left var(--duration, 0.3s) ease-in-out forwards, opacity-in var(--duration, 0.3s) linear forwards;
+  }
+  &.slide-out {
+    animation: slide-out var(--duration, 0.3s) ease-in-out forwards;
+  }
+}
+
+/*  keyframes  */
+@keyframes opacity-in {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: var(--opacity);
+  }
+}
+@keyframes opacity-out {
+  0% {
+    opacity: var(--opacity);
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes slide-out {
+  0% {
+    transform: translateX(0) translateY(0rem);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(-5rem);
+    opacity: 0;
+  }
+}
+@keyframes slide-in-top-right {
+  0% {
+    transform: translateX(100%) translateY(5rem);
+  }
+  to {
+    transform: translateX(0) translateY(0rem);
+  }
+}
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slide-out-top {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+@keyframes slide-out-right {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+@keyframes slide-out-bottom {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+@keyframes slide-out-left {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}

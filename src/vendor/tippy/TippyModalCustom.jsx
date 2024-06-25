@@ -7,7 +7,8 @@ const TippyCustom = forwardRef(
     {
       content,
       children,
-      arrow = "false",
+      arrow = false,
+      onHide,
       isFixed = false,
       interactive = "true",
       placement = "bottom-end",
@@ -24,16 +25,17 @@ const TippyCustom = forwardRef(
     const tippyRef = useRef(null);
     const [visible, setVisible] = useState(false);
     const [target, setTarget] = useState(null);
+
     const toggleModal = useCallback(() => setVisible((prev) => !prev), [visible]);
 
     useImperativeHandle(ref, () => ({
       show: () => setVisible(true),
       hide: () => {
-        if (isTriggerClick) {
-          setVisible(false);
-        } else {
-          tippyRef.current._tippy.hide();
-        }
+        setVisible(false);
+        tippyRef.current._tippy.hide();
+        // if (isTriggerClick) {
+        // } else {
+        // }
       },
       getReference: (newTarget) => {
         if (isTriggerClick) {
@@ -76,6 +78,7 @@ const TippyCustom = forwardRef(
           appendTo={appendTo}
           placement={placement}
           interactive={interactive}
+          onHide={onHide}
           popperOptions={
             isFixed && {
               strategy: "fixed",
@@ -107,7 +110,7 @@ const TippyCustom = forwardRef(
             </Fragment>
           )}>
           <div
-            className={`btn-toggle-modal cursor-pointer ${!children && !visible ? "d-none" : "d-flex"}`}
+            className={`btn-toggle-modal cursor-pointer ${!children && !visible ? "d-none" : ` ${!children ? "w-0 h-0" : "d-flex"}`}`}
             onClick={interactive && toggleModal}>
             {visible && isShowOverlay && <div className={`overlay ${overlayClass}`}></div>}
             {children}

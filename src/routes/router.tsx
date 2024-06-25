@@ -11,7 +11,7 @@ interface UI {
   id?: string;
   path: string;
   layout?: string | null;
-  access?: string;
+  access: string;
   history?: History | null;
   fallbackElement?: any;
   component: () => React.JSX.Element;
@@ -32,7 +32,7 @@ const nestedRoutes = (isVip: boolean, data: UI[]): JSX.Element => {
         const Layouts: React.JSX.Element = layoutSwitcher(page.layout);
         const childrenPages = isVip && page.children && page.children;
         const Pages = page.component;
-        const path = !page.access ? page.path : page.access === "private" && isVip ? page.path : "";
+        const path = page.access === "public" ? page.path : page.access === "private" && isVip ? page.path : "";
         const loader = page.loader;
         const action = page.action;
         return (
@@ -54,10 +54,10 @@ const nestedRoutes = (isVip: boolean, data: UI[]): JSX.Element => {
           </Route>
         );
       })}
-      <Route
+      {/* <Route
         path="*"
         element={!isVip ? <InviteLogIn /> : <Welcome />}
-      />
+      /> */}
     </Route>
   );
 };

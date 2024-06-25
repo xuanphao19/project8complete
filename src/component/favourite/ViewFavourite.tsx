@@ -139,7 +139,7 @@ const FavouriteModal = memo(({ children, data }: { children: React.JSX.Element; 
     <TippyCustom
       ref={refLiked}
       className="modal-favourite mt-2 rounded-4 bg-body shadow"
-      arrow="true"
+      arrow={true}
       offset={[52, 2]}
       delay={[0, 200]}
       interactive="true"

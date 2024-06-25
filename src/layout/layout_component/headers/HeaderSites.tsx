@@ -6,6 +6,7 @@ import { RootState } from "@/vendor/redux/store";
 import { Logo, Avatar, Header } from "@/component";
 import { ModalAvatar, FavouriteBtn, ModalCartBtn } from "@/component";
 import { handleListenerEvent, getElement, findRelatives } from "@/utils";
+import { LoginPage, BtnLogOut, BtnLogin, action, RegisterPage, BtnRegister } from "@/pages";
 import HeaderMenu from "./HeaderMenu";
 import { ThemeSwitch } from "@/themes";
 
@@ -20,9 +21,6 @@ const HeaderSites = ({ isLSOP = ["/", "/about"], distance = 80 }) => {
   const [isVip, setIsVip] = useState<boolean>(false);
   const [avatarUrl, setAvatarUrl] = useState<string>("");
   const [favoriteData, setFavoriteData] = useState();
-
-  const BtnRegister = "div";
-  const BtnLogin = "div";
 
   useEffect(() => {
     setIsVip(user.isVip);

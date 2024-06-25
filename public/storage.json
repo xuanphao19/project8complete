@@ -15,7 +15,7 @@
     "avatarUrl": "https://files.fullstack.edu.vn/f8-prod/user_avatars/36050/649fc3c653f2c.png",
     "phoneNumber": "",
     "isAdmin": false,
-    "isVip": true
+    "isVip": false
   },
 
   "themeData": {

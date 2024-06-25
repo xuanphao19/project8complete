@@ -230,6 +230,10 @@ const formFields = [
   },
   { id: "cvc", name: "card-cvc", placeholder: "CVC", autoComplete: "off", icon: "icon-error", maxLength: "3", required: true, type: "number" },
 ];
+
+const registerFieldLeft = ["firstName", "lastName", "username"];
+const registerFieldRight = ["email", "password", "confirmPassword"];
+
 const socialRegister = [
   { href: "https://www.youtube.com/channel/UCxvQ4j_oWcUrUkGbHWs4dLw", icon: "google-color", className: "text-danger" },
   { href: "https://github.com/xuanphao19", icon: "GitHub", className: "text-body ms-3" },
@@ -242,4 +246,4 @@ const genderOptions = [
   { id: "other", label: "Other", value: "other" },
 ];
 
-export { cityName, genderOptions, socialRegister, formFields, initialUserState };
+export { cityName, genderOptions, socialRegister, formFields, initialUserState, registerFieldLeft, registerFieldRight };

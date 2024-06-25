@@ -109,7 +109,7 @@ const ModalAvatar = memo(({ children, avatarUrl }: { children: any; avatarUrl: s
     <TippyCustom
       ref={refAvatar}
       className="modal-avatar mt-2 ⭐ rounded-4 bg-body"
-      arrow="true"
+      arrow={true}
       offset={[30, 2]}
       delay={[0, 200]}
       interactive="true"

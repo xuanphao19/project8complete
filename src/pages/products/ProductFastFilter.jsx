@@ -74,7 +74,7 @@ const ProductFastFilter = () => {
         <TippyCustom
           className="modal-filter-product my-4 w-100 rounded-5 bg-dark-subtle"
           visible={showModal}
-          arrow="true"
+          arrow={true}
           interactive="true"
           placement="bottom-end"
           onClickOutside={handleClose}
