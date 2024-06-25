@@ -31,7 +31,12 @@ const registerNewUser = async (email, password) => {
     );
     if (user) await logoutUser("Đã đăng xuất người dùng mới");
     return {
-      user: { ...user.reloadUserInfo, username: user.displayName },
+      user: {
+        ...user.reloadUserInfo,
+        userId: user.uid,
+        username: user.displayName,
+        avatarUrl: "https://files.fullstack.edu.vn/f8-prod/user_avatars/36050/649fc3c653f2c.png",
+      },
       register: { success: emailSended.success, message: emailSended.message },
     };
   } catch (error) {

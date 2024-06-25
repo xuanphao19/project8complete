@@ -100,7 +100,7 @@ const RegisterPage = () => {
         if (data) {
           const result = await registerNewUser(data.email, data.password);
           if (result.register.success) {
-            setUserInfo((prev) => ({ ...prev, ...data, email: result.user.email }));
+            setUserInfo((prev) => ({ ...prev, ...data, email: result.user.email, avatarUrl: result.user.avatarUrl }));
             setSubInfo((prev) => ({ ...prev, message: result.register.message }));
             handleToggleToast();
           }
