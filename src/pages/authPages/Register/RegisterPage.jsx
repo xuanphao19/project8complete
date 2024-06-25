@@ -137,7 +137,6 @@ const RegisterPage = () => {
   };
 
   const handleToggleToast = () => {
-    resetToastState(false);
     toastRef.current?.toggleToast();
   };
 
