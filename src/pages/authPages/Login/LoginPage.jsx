@@ -226,11 +226,12 @@ const LoginPage = () => {
                         View Products!
                       </span>
                     </Col>
+
                     <Col className="col-6">
                       <div className="dreams-ctrl flex-center w-100 ps-4 pe-2 rounded-4 flex-shrink-0">
                         <ModalVideojs
                           reverseState={resetVideoState}
-                          videoUrl="/src/video/phuongphahoclaptrinh.mp4">
+                          videoUrl="/assets/video/phuongphahoclaptrinh.mp4">
                           <button
                             type="button"
                             className="dreams-ctrl btn btn-outline-warning flex-center gap-3 px-3 rounded-4">
