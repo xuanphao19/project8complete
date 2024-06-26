@@ -19,7 +19,7 @@ const action = async ({ request, params }) => {
   return redirect(`${products}`);
 };
 
-const Login = () => {
+const LoginPage = () => {
   const formRef = useRef(null);
   const toastRef = useRef(null);
   const navigate = useNavigate();
@@ -388,4 +388,4 @@ const BtnLogOut = ({ className, onClick }) => {
 };
 
 export { BtnLogOut, BtnLogin, action };
-export default Login;
+export default LoginPage;
