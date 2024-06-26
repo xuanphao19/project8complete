@@ -251,6 +251,7 @@ const Login = () => {
                 <div className="error flex-center position-absolute start-0 top-100 mt-2 ps-4 pe-3 py-3 w-100 text-bg-danger fs-4 fst-italic rounded-3 user-select-none">
                   <span>{subInfo.reminder}</span>
                   <IconSvg
+                    role="button"
                     className="mb-auto ms-auto fs-2 cursor-pointer flex-shrink-0"
                     link="close-square"
                     onClick={handleCloseError}
