@@ -10,7 +10,7 @@ const TippyCustom = forwardRef(
       arrow = false,
       onHide,
       isFixed = false,
-      interactive = "true",
+      interactive = true,
       placement = "bottom-end",
       isShowOverlay = false,
       isTriggerClick = false,
@@ -26,16 +26,15 @@ const TippyCustom = forwardRef(
     const [visible, setVisible] = useState(false);
     const [target, setTarget] = useState(null);
 
-    const toggleModal = useCallback(() => setVisible((prev) => !prev), [visible]);
+    const toggleModal = useCallback(() => {
+      setVisible((prev) => !prev);
+    }, [visible]);
 
     useImperativeHandle(ref, () => ({
       show: () => setVisible(true),
       hide: () => {
         setVisible(false);
         tippyRef.current._tippy.hide();
-        // if (isTriggerClick) {
-        // } else {
-        // }
       },
       getReference: (newTarget) => {
         if (isTriggerClick) {
@@ -50,7 +49,7 @@ const TippyCustom = forwardRef(
       const onResize = () => {
         updatePosition(target, tippyRef);
       };
-      window.addEventListener("resize", onResize);
+      window.addEventListener("resize", onResize, { passive: true });
       return () => {
         window.removeEventListener("resize", onResize);
       };
@@ -101,7 +100,7 @@ const TippyCustom = forwardRef(
               )}
 
               <div
-                className={`tippy-content mt-5 p-5 ${className}`}
+                className={`tippy-content mt-5 ${className ? className : "p-5"}`}
                 tabIndex="-1"
                 role="tooltip"
                 {...attrs}>
@@ -112,7 +111,6 @@ const TippyCustom = forwardRef(
           <div
             className={`btn-toggle-modal cursor-pointer ${!children && !visible ? "d-none" : ` ${!children ? "w-0 h-0" : "d-flex"}`}`}
             onClick={interactive && toggleModal}>
-            {visible && isShowOverlay && <div className={`overlay ${overlayClass}`}></div>}
             {children}
           </div>
         </Tippy>

@@ -19,7 +19,7 @@
   top: 50%;
   left: 50%;
   translate: -50% -50%;
-  z-index: 9999999;
+  z-index: 99;
   pointer-events: auto;
 }
 
@@ -48,6 +48,10 @@
 .popup-toast.danger {
   color: #c50000;
   background: #ffe3e3;
+}
+
+.dreams-fly .dreams-ctrl {
+  height: 4.6rem !important;
 }
 
 .popup-toast.center {
@@ -214,4 +218,8 @@
     transform: translateX(-100%);
     opacity: 0;
   }
+}
+
+.login-dream-fly .toast-content {
+  width: 30rem;
 }

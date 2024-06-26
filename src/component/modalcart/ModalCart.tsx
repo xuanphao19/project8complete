@@ -35,7 +35,7 @@ const ContentModalCart = memo(({ data, onHide }: { data?: any; onHide: FC }): Re
   const [products, setProducts] = useState(data);
 
   useEffect(() => {
-    data && setProducts(data.slice(0, 3));
+    data?.length > 0 && setProducts(data.slice(0, 3));
   }, [data]);
 
   return (
@@ -51,7 +51,7 @@ const ContentModalCart = memo(({ data, onHide }: { data?: any; onHide: FC }): Re
       </div>
 
       <Row className="items-list pt-4 pb-5 row-cols-3 gx-4 border-bottom border-2">
-        {products &&
+        {products?.length > 0 &&
           products.map((product: any, i: number) => (
             <Fragment key={`Scart0${i + 1}`}>
               <CategoriesCards
@@ -128,7 +128,7 @@ const ModalCart = memo(({ children, data }: { children: React.JSX.Element; data?
   return (
     <TippyCustom
       ref={refCart}
-      className="modal-cart-header d-none d-sm-flex mt-2 rounded-4 bg-body bg-opacity-100 shadow"
+      className="modal-cart-header d-none d-sm-flex p-5 mt-2 rounded-4 bg-body bg-opacity-100 shadow"
       arrow={true}
       offset={[52, 2]}
       delay={[0, 200]}

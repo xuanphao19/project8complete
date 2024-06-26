@@ -50,6 +50,7 @@ const authUserLogin = async (email, password, message = "Đăng nhập thành c�
   if (authF8.currentUser && authF8.currentUser.email === email) {
     return { success: false, message: "Người dùng đang đăng nhập!" };
   } else signOut(authF8);
+
   try {
     // setPersistence => PHIÊN đăng nhập (trình duyệt).
     await setPersistence(authF8, browserSession);
@@ -124,7 +125,6 @@ const reAuthUser = async (email, password) => {
       return { user, success: true, message: "User reauthenticated successfully." };
     }
   } catch (error) {
-    // Error => Hạn chế các hành động tiếp theo!
     return returnError(error, "Error reAuthUser");
   }
 };
@@ -147,68 +147,3 @@ const sendPasswordReset = async (email, password) => {
 
 export default registerNewUser;
 export { sendEmailAuth, authUserLogin, logoutUser, deleteAccount, reAuthUser, sendPasswordReset };
-
-/*
-const handleRegister = async (email, password) => {
-  try {
-    // Bước 1: Tạo người dùng mới và đăng xuất ngay lập tức
-    const newUser = await registerNewUser(email, password);
-    // Bước 2: Gửi email xác minh cho người dùng mới
-    const verificationMessage = await sendVerificationEmail(newUser);
-    console.log(verificationMessage);
-    // Thông báo cho người dùng về việc gửi email xác minh thành công
-    alert(verificationMessage);
-  } catch (error) {
-    console.error('Registration process failed:', error);
-    // Thông báo cho người dùng về lỗi xảy ra
-    alert(`Error: ${error.message}`);
-  }
-};
-// // Gọi hàm Đăng ký:
-// const onSubmit = async (e) => {
-//   e.preventDefault();
-//   const email = e.target.email.value;
-//   const password = e.target.password.value;
-//   await handleRegister(email, password);
-// };
-
-const handleLogin = async (email, password) => {
-  try {
-    const user = await authUserLogin(email, password);
-    alert('User signed in successfully.');
-  } catch (error) {
-    console.error('Login failed:', error);
-    alert(`Login failed: ${error.message}`);
-  }
-};
-// // Gọi hàm Đăng nhập:
-// const onSubmit = async (e) => {
-//   e.preventDefault();
-//   const email = e.target.email.value;
-//   const password = e.target.password.value;
-//   await handleLogin(email, password);
-// };
-
-const handleDeleteAccount = async (email, password) => {
-  const auth = getAuth();
-  const user = auth.currentUser;
-  if (user) {
-    try {
-      await deleteAccount(user, email, password);
-      alert('User account deleted successfully.');
-    } catch (error) {
-      console.error('Account deletion failed:', error);
-      alert(`Account deletion failed: ${error.message}`);
-    }
-  } else {
-    alert('No user is currently signed in.');
-  }
-};
-// // 3. Xóa tài khoản người dùng
-// const onSubmit = async (e) => {
-//   e.preventDefault();
-//   const email = e.target.email.value;
-//   const password = e.target.password.value;
-//   await handleDeleteAccount(email, password);
-// };
-*/

@@ -1,14 +1,14 @@
 // Mã hóa ký tự đặc biệt : encodeURIComponent(value) // => code!
-
+// Loại bỏ ký tự đặc biệt : split("@")[0].replace(/[^a-zA-Z0-9]/g, "")
 import React, { useRef, useState } from "react";
 import { useEffect, useMemo, useCallback } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useFetcher } from "react-router-dom";
+import { Link, useFetcher, useNavigate } from "react-router-dom";
 
 import { registerNewUser, OpenYourMail, DreamsFly } from "@/service";
 
-import { register } from "@/vendor";
+import { reduxRegister } from "@/vendor";
 import { routesConfig } from "@/config";
 import { handleQuickTestForm, validateForm } from "@/utils";
 import { MainSection, FormInput, IconSvg } from "@/component";
@@ -19,6 +19,7 @@ const RegisterPage = () => {
   const fetcher = useFetcher();
   const formRef = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { home, login } = routesConfig;
   const user = useSelector((s) => s.app.user);
 
@@ -43,10 +44,6 @@ const RegisterPage = () => {
   useEffect(() => {
     setUserInfo(reference.newInfo);
   }, [reference]);
-
-  useEffect(() => {
-    // user && console.log(user);
-  }, [user]);
 
   const handleChange = useCallback((name, value) => {
     if (name === "isNotRobot") {
@@ -89,20 +86,25 @@ const RegisterPage = () => {
     } else {
       try {
         const formData = new FormData(event.currentTarget);
+        const emailForm = formData.get("email");
+        const username = formData.get("username");
         const data = {
-          email: formData.get("email"),
+          email: emailForm,
+          username: username ? username : emailForm?.split("@")[0].replace(/[^a-zA-Z0-9]/g, ""),
           firstName: formData.get("firstName"),
           lastName: formData.get("lastName"),
-          username: formData.get("username"),
           password: formData.get("password"),
           gender: formData.get("gender"),
+          confirmPassword: "",
         };
         if (data) {
           const result = await registerNewUser(data.email, data.password);
-          if (result.register.success) {
+          if (result && result.register.success) {
             setUserInfo((prev) => ({ ...prev, ...data, email: result.user.email, userId: result.user.userId, avatarUrl: result.user.avatarUrl }));
             setSubInfo((prev) => ({ ...prev, message: result.register.message }));
             handleToggleToast();
+          } else if (result.success === false && result.message) {
+            setError(result.message);
           }
         }
       } catch (error) {
@@ -127,7 +129,7 @@ const RegisterPage = () => {
           type={`${field.type || "text"}`}
           autoComplete={field.autoComplete}
           value={userInfo[field.id]}
-          classGroup={`${"⭐"}`}
+          classGroup="I-💔-F8"
           classLabel="🌺"
           classFormCtrl="register-input fs-4 border-dark border-opacity-50 rounded-3 i💔f8"
           classIcon={field.classIcon}
@@ -140,7 +142,7 @@ const RegisterPage = () => {
 
   const resetState = (state) => {
     if (state === false) {
-      formRef.current.reset();
+      formRef.current?.reset();
     }
   };
 
@@ -151,11 +153,12 @@ const RegisterPage = () => {
   const gotoEmailAdd = () => {
     handleToggleToast();
     setIsConfirmed(true);
+    navigate(`/${login}`, { replace: true });
   };
 
   useEffect(() => {
     if (isConfirmed) {
-      dispatch(register(userInfo));
+      dispatch(reduxRegister(userInfo));
     }
   }, [isConfirmed]);
 
@@ -166,13 +169,13 @@ const RegisterPage = () => {
       className="flex-center mx-auto">
       {error && (
         <div className="error-message">
-          <p>{error.code}</p>
-          <p>{error.message}</p>
+          <p>{error}</p>
         </div>
       )}
       <DreamsFly
         ref={toastRef}
         showForever={true}
+        outsideCtrl={true}
         variant="success"
         direction=""
         className="flex-center p-5 rounded-4 border border-2"
@@ -322,8 +325,7 @@ const RegisterPage = () => {
             md={6}>
             <Link
               type="button"
-              // to={`/${login}`}
-              to={"/"}
+              to={`/${login}`}
               className="btn btn-outline-primary flex-center pb-2 fs-3 fst-italic fw-medium w-100">
               Đã có Account
             </Link>

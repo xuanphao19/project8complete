@@ -37,7 +37,7 @@ const FormInput = forwardRef(
       if (inputValue.startsWith(" ")) return;
       onChange(inputId, inputValue);
     };
-    
+
     const handleInputFocus = (event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -86,7 +86,7 @@ const FormInput = forwardRef(
         className={`form-group ${classGroup || ""}`}
         controlId={id}>
         {label && (
-          <FormLabel className={`${classLabel || ""}`}>
+          <FormLabel className={`${classLabel || ""} user-select-none cursor-pointer`}>
             {required && <span className="fs-4 text-danger me-3">* </span>} {label}:
           </FormLabel>
         )}

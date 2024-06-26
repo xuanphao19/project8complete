@@ -65,7 +65,7 @@ const cityName = [
 ];
 
 const initialUserState = {
-  userId: 1,
+  userId: 0,
   email: "",
   firstName: "",
   lastName: "",
@@ -140,7 +140,7 @@ const formFields = [
     id: "email",
     name: "email",
     label: "Email",
-    type: "email",
+    type: "text",
     placeholder: "Enter Email",
     autoComplete: "on",
     required: true,
@@ -231,6 +231,7 @@ const formFields = [
   { id: "cvc", name: "card-cvc", placeholder: "CVC", autoComplete: "off", icon: "icon-error", maxLength: "3", required: true, type: "number" },
 ];
 
+const loginFields = ["email", "password"];
 const registerFieldLeft = ["firstName", "lastName", "username"];
 const registerFieldRight = ["email", "password", "confirmPassword"];
 
@@ -246,4 +247,4 @@ const genderOptions = [
   { id: "other", label: "Other", value: "other" },
 ];
 
-export { cityName, genderOptions, socialRegister, formFields, initialUserState, registerFieldLeft, registerFieldRight };
+export { cityName, genderOptions, socialRegister, formFields, initialUserState, registerFieldLeft, registerFieldRight, loginFields };

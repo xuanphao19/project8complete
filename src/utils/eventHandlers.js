@@ -105,7 +105,7 @@ const handleListenerEvent = (test, action, handleEvent) => {
   if (!test) {
     window.removeEventListener(action, handleEvent);
   } else {
-    window.addEventListener(action, handleEvent);
+    window.addEventListener(action, handleEvent, { passive: true });
   }
 };
 

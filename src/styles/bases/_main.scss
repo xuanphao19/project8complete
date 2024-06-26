@@ -105,7 +105,11 @@ body {
 .icon-link,
 .icon-ctrl {
   cursor: pointer;
+  &:active {
+    filter: brightness(0.5);
+  }
 }
+
 .dashed {
   border-style: dashed !important;
 }
@@ -335,11 +339,18 @@ body:has(div[data-tippy-root] .modal-video-detail) {
 }
 
 div[data-tippy-root]:has(.modal-video-detail) {
-  position: fixed !important;
   inset: unset !important;
   transform: unset !important;
   top: 0 !important;
   left: 0 !important;
+  .video-js:has(video#video1[src="/src/video/i-💔-F8.mp4"]) {
+    width: 68vw !important;
+    overflow: hidden;
+    #video1 {
+      width: auto !important;
+      height: 62% !important;
+    }
+  }
 }
 
 .cart-btn::before {
@@ -349,6 +360,7 @@ div[data-tippy-root]:has(.modal-video-detail) {
   background: rgba(163, 153, 153, 0.625);
   border-radius: 9rem;
 }
+
 /* Header control  */
 .btn-login,
 .btn-logout,

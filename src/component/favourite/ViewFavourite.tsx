@@ -82,7 +82,7 @@ const ContentModalFavourite = memo(({ data, handleOnHide }: { data?: any; handle
       </div>
 
       <Row className="items-list py-3  row row-cols-3 gx-4 border-bottom border-2">
-        {products &&
+        {products?.length > 0 &&
           products.map((product: any, i: number) => (
             <Fragment key={`cart${product.id + i}${product.name}`}>
               <CategoriesCards
@@ -140,7 +140,7 @@ const FavouriteModal = memo(({ children, data }: { children: React.JSX.Element; 
   return (
     <TippyCustom
       ref={refLiked}
-      className="modal-favourite mt-2 rounded-4 bg-body shadow"
+      className="modal-favourite mt-2 p-5 rounded-4 bg-body shadow"
       arrow={true}
       offset={[52, 2]}
       delay={[0, 200]}

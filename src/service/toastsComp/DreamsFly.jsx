@@ -11,6 +11,7 @@ const DreamsFly = forwardRef(
       duration = 500,
       overlayOpacity = 0,
       showForever = false,
+      outsideCtrl = false,
       variant = "success", // [warning, success, danger] border-success
       direction = "top-right", // Vào từ ["top","right","bottom","left"]
       className = "flex-center p-5 rounded-4",
@@ -84,7 +85,7 @@ const DreamsFly = forwardRef(
       isVisible && (
         <div
           className="toast-container"
-          onClick={outsideClose}>
+          onClick={outsideCtrl ? outsideClose : () => {}}>
           {!!overlayOpacity && (
             <div
               ref={overlayRef}
@@ -94,7 +95,7 @@ const DreamsFly = forwardRef(
           )}
           <div
             ref={toastRef}
-            className={`popup-toast ${toastClass}`}
+            className={`popup-toast dreams-fly ${toastClass}`}
             style={{ "--duration": `${duration}ms` }}>
             <div className="toast-content">{children}</div>
           </div>

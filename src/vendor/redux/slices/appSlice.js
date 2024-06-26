@@ -45,16 +45,20 @@ const appSlice = createSlice({
         const newUser = { ...state.user, ...action.payload };
         state.user = newUser;
         updatedData("userData", newUser);
-      } else {
-        // Xử lý User đã tồn tại!
       }
     },
+
     login: (state, action) => {
       state.user = action.payload;
+      updatedData("userData", action.payload);
     },
+
     logout: (state) => {
-      state.user = null;
+      state.user = action.payload;
+      console.log("str1", action.payload);
+      updatedData("userData", action.payload);
     },
+
     updatedUserInfo: (state, action) => {
       state.user = action.payload;
       updatedData("userData", action.payload);

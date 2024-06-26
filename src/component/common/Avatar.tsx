@@ -8,6 +8,7 @@ import { Image } from "@/assets/images";
 import { TippyCustom } from "@/vendor/";
 import { IconSvg } from "@/component/";
 import { ThemeSwitch } from "@/themes";
+import { BtnLogOut } from "@/pages";
 const { profile } = routesConfig;
 
 const Avatar = memo(
@@ -30,7 +31,6 @@ const Avatar = memo(
 
 const ContentModalAvatar = memo(({ src, onHide }: { src?: string; onHide?: FC }): React.JSX.Element => {
   const [avatar, setAvatar] = useState<string>("");
-  const BtnLogOut = "div";
 
   useEffect(() => {
     src && setAvatar(src);
@@ -92,8 +92,8 @@ const ContentModalAvatar = memo(({ src, onHide }: { src?: string; onHide?: FC })
 
       <BtnLogOut
         onClick={onHide}
-        className="fs-3 mt-4 py-3 px-4 btn btn-outline-primary">
-        BtnLogOut
+        className="fs-3 mt-4 py-3 px-4 btn btn-outline-warning">
+        Log Out
       </BtnLogOut>
     </div>
   );
@@ -108,7 +108,7 @@ const ModalAvatar = memo(({ children, avatarUrl }: { children: any; avatarUrl: s
   return (
     <TippyCustom
       ref={refAvatar}
-      className="modal-avatar mt-2 ⭐ rounded-4 bg-body"
+      className="modal-avatar p-5 mt-2 ⭐ rounded-4 bg-body"
       arrow={true}
       offset={[30, 2]}
       delay={[0, 200]}
