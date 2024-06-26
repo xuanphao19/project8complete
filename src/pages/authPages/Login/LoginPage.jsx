@@ -143,7 +143,7 @@ const LoginPage = () => {
 
   const gotoProducts = () => {
     handleToggleToast();
-    navigate(`${products}`, { replace: true });
+    navigate(`/${products}`, { replace: true });
   };
 
   const resetVideoState = (state) => {
@@ -230,7 +230,7 @@ const LoginPage = () => {
                       <div className="dreams-ctrl flex-center w-100 ps-4 pe-2 rounded-4 flex-shrink-0">
                         <ModalVideojs
                           reverseState={resetVideoState}
-                          videoUrl="/src/video/i-💔-F8.mp4">
+                          videoUrl="/src/video/phuongphahoclaptrinh.mp4">
                           <button
                             type="button"
                             className="dreams-ctrl btn btn-outline-warning flex-center gap-3 px-3 rounded-4">
