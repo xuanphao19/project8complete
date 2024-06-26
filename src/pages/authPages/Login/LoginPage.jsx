@@ -16,7 +16,7 @@ const { home, register, products, forgotpw, login } = routesConfig;
 
 const action = async ({ request, params }) => {
   console.log("action str1", request, params);
-  return redirect(`/${products}`);
+  return redirect(`${products}`);
 };
 
 const Login = () => {
@@ -143,7 +143,7 @@ const Login = () => {
 
   const gotoProducts = () => {
     handleToggleToast();
-    navigate(`/${products}`, { replace: true });
+    navigate(`${products}`, { replace: true });
   };
 
   const resetVideoState = (state) => {
@@ -284,7 +284,7 @@ const Login = () => {
               </Button>
               <Link
                 className="btn btn-outline-primary w-50 py-3 fs-4"
-                to={`/${forgotpw}`}>
+                to={`${forgotpw}`}>
                 Forgot password?
               </Link>
             </div>
@@ -315,7 +315,7 @@ const BtnLogin = () => {
   if (user && user.isVip) return;
   return (
     <Link
-      to={`/${login}`}
+      to={`${login}`}
       className={`btn btn-login btn-outline-primary flex-center d-none d-md-flex fs-4 py-3 px-5`}>
       Log In
     </Link>
