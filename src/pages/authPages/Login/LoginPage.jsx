@@ -81,6 +81,7 @@ const Login = () => {
       setSubInfo((prev) => ({ ...prev, message: result.message, ["success"]: result.success }));
 
       handleToggleToast();
+
       return;
     } else if (result.success === false && result.message) {
       let message = "";
