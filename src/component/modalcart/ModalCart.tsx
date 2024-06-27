@@ -155,5 +155,5 @@ const ModalCartDetail = () => {
   );
 };
 
-export { ModalCartBtn, ModalCart };
-export default ModalCartDetail;
+export { ModalCartBtn };
+export default ModalCart;

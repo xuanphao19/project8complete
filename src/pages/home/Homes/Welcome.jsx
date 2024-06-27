@@ -1,8 +1,8 @@
 // Welcome.jsx
-import React, { Fragment } from "react";
+import React, { Fragment, memo } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-const Welcome = () => {
+const Welcome = memo(() => {
   return (
     <React.Fragment>
       <div className="container pt-5">
@@ -22,8 +22,9 @@ const Welcome = () => {
       </div>
     </React.Fragment>
   );
-};
-const InviteLogIn = () => {
+});
+
+const InviteLogIn = memo(() => {
   const navigate = useNavigate();
   const handlePress = () => {
     navigate(-1);
@@ -78,8 +79,7 @@ const InviteLogIn = () => {
       </div>
     </Fragment>
   );
-};
+});
 
 export { InviteLogIn };
 export default Welcome;
-//  https://tranhuloc.github.io//CT250

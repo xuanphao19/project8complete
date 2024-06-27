@@ -62,9 +62,6 @@ const Contact = () => {
           <Row className="">
             <Col className="col-12 col-sm-10 col-lg-6 mt-5 mt-lg-0 mx-auto">
               <div className="p-4 border rounded-4 shadow">
-                {/* <iframe
-                  src="https://maps.google.com/maps?q=Ho%20Chi%20Minh's%20Mausoleum&amp;z=13&amp;output=embed" >
-                  </iframe> */}
                 <iframe
                   loading="lazy"
                   allowFullScreen=""

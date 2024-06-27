@@ -13,6 +13,7 @@ const ClassicLayout = ({ children }) => {
         name="main"
         className="p-6">
         {children}
+        <Outlet />
       </MainSection>
     </React.Fragment>
   );

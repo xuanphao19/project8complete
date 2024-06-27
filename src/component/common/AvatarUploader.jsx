@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo, memo } from "react";
-import { Link, Outlet, useLocation, useMatch } from "react-router-dom";
+import React, { useState, useEffect, useCallback, memo } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
@@ -33,7 +32,6 @@ const AvatarUploader = memo(({ isUpload = false, avatarId = "avatar1", className
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      // Logic để upload avatar lên server nếu cần
       console.log("Avatar uploaded:", avatar);
     },
     [avatar],

@@ -35,9 +35,24 @@
   z-index: 9999999;
 }
 
+.popup-toast .dreams-ctrl:active,
+.popup-toast .dreams-ctrl {
+  background-color: transparent;
+}
+
+.popup-toast .dreams-ctrl:active {
+  background-color: transparent;
+  filter: brightness(0.9);
+}
+
 .popup-toast.warning {
   color: #d88700;
   background: #fff8ed;
+}
+
+.popup-toast.warning .dreams-ctrl {
+  color: #d88700;
+  border-color: currentColor;
 }
 
 .popup-toast.success {
@@ -45,9 +60,19 @@
   background: #ecfff8;
 }
 
+.popup-toast.success .dreams-ctrl {
+  color: #00985f;
+  border-color: currentColor;
+}
+
 .popup-toast.danger {
   color: #c50000;
   background: #ffe3e3;
+}
+
+.popup-toast.danger .dreams-ctrl {
+  color: #c50000;
+  border-color: currentColor;
 }
 
 .dreams-fly .dreams-ctrl {

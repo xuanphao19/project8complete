@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link, useRouteLoaderData, useNavigate } from "react-router-dom";
+import { NavLink, Link, useRouteLoaderData } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Image } from "@/assets/images/";
 import { IconSvg } from "@/component";
@@ -9,6 +9,7 @@ const ItemMenu = ({ type = "nav", item, path, linkClass, icons, subIcon, childre
   onClick = onClick ? onClick : () => {};
   let ItemLink = path && !item.children ? NavLink : "span";
   ItemLink = isLink ? NavLink : ItemLink;
+
   return (
     <ItemLink
       role={ItemLink !== "span" ? "link" : null}
@@ -24,45 +25,48 @@ const ItemMenu = ({ type = "nav", item, path, linkClass, icons, subIcon, childre
 
 const Navigation = ({ type = "nav", links, navClass, className, itemClass, linkClass, iconClass, icons, subIcon, onClick, ...prop }) => {
   const user = useSelector((state) => state.app.user);
-
   const { productsData } = useRouteLoaderData("root");
   const ListItem = type === "nav" ? "ul" : "div";
   const Items = ListItem === "ul" ? "li" : "div";
-  links = links ? links : productsData.Grocery;
+  links = links ? links : productsData?.Grocery;
+
+  if (!productsData) return;
 
   return (
     <Nav className={navClass}>
       <ListItem className={`${type}-group${className ? ` ${className}` : ""}`}>
-        {links.map((link, index) => {
-          const hidden = link.type && link.type === "private" && !user.isVip;
-          const keys = `${index}${link.id ? link.id : "-01"}`;
-          const paths = link.path ? link.path : `${link.id}/fastfilter`;
-          icons = link.id && (
-            <Image
-              className={iconClass}
-              src={`/assets/images/product/product${link.id}.png`}
-            />
-          );
-          return (
-            !hidden && (
-              <Items
-                key={keys}
-                className={`${type}-item${itemClass ? ` ${itemClass}` : ""}`}>
-                <ItemMenu
-                  item={link}
-                  path={paths}
-                  isLink={true}
-                  linkClass={linkClass}
-                  icons={icons ? icons : null}
-                  subIcon={subIcon ? subIcon : null}
-                  onClick={onClick}
-                  {...prop}>
-                  {link.name}
-                </ItemMenu>
-              </Items>
-            )
-          );
-        })}
+        {links &&
+          links.length > 0 &&
+          links.map((link, index) => {
+            const hidden = link.type && link.type === "private" && !user.isVip;
+            const keys = `${index}${link.id ? link.id : "-01"}`;
+            const paths = link.path ? link.path : `${link.id}/fastfilter`;
+            icons = link.id && (
+              <Image
+                className={iconClass}
+                src={`/assets/images/product/product${link.id}.png`}
+              />
+            );
+            return (
+              !hidden && (
+                <Items
+                  key={keys}
+                  className={`${type}-item${itemClass ? ` ${itemClass}` : ""}`}>
+                  <ItemMenu
+                    item={link}
+                    path={paths}
+                    isLink={true}
+                    linkClass={linkClass}
+                    icons={icons ? icons : null}
+                    subIcon={subIcon ? subIcon : null}
+                    onClick={onClick}
+                    {...prop}>
+                    {link.name}
+                  </ItemMenu>
+                </Items>
+              )
+            );
+          })}
       </ListItem>
     </Nav>
   );
@@ -146,7 +150,6 @@ const MenuLists = ({
 
 const MultiLevelMenu = ({ itemPath = [], pathname, classContent, className, classLink, ...props }) => {
   let path = "";
-  const navigate = useNavigate();
 
   return (
     <React.Fragment>
@@ -172,37 +175,3 @@ const MultiLevelMenu = ({ itemPath = [], pathname, classContent, className, clas
 };
 
 export { Navigation, MenuLists, MultiLevelMenu };
-
-/*
-// ** Lý thuyết NavLink cơ bản:
-// ** className "active" là mặc định với <ul id = "sidebar">
-// ** className= ({ isActive, isPending }) => {{ isActive, isPending}}
-// ** style= ({ isActive, isPending }) => {{ isActive, isPending}}
-// ** children = ({ isActive, isPending }) Xem ví dụ 1...
-// ** reloadDocument <a href="#"> Em lại là em của ngày xưa!
-// ** caseSensitive // => Phân biệt chưa hoa chữ thường.
-// ** <Link to="?tab=one" preventScrollReset={true} /> Không cuộn Top!
-// Ví dụ 1:
-// <NavLink to="/tasks">
-//   {({ isActive, isPending, isTransitioning }) => (
-//     <span className={isActive ? "active" : ""}>Tasks</span>
-//   )}
-// </NavLink>
-//
-// Ví dụ 2:
-// <NavLink to={to} unstable_viewTransition>
-//   {({ isTransitioning }) => (
-//     <>
-//       <p
-//         style={{
-//           viewTransitionName: isTransitioning ?
-// "image-title" : "",
-//         }}>
-//         Image Number {idx}
-//       </p>
-//       <img src={src} alt={`Img ${idx}`} style={{
-// viewTransitionName: isTransitioning ?
-// "image-expand" : "" }} />
-//     </>
-//   )}
-// </NavLink> */

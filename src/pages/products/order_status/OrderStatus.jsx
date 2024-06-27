@@ -145,12 +145,3 @@ const OrderStatus = memo(() => {
 
 export { action };
 export default OrderStatus;
-
-/*
-  Address: 5678 Mission Street, Apt 9, San Francisco, CA 94110, USA
-  Tên người nhận: "Jane Smith"
-  Số nhà, tên đường và số căn hộ: "5678 Mission Street, Apt 9"
-  Tên thành phố và mã tiểu bang: "San Francisco, CA"
-  Mã bưu chính (ZIP code): "94110"
-  Quốc gia: "USA"
-  */

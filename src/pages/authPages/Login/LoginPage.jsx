@@ -1,6 +1,4 @@
-// Mã hóa ký tự đặc biệt : encodeURIComponent(value) // => code!
-// Loại bỏ ký tự đặc biệt : split("@")[0].replace(/[^a-zA-Z0-9]/g, "")
-import React, { Fragment, useRef, useState, useCallback, useEffect } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import { Form, Link, useNavigate, redirect } from "react-router-dom";
 import { Row, Col, FormCheck, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
@@ -105,6 +103,7 @@ const LoginPage = () => {
         if (localUser && userInfo.userId) {
           const userLogged = { ...localUser, isVip: true };
           dispatch(reduxLogin(userLogged));
+          setSubInfo((prev) => ({ ...prev, success: true }));
         }
       };
       getLocalUser();
@@ -147,7 +146,7 @@ const LoginPage = () => {
   };
 
   const resetVideoState = (state) => {
-    setSubInfo((prev) => ({ ...prev, isVideoPlaying: state }));
+    setSubInfo((prev) => ({ ...prev, spinning: false, isVideoPlaying: state }));
   };
 
   return (
@@ -171,6 +170,7 @@ const LoginPage = () => {
               thumb="https://files.fullstack.edu.vn/f8-prod/user_avatars/36050/649fc3c653f2c.png"
               icon={null}
               error={subInfo.error}
+              success={subInfo.success}
               spinning={subInfo.spinning}
               className={`w-25 mb-2`}
             />
@@ -212,7 +212,7 @@ const LoginPage = () => {
               <DreamsFly
                 ref={toastRef}
                 direction=""
-                variant="warning"
+                variant="success"
                 showForever={true}
                 className="login-dream-fly flex-center p-5 rounded-4 border border-1 bg-body"
                 resetState={resetState}>
@@ -221,7 +221,7 @@ const LoginPage = () => {
                   <Row>
                     <Col className="col-6">
                       <span
-                        className="dreams-ctrl view-products btn flex-center btn-outline-warning w-100 py-3 px-3 fs-4 fst-italic fw-light rounded-4 flex-shrink-0"
+                        className="dreams-ctrl view-products btn flex-center btn-outline-primary w-100 py-3 px-3 fs-4 fst-italic fw-light rounded-4 flex-shrink-0"
                         onClick={gotoProducts}>
                         View Products!
                       </span>
@@ -230,11 +230,12 @@ const LoginPage = () => {
                     <Col className="col-6">
                       <div className="dreams-ctrl flex-center w-100 ps-4 pe-2 rounded-4 flex-shrink-0">
                         <ModalVideojs
+                          startVolume={100}
                           reverseState={resetVideoState}
                           videoUrl="/assets/video/phuongphahoclaptrinh.mp4">
                           <button
                             type="button"
-                            className="dreams-ctrl btn btn-outline-warning flex-center gap-3 px-3 rounded-4">
+                            className="dreams-ctrl btn btn-outline-info flex-center gap-3 px-3 rounded-4">
                             <span className="fst-italic fs-4 fw-light">Video Intros</span>
                             <IconSvg
                               className={`icon-ctrl text-info fs-2`}
@@ -260,6 +261,7 @@ const LoginPage = () => {
                 </div>
               )}
             </div>
+
             <div className="brands flex-center w-100 py-4 gap-4 fs-2 mb-3">
               {socialRegister.map((social, index) => (
                 <Link
@@ -276,6 +278,7 @@ const LoginPage = () => {
                 </Link>
               ))}
             </div>
+
             <div className="d-flex gap-4 mt-3">
               <Button
                 className="w-50 py-3 fs-4 bg-opacity-50"
@@ -289,6 +292,7 @@ const LoginPage = () => {
                 Forgot password?
               </Link>
             </div>
+
             <span className="d-flex fw-light fs-4 gap-4 mt-3">
               Chưa có tài khoản:
               <Link
@@ -297,6 +301,7 @@ const LoginPage = () => {
                 Đăng ký Account!
               </Link>
             </span>
+
             <Link
               className="d-flex gap-4 py-2 mb-3 fs-5 fw-light fst-italic"
               to={home}>
@@ -317,7 +322,7 @@ const BtnLogin = () => {
   return (
     <Link
       to={`${login}`}
-      className={`btn btn-login btn-outline-primary flex-center d-none d-md-flex fs-4 py-3 px-5`}>
+      className={`btn btn-login btn-outline-primary flex-center d-none d-md-flex fs-4 py-3 px-5 me-2`}>
       Log In
     </Link>
   );
@@ -326,6 +331,7 @@ const BtnLogin = () => {
 const BtnLogOut = ({ className, onClick }) => {
   const toastRef = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.app.user);
 
   const handleLogOut = () => {
@@ -336,6 +342,7 @@ const BtnLogOut = ({ className, onClick }) => {
     const userLogOut = { ...user, isVip: false, password: "", email: "", username: "", firstName: "" };
     dispatch(reduxLogin(userLogOut));
     logoutUser();
+    navigate(home, { replace: true });
   };
   const handleToggleToast = () => {
     toastRef.current?.toggleToast();

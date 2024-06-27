@@ -18,7 +18,6 @@ const HeaderMenu = memo(() => {
   const [fulcrum, setFulcrum] = useState(null);
   const [contact, setContact] = useState(null);
 
-  const [userId, setUserId] = useState("");
   const [isVip, setIsVip] = useState(false);
   const user = useSelector((state) => state.app.user);
   const [activeLink, setActiveLink] = useState("link2");
@@ -39,7 +38,6 @@ const HeaderMenu = memo(() => {
 
   useEffect(() => {
     setIsVip(user.isVip);
-    setUserId(user.userId);
   }, [user]);
 
   useEffect(() => {
@@ -86,6 +84,7 @@ const HeaderMenu = memo(() => {
     );
     handleCloseCanvas();
   };
+
   const handleCloseModal = useCallback(
     (event) => {
       closeModal(event, tippyRef.current, "tippy3");

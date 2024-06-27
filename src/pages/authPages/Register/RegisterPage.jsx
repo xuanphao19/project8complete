@@ -1,17 +1,14 @@
-// Mã hóa ký tự đặc biệt : encodeURIComponent(value) // => code!
-// Loại bỏ ký tự đặc biệt : split("@")[0].replace(/[^a-zA-Z0-9]/g, "")
 import React, { useRef, useState } from "react";
 import { useEffect, useMemo, useCallback } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useFetcher, useNavigate } from "react-router-dom";
 
-import { registerNewUser, OpenYourMail, DreamsFly } from "@/service";
-
-import { reduxRegister } from "@/vendor";
 import { routesConfig } from "@/config";
+import { reduxRegister } from "@/vendor";
 import { handleQuickTestForm, validateForm } from "@/utils";
 import { MainSection, FormInput, IconSvg } from "@/component";
+import { registerNewUser, OpenYourMail, DreamsFly } from "@/service";
 import { formFields, registerFieldLeft, registerFieldRight, initialUserState, genderOptions, socialRegister } from "@/api";
 
 const RegisterPage = () => {

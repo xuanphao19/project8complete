@@ -34,17 +34,39 @@
   transition: opacity 300ms, transform 300ms;
   z-index: 9999999;
 
+  .dreams-ctrl:active,
+  .dreams-ctrl {
+    background-color: transparent;
+  }
+  .dreams-ctrl:active {
+    background-color: transparent;
+    filter: brightness(0.9);
+  }
+
   &.warning {
     color: #d88700;
     background: #fff8ed;
+    .dreams-ctrl {
+      color: #d88700;
+      border-color: currentColor;
+    }
   }
   &.success {
     color: #00985f;
     background: #ecfff8;
+    .dreams-ctrl {
+      color: #00985f;
+      border-color: currentColor;
+    }
   }
   &.danger {
     color: #c50000;
     background: #ffe3e3;
+
+    .dreams-ctrl {
+      color: #c50000;
+      border-color: currentColor;
+    }
   }
 }
 .dreams-fly .dreams-ctrl {

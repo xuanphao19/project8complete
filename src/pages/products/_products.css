@@ -170,7 +170,12 @@
 }
 
 .nav-sidebar::-webkit-scrollbar-track {
+  background: transparent;
   border-radius: 0rem;
+}
+
+::-webkit-scrollbar-button {
+  display: none !important;
 }
 
 .product-navigation img {
@@ -181,6 +186,8 @@
 .product-navigation ::-webkit-scrollbar-thumb {
   height: 0.6rem;
   background: rgba(1, 255, 48, 0.162);
+  border-radius: 9999px;
+  background: #65a2af !important;
 }
 
 .product-navigation ::-webkit-scrollbar {

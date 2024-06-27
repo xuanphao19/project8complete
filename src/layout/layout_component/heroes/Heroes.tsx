@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { Carousel } from "slick-carousel";
 import { Row, Col } from "react-bootstrap";
-import { heroImg as hero, Image } from "@/assets/images";
+import { Image } from "@/assets/images";
 import { IconSvg } from "@/component/";
+import { heroData } from "@/utils/";
 
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./_heroes.min.css";
-
-const { coffee0, coffee1, coffee2, coffee6, bgr_right } = hero;
 
 type HeroData = {
   title: string;
@@ -20,45 +19,6 @@ type HeroData = {
   thumb: string;
   href?: string;
 };
-
-const heroData: HeroData[] = [
-  {
-    title: "ORDER YOUR FAVORITE COFFEE",
-    itemBgr: bgr_right,
-    thumb: coffee2,
-    href: "/login",
-  },
-  {
-    title: "Lavazza Coffee Blends Try the Italian Espresso",
-    itemBgr: bgr_right,
-    thumb: coffee0,
-    href: "/register",
-  },
-  {
-    title: "Qualità Oro Mountain Grown Espresso Coffee Beans",
-    itemBgr: bgr_right,
-    thumb: coffee1,
-    href: "/forgotpw",
-  },
-  {
-    title: "ORDER YOUR FAVORITE COFFEE",
-    itemBgr: bgr_right,
-    thumb: coffee2,
-    href: "/login",
-  },
-  {
-    title: "Lavazza Coffee Blends Try the Italian Espresso",
-    itemBgr: bgr_right,
-    thumb: coffee6,
-    href: "/register",
-  },
-  {
-    title: "Qualità Oro Mountain Grown Espresso Coffee Beans",
-    itemBgr: bgr_right,
-    thumb: coffee1,
-    href: "/forgotpw",
-  },
-];
 
 type HeroProp = {
   id: string;

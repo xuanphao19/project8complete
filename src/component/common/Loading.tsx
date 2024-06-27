@@ -1,5 +1,5 @@
 import React from "react";
-// Đang tải preloader
+
 interface LoadingProps {
   className?: string;
   isLoadSite?: boolean;

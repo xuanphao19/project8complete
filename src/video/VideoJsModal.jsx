@@ -5,11 +5,11 @@ import VideoJs from "./VideoJs";
 /*
 
 */
-const ModalVideo = memo(({ children, videoUrl, reverseState, playback = true }) => {
+const ModalVideo = memo(({ children, videoUrl, reverseState, playback = true, startVolume = 19 }) => {
   const videoRef = useRef(null);
   const progressBarRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [volume, setVolume] = useState(5);
+  const [volume, setVolume] = useState(startVolume);
   const [isPlay, setIsPlay] = useState(false);
   const [videoState, setVideoState] = useState({});
   const [timeReplay, setTimeReplay] = useState(0);
@@ -22,8 +22,12 @@ const ModalVideo = memo(({ children, videoUrl, reverseState, playback = true }) 
   }, [isPlay]);
 
   useEffect(() => {
-    reverseState(isVisible);
+    setIsVisible(isVisible);
   }, [isVisible]);
+
+  useEffect(() => {
+    !!startVolume && setVolume(startVolume);
+  }, [startVolume]);
 
   const handleVisible = useCallback(() => setIsVisible(!isVisible), [isVisible]);
 
@@ -112,7 +116,7 @@ const ModalVideo = memo(({ children, videoUrl, reverseState, playback = true }) 
         interactive
         delay={[0, 500]}
         onClickOutside={handleClickOutside}
-        className="modal-video-detail position-fixed top-50 start-50 translate-middle z-9 border-3 border-info rounded-5 overflow-hidden shadow-lg user-select-none"
+        className="modal-video-detail position-fixed top-50 start-50 translate-middle z-9 border-3 border-info rounded-5 overflow-hidden shadow-lg bg-body user-select-none"
         content={
           <div className="modal-content position-relative flex-center use">
             <VideoJs
@@ -163,7 +167,8 @@ const ModalVideo = memo(({ children, videoUrl, reverseState, playback = true }) 
               }`}>
               <div className="flex-center flex-column gap-2">
                 <IconSvg
-                  className={`icon-ctrl volume-mark text-info`}
+                  className={`icon-ctrl volume-mark text-info filter: `}
+                  style={{ filter: `invert(${volume * 0.01})` }}
                   link={`${volume === 0 ? "speaker-x-mark" : "speaker-wave"}`}
                   onClick={handleToggleMute}
                 />
@@ -175,14 +180,14 @@ const ModalVideo = memo(({ children, videoUrl, reverseState, playback = true }) 
                 <IconSvg
                   role="button"
                   name="increase"
-                  className={`icon-ctrl volume-ctrl mt-auto`}
+                  className={`icon-ctrl volume-ctrl text-info mt-auto`}
                   onClick={handleVolume}
                   link="plus-circle"
                 />
                 <IconSvg
                   role="button"
                   name="minus"
-                  className={`icon-ctrl volume-ctrl mx-4 mb-4`}
+                  className={`icon-ctrl volume-ctrl text-info mx-4 mb-4`}
                   onClick={handleVolume}
                   link="minus-circle"
                 />

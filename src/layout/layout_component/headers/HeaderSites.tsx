@@ -6,7 +6,7 @@ import { RootState } from "@/vendor/redux/store";
 import { Logo, Avatar, Header } from "@/component";
 import { ModalAvatar, FavouriteBtn, ModalCartBtn } from "@/component";
 import { handleListenerEvent, getElement, findRelatives } from "@/utils";
-import { LoginPage, BtnLogOut, BtnLogin, action, RegisterPage, BtnRegister } from "@/pages";
+import { BtnLogin, BtnRegister } from "@/pages";
 import HeaderMenu from "./HeaderMenu";
 import { ThemeSwitch } from "@/themes";
 

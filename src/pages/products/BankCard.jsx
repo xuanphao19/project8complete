@@ -5,12 +5,57 @@ import Button from "react-bootstrap/Button";
 
 import { IconSvg, FormInput } from "@/component/";
 // import { dataPayment } from "@/api/";
-const dataPayment = [];
+
+const dataPayment = [
+  {
+    id: "email",
+    name: "email",
+    label: "Email Address:",
+    placeholder: "Enter Email Address",
+    autoComplete: "on",
+    icons: "icon-error",
+    required: true,
+  },
+
+  {
+    id: "holder",
+    name: "card-holder",
+    label: "Card Holder:",
+    placeholder: "Enter Card Holder",
+    autoComplete: "on",
+    icons: "icon-error",
+    required: true,
+  },
+
+  {
+    id: "cardNumber",
+    name: "card-details",
+    label: "Card Details:",
+    placeholder: "Enter Card Number",
+    autoComplete: "on",
+    icons: "icon-error",
+    maxLength: "19",
+    required: true,
+    type: "number",
+  },
+
+  {
+    id: "expire",
+    name: "expire",
+    placeholder: "MM/YY",
+    autoComplete: "off",
+    icons: "icon-error",
+    maxLength: "5",
+    required: true,
+    type: "number",
+  },
+
+  { id: "cvc", name: "card-cvc", placeholder: "CVC", autoComplete: "off", icons: "icon-error", maxLength: "3", required: true, type: "number" },
+];
 
 const BankCard = ({ className, onClick }) => {
   const lastNameRef = useRef(null);
   const firstNameRef = useRef(null);
-  const { user } = useSelector((state) => state.app);
   const matchProfile = useMatch("/profile");
   const [error, setError] = useState({});
   const [bankInfo, setBankInfo] = useState({

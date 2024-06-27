@@ -1,4 +1,3 @@
-// src/redux/slices/dataSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "@/api";
 import { updatedData } from "@/vendor/";

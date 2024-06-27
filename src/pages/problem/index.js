@@ -1,4 +1,4 @@
-export { NotFoundPage } from "./NotFound";
-export { ErrorPages } from "./ErrorPages";
-export { UploadPage } from "./Upload";
-export { DownloadButton, DownloadPage } from "./Download";
+export { default as NotFoundPage } from "./NotFound";
+export { default as ErrorPages } from "./ErrorPage";
+export { default as UploadPage } from "./Upload";
+export { DownloadButton, default as DownloadPage } from "./Download";

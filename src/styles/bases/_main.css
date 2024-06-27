@@ -372,16 +372,6 @@ div[data-tippy-root]:has(.modal-video-detail) {
   left: 0 !important;
 }
 
-div[data-tippy-root]:has(.modal-video-detail) .video-js:has(video#video1[src="/src/video/i-💔-F8.mp4"]) {
-  width: 68vw !important;
-  overflow: hidden;
-}
-
-div[data-tippy-root]:has(.modal-video-detail) .video-js:has(video#video1[src="/src/video/i-💔-F8.mp4"]) #video1 {
-  width: auto !important;
-  height: 62% !important;
-}
-
 .cart-btn::before {
   content: "";
   position: absolute;

@@ -1,1 +1,1 @@
-export { default as ModalCartDetail, ModalCartBtn, ModalCart } from "./ModalCart";
+export { default as ModalCart, ModalCartBtn } from "./ModalCart";

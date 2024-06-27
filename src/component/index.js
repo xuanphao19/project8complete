@@ -1,20 +1,7 @@
-export {
-  Logo,
-  Avatar,
-  ModalAvatar,
-  IconSvg,
-  Header,
-  MainSection,
-  Loading,
-  LoadingSvg,
-  BackToTop,
-  Navigation,
-  MenuLists,
-  MultiLevelMenu,
-  AvatarUploader,
-  ContactInfo,
-} from "./common";
+export { Logo, Avatar, MenuLists, Loading, IconSvg, Header } from "./common";
+export { MainSection, LoadingSvg, BackToTop, Navigation } from "./common";
+export { ModalAvatar, MultiLevelMenu, AvatarUploader, ContactInfo } from "./common";
 export { FormInput, InputRangeDouble, FormInputSelect, multiUseCheckbox, CountProducts } from "./comp_form/";
 export { ViewFavourite as FavouritePage, FavouriteBtn, FavouriteModal } from "./favourite";
-export { ModalCartDetail, ModalCartBtn, ModalCart } from "./modalcart";
+export { ModalCartBtn, ModalCart } from "./modalcart";
 export { CategoriesCards } from "./cards";

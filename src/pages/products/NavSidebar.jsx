@@ -2,8 +2,6 @@ import React, { Fragment } from "react";
 import { Navigation } from "@/component";
 
 const NavigationSidebar = ({ groupClass }) => {
-  // NavigationSidebar!
-
   return (
     <Fragment>
       <aside className="sidebar d-flex d-lg-block overflow-hidden text-info-emphasis">

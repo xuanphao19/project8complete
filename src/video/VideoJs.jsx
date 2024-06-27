@@ -121,7 +121,7 @@ const VideoJs = forwardRef(
         <video
           id={id}
           ref={videoRef}
-          className={classVideo}
+          className={`object-fit-cover ${classVideo}`}
           src={videoUrl}
           width={width}
           height={height}

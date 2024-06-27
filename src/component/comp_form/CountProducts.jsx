@@ -1,4 +1,4 @@
-import React, { Fragment, forwardRef, useRef, useEffect, useState, memo, useImperativeHandle } from "react";
+import React, { Fragment, forwardRef, useRef, useState, memo, useImperativeHandle } from "react";
 import { IconSvg } from "@/component/";
 
 const CountProducts = memo(
@@ -35,7 +35,7 @@ const CountProducts = memo(
           <button
             type="button"
             name="minus"
-            className="count-btn ctrl-minus flex-center p-2 rounded-3 bg-body border">
+            className="count-btn icon-ctrl ctrl-minus flex-center p-2 rounded-3 bg-body border">
             <IconSvg
               className="icon"
               link="minus-small"
@@ -45,7 +45,7 @@ const CountProducts = memo(
           <button
             type="button"
             name="increase"
-            className="count-btn ctrl-plus flex-center p-2 rounded-3 bg-body border">
+            className="count-btn icon-ctrl ctrl-plus flex-center p-2 rounded-3 bg-body border">
             <IconSvg
               className="icon"
               link="plus"

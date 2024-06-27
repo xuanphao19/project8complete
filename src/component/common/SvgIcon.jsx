@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { useEffect, memo, useState, forwardRef } from "react";
 import { SVG_STORE } from "@/assets/icons/svg/svgStones.js";
 import { loadedIdSvg, appendSymbol } from "@/utils";

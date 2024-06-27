@@ -5,14 +5,14 @@ Gió anh vào nếu chán gió lại ra!
 
 */
 
-import React, { Fragment } from "react";
+import React, { Fragment, memo } from "react";
 import { Outlet, useLocation, Link } from "react-router-dom";
 
 import { MainSection } from "@/component";
 import { Heroes } from "@/layout";
-import { ContactPage } from "@/pages";
+import { ContactPage, ProductFastFilter, NavSidebar } from "@/pages";
 
-const Home = () => {
+const Home = memo(() => {
   const location = useLocation();
   const exactly = location.pathname.includes("/fastfilter");
 
@@ -24,7 +24,7 @@ const Home = () => {
         name="section">
         {exactly && (
           <div className="nav-sidebar col-lg-3 d-none d-lg-flex flex-column me-3 rounded-3 bg-secondary bg-opacity-25 border-opacity-25 border-primary">
-            {/* <ProductNavSidebar /> */}
+            <NavSidebar />
           </div>
         )}
         <div className="home-content w-100">
@@ -35,13 +35,12 @@ const Home = () => {
             dots={true}
             arrows={true}
           />
-          {/* <ProductFastFilter /> */}
+          <ProductFastFilter />
           {exactly && (
-            <div className="product-navigation d-lg-none d-flex mb-4 mt-3 bg-secondary bg-opacity-25 border-opacity-25 border-primary rounded-3 vh-70">
-              {/* <NavSidebar groupClass="d-flex gap-2 py-2" /> */}
+            <div className="product-navigation d-lg-none d-flex mb-4 mt-3 bg-secondary bg-opacity-25 border-opacity-25 border-primary rounded-3">
+              <NavSidebar groupClass="d-flex gap-2 py-2" />
             </div>
           )}
-          <div className="flex-center mb-4 mt-3 bg-secondary bg-opacity-25 border-opacity-25 border-primary rounded-3 vh-60">Chờ Em!</div>
           <Outlet />
         </div>
       </MainSection>
@@ -57,6 +56,6 @@ const Home = () => {
       <ContactPage />
     </Fragment>
   );
-};
+});
 
 export default Home;

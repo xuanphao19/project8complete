@@ -343,14 +343,7 @@ div[data-tippy-root]:has(.modal-video-detail) {
   transform: unset !important;
   top: 0 !important;
   left: 0 !important;
-  .video-js:has(video#video1[src="/src/video/i-💔-F8.mp4"]) {
-    width: 68vw !important;
-    overflow: hidden;
-    #video1 {
-      width: auto !important;
-      height: 62% !important;
-    }
-  }
+ 
 }
 
 .cart-btn::before {

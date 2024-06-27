@@ -5,7 +5,8 @@ import { Route } from "react-router-dom";
 import { layoutSwitcher } from "@/layout";
 import Root, { loader as rootLoader } from "./Root";
 
-import { HomePage, InviteLogIn, ErrorPages, Welcome } from "@/pages";
+import { InviteLogIn, ErrorPages, Welcome } from "@/pages";
+import { Loading } from "@/component";
 
 interface UI {
   id?: string;
@@ -49,20 +50,20 @@ const nestedRoutes = (isVip: boolean, data: UI[]): JSX.Element => {
               element={<Pages />}
               loader={loader}
               action={page.action}>
-              {childrenPages && generateRoutes(childrenPages)}
+              {childrenPages && generate(childrenPages)}
             </Route>
           </Route>
         );
       })}
-      {/* <Route
+      <Route
         path="*"
-        element={!isVip ? <InviteLogIn /> : <Welcome />}
-      /> */}
+        element={!isVip ? <Loading /> : <Welcome />}
+      />
     </Route>
   );
 };
 
-const generateRoutes = (childrenPages: UI[]): JSX.Element[] => {
+const generate = (childrenPages: UI[]): JSX.Element[] => {
   return childrenPages.map((page) => {
     const Page = page.component;
     return (
@@ -73,7 +74,7 @@ const generateRoutes = (childrenPages: UI[]): JSX.Element[] => {
         element={<Page />}
         loader={page.loader}
         action={page.action}>
-        {page.children && generateRoutes(page.children)}
+        {page.children && generate(page.children)}
       </Route>
     );
   });

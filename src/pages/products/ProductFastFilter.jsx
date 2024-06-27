@@ -66,7 +66,7 @@ const ProductFastFilter = () => {
         </div>
       )}
 
-      <div className="product-filter d-flex justify-content-between py-4">
+      <div className="product-filter d-flex justify-content-between py-4 user-select-none">
         <span className="d-flex gap-2 align-items-center fs-3 fw-medium fst-italic">
           <span>Total LavAzza:</span>
           <span className="total shadow fs-4 fw-medium fst-italic ms-3 py-2 px-4 text-bg-primary rounded-3">{total}</span>

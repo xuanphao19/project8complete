@@ -14,9 +14,6 @@ const AdminLayout = ({ children }): React.JSX.Element => {
           links={[
             { path: "/", name: "💔💔💔" },
             { path: "/history", name: "💥History💥" },
-            { path: "/about/123/editor", name: "🌻🌼⭐🚗⭐" },
-            { path: "/about/456/events", name: "🌻🌼💥💥events💥" },
-            { path: "/team", name: "🌻Đội Nhóm🌼" },
           ]}
         />
         <Outlet />

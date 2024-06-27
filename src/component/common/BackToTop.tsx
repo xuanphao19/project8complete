@@ -54,5 +54,5 @@ const BackToTop: React.FC<BackToTopProps> = ({ className, threshold = 200, child
     </>
   );
 };
-// btn  rounded-4 px-5 py-2 text-primary fs-3
+
 export default memo(BackToTop);

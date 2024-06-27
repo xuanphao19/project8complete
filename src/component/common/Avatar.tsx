@@ -1,7 +1,6 @@
-import React, { forwardRef, useRef, useState, useEffect, useCallback, memo, FC } from "react";
+import { useState, useEffect, useCallback } from "react";
+import React, { forwardRef, useRef, memo, FC } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "@/vendor/redux/store";
 
 import { routesConfig } from "@/config";
 import { Image } from "@/assets/images";
@@ -13,7 +12,6 @@ const { profile } = routesConfig;
 
 const Avatar = memo(
   forwardRef(({ isVip, src, className }: { isVip: boolean; src: string; className: string }, ref?: React.LegacyRef<HTMLSpanElement>) => {
-    // if (!!userID && authed) // Xác thực Admin!
     return (
       isVip && (
         <span
@@ -38,7 +36,7 @@ const ContentModalAvatar = memo(({ src, onHide }: { src?: string; onHide?: FC })
 
   return (
     <div className="modal-avatar-content d-flex flex-column gap-3 fs-3">
-      <div className="user-menus d-flex align-items-center p-3 shadow-sm">
+      <div className="user-menus d-flex align-items-center justify-content-between p-3 shadow-sm">
         <Link to="/profile">
           <img
             onClick={onHide}
@@ -46,10 +44,16 @@ const ContentModalAvatar = memo(({ src, onHide }: { src?: string; onHide?: FC })
             src={avatar}
           />
         </Link>
-        <div className="user-menu-name ms-5">
+        <div className="user-menu-name ms-5 me-auto">
           <p className="m-0 fs-3">John Smith</p>
           <p className="m-0 fs-5 fst-italic text-start">@johnsmith</p>
         </div>
+        <Link to="/login">
+          <IconSvg
+            className="fs-2 text-warning icon-ctrl"
+            link="arrow-path"
+          />
+        </Link>
       </div>
       <Link
         to={profile}
@@ -100,7 +104,6 @@ const ContentModalAvatar = memo(({ src, onHide }: { src?: string; onHide?: FC })
 });
 
 const ModalAvatar = memo(({ children, avatarUrl }: { children: any; avatarUrl: string }): React.JSX.Element => {
-  const user = useSelector((state: RootState) => state.app.user);
   const refAvatar = useRef(null);
 
   const handleOnHide = useCallback(() => refAvatar.current.hide(), [refAvatar]);
@@ -127,5 +130,5 @@ const ModalAvatar = memo(({ children, avatarUrl }: { children: any; avatarUrl: s
   );
 });
 
-export { ModalAvatar };
-export default Avatar;
+export { Avatar };
+export default ModalAvatar;

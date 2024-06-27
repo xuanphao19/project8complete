@@ -1,5 +1,3 @@
-// import CryptoJS from "crypto-js"; // Băm rau lợn
-
 import React, { forwardRef, useRef } from "react";
 import { memo } from "react";
 import { Container } from "react-bootstrap";

@@ -234,6 +234,7 @@ const formFields = [
 const loginFields = ["email", "password"];
 const registerFieldLeft = ["firstName", "lastName", "username"];
 const registerFieldRight = ["email", "password", "confirmPassword"];
+const dataPayment = ["email", "holder", "cardNumber", "expire", "cvc", "icon-error"];
 
 const socialRegister = [
   { href: "https://www.youtube.com/channel/UCxvQ4j_oWcUrUkGbHWs4dLw", icon: "google-color", className: "text-danger" },
@@ -247,4 +248,4 @@ const genderOptions = [
   { id: "other", label: "Other", value: "other" },
 ];
 
-export { cityName, genderOptions, socialRegister, formFields, initialUserState, registerFieldLeft, registerFieldRight, loginFields };
+export { cityName, genderOptions, socialRegister, formFields, initialUserState, registerFieldLeft, registerFieldRight, loginFields, dataPayment };
