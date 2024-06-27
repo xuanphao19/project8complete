@@ -16,7 +16,7 @@ const TippyCustom = forwardRef(
       isTriggerClick = false,
       appendTo = document.body,
       overlayClass = "bg-opacity-50",
-      arrowClass = "d-none d-lg-flex align-items-start",
+      arrowClass = "d-none  d-lg-inline-flex align-items-start",
       className = "flex-center bg-body shadow-sm rounded-4",
       ...props
     },
@@ -87,23 +87,22 @@ const TippyCustom = forwardRef(
           {...props}
           render={(attrs) => (
             <Fragment>
-              {arrow && (
-                <div
-                  id="arrow"
-                  data-popper-arrow
-                  className={`tippy-arrow z-3 ${arrowClass}`}>
-                  <IconSvg
-                    className="arrow position-relative"
-                    link="arrow-up-triangle"
-                  />
-                </div>
-              )}
-
               <div
-                className={`tippy-content mt-5 ${className ? className : "p-5"}`}
+                className={`tippy-content mt-5 ${className}`}
                 tabIndex="-1"
                 role="tooltip"
                 {...attrs}>
+                {arrow && (
+                  <div
+                    id="arrow"
+                    data-popper-arrow
+                    className={`tippy-arrow z-3 ${arrowClass ? ` ${arrowClass}` : ""}`}>
+                    <IconSvg
+                      className={`arrow position-relative`}
+                      link="arrow-up-triangle"
+                    />
+                  </div>
+                )}
                 {content && content}
               </div>
             </Fragment>

@@ -8,9 +8,10 @@ Gió anh vào nếu chán gió lại ra!
 import React, { Fragment, memo } from "react";
 import { Outlet, useLocation, Link } from "react-router-dom";
 
-import { MainSection } from "@/component";
 import { Heroes } from "@/layout";
-import { ContactPage, ProductFastFilter, NavSidebar } from "@/pages";
+import { MainSection } from "@/component";
+import { ProductPage, NavSidebar } from "@/pages";
+import { ContactPage, ProductFastFilter } from "@/pages";
 
 const Home = memo(() => {
   const location = useLocation();
@@ -53,6 +54,8 @@ const Home = memo(() => {
         className="d-flex justify-content-center w-100 p-3 bg-secondary">
         the docs at reactrouter.com.
       </Link>
+
+      <ProductPage />
       <ContactPage />
     </Fragment>
   );

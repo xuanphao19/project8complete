@@ -1,32 +1,51 @@
 @charset "UTF-8";
 /* ProductFilter */
 /* overscroll-behavior: contain vào để khi cuộn nó không cuộn cả bên ngoài! */
-.product-filter [data-tippy-root] {
-  max-width: 1300px;
-  width: 82%;
-}
-
 .btn-filter {
   --bs-secondary-bg-subtle: #fff;
 }
 
+.product-filter:has([data-placement^="top"]) #arrow {
+  --color-arrow: #fff;
+  top: auto;
+  bottom: -1.8rem !important;
+}
+
+.product-filter:has([data-placement^="top"]) #arrow .arrow {
+  transform: scaleY(-1) !important;
+  color: var(--color-arrow);
+}
+
+.product-filter:has([data-placement^="bottom"]) #arrow {
+  --color-arrow: #fff;
+  top: -1.8rem;
+}
+
+.product-filter:has([data-placement^="bottom"]) #arrow .arrow {
+  color: var(--color-arrow);
+}
+
+.product-filter .tippy-content {
+  padding: 0 !important;
+  margin-block: 0 !important;
+}
+
+.product-filter .fastfilter-ctrl {
+  margin: 2px;
+  min-width: 120px;
+  height: 42px;
+}
+
 .modal-filter-product {
+  user-select: none;
+  margin-left: 5vw !important;
+  width: 90vw;
   --bs-dark-bg-subtle: #fff;
   filter: drop-shadow(0px 40px 90px var(--filter-form-shadow));
 }
 
 .modal-filter-product .modal-arrow {
   border: 1.5rem solid transparent;
-}
-
-.modal-filter-product[data-placement^="top"] .modal-arrow {
-  border-top-color: var(--bs-dark-bg-subtle);
-  bottom: -3rem;
-}
-
-.modal-filter-product[data-placement^="bottom"] .modal-arrow {
-  border-bottom-color: var(--bs-dark-bg-subtle);
-  top: -3rem;
 }
 
 .modal-filter-product .search-brand,

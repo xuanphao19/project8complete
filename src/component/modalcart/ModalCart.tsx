@@ -128,9 +128,9 @@ const ModalCart = memo(({ children, data }: { children: React.JSX.Element; data?
   return (
     <TippyCustom
       ref={refCart}
-      className="modal-cart-header d-none d-sm-flex p-5 mt-2 rounded-4 bg-body bg-opacity-100 shadow"
+      className="modal-cart-header d-none d-sm-flex p-5 mt-4 rounded-4 bg-body bg-opacity-100 shadow"
       arrow={true}
-      offset={[52, 2]}
+      offset={[52, 0]}
       delay={[0, 200]}
       interactive="true"
       placement="bottom-end"

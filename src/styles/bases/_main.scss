@@ -254,7 +254,7 @@ body:has(#header-site [data-tippy-root] .header-modal) {
 
 [data-tippy-root] {
   #arrow.tippy-arrow {
-    top: -0.3rem;
+    top: -3.4rem;
     font-size: 5rem;
     color: var(--color-arrow);
   }
@@ -262,14 +262,21 @@ body:has(#header-site [data-tippy-root] .header-modal) {
     opacity: 1 !important;
   }
 }
-
+.user-menus:hover [name="arrow-path"] {
+  transform: rotate(500deg);
+}
+[name="arrow-path"] {
+  transition: transform 1.2s;
+  &:hover {
+    transform: rotate(500deg);
+  }
+}
 .tippy-content {
   filter: drop-shadow(0px 0px 20px var(--filter-form-shadow));
   &.modal-header-menu {
     box-shadow: 0px 0px 4px 1px var(--bs-dark-border-subtle), 0px 40px 90px 20px var(--dropdown-shadow-color),
       inset 0px 0px 1px 1px var(--bs-tertiary-bg);
     width: calc(100vw - 10vw);
-    margin-left: 5vw !important;
   }
 }
 
@@ -343,7 +350,6 @@ div[data-tippy-root]:has(.modal-video-detail) {
   transform: unset !important;
   top: 0 !important;
   left: 0 !important;
- 
 }
 
 .cart-btn::before {

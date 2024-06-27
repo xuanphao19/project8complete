@@ -131,6 +131,11 @@
   }
 }
 
+@media screen and (min-width: 992px) {
+  .tippy-content.modal-header-menu {
+    margin-left: 5vw;
+  }
+}
 @media screen and (min-width: 1200px) {
   .group-items.fast-filter .card-contain:nth-child(3) {
     display: block !important;

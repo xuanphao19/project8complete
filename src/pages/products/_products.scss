@@ -1,28 +1,45 @@
 /* ProductFilter */
 /* overscroll-behavior: contain vào để khi cuộn nó không cuộn cả bên ngoài! */
-.product-filter {
-  [data-tippy-root] {
-    max-width: 1300px;
-    width: 82%;
-  }
-}
+
 .btn-filter {
   --bs-secondary-bg-subtle: #fff;
 }
 
+.product-filter {
+  &:has([data-placement^="top"]) #arrow {
+    --color-arrow: #fff;
+    top: auto;
+    bottom: -1.8rem !important;
+    & .arrow {
+      transform: scaleY(-1) !important;
+      color: var(--color-arrow);
+    }
+  }
+  &:has([data-placement^="bottom"]) #arrow {
+    --color-arrow: #fff;
+    top: -1.8rem;
+    & .arrow {
+      color: var(--color-arrow);
+    }
+  }
+  .tippy-content {
+    padding: 0 !important;
+    margin-block: 0 !important;
+  }
+  .fastfilter-ctrl {
+    margin: 2px;
+    min-width: 120px;
+    height: 42px;
+  }
+}
 .modal-filter-product {
+  user-select: none;
+  margin-left: 5vw !important;
+  width: 90vw;
   --bs-dark-bg-subtle: #fff;
   filter: drop-shadow(0px 40px 90px var(--filter-form-shadow));
   .modal-arrow {
     border: 1.5rem solid transparent;
-  }
-  &[data-placement^="top"] .modal-arrow {
-    border-top-color: var(--bs-dark-bg-subtle);
-    bottom: -3rem;
-  }
-  &[data-placement^="bottom"] .modal-arrow {
-    border-bottom-color: var(--bs-dark-bg-subtle);
-    top: -3rem;
   }
   .search-brand,
   .select-size-weight {

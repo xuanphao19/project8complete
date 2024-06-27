@@ -23,6 +23,7 @@ const ProductResults = () => {
 
         <Row className="group-items fast-filter row-cols-1 row-cols-md-4 row-cols-lg-3 row-cols-xl-4 row-gap-5 g-4 py-3">
           {products &&
+            products.length > 0 &&
             products.map((product) => (
               <Fragment key={`fast-filter${product.id}`}>
                 <CategoriesCards

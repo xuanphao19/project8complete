@@ -35,7 +35,7 @@ const ContentModalAvatar = memo(({ src, onHide }: { src?: string; onHide?: FC })
   }, [src]);
 
   return (
-    <div className="modal-avatar-content d-flex flex-column gap-3 fs-3">
+    <div className="modal-avatar-content d-flex flex-column p-5 gap-3 fs-3 rounded-4 bg-body">
       <div className="user-menus d-flex align-items-center justify-content-between p-3 shadow-sm">
         <Link to="/profile">
           <img
@@ -96,7 +96,7 @@ const ContentModalAvatar = memo(({ src, onHide }: { src?: string; onHide?: FC })
 
       <BtnLogOut
         onClick={onHide}
-        className="fs-3 mt-4 py-3 px-4 btn btn-outline-warning">
+        className="fs-3 mt-4 mb-3 py-3 px-4 btn btn-outline-warning">
         Log Out
       </BtnLogOut>
     </div>
@@ -111,9 +111,9 @@ const ModalAvatar = memo(({ children, avatarUrl }: { children: any; avatarUrl: s
   return (
     <TippyCustom
       ref={refAvatar}
-      className="modal-avatar p-5 mt-2 ⭐ rounded-4 bg-body"
+      className="modal-avatar"
       arrow={true}
-      offset={[30, 2]}
+      offset={[45, 0]}
       delay={[0, 200]}
       interactive="true"
       placement="bottom-end"

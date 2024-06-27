@@ -355,7 +355,7 @@ const BtnLogOut = ({ className, onClick }) => {
   };
 
   return (
-    <div>
+    <React.Fragment>
       <DreamsFly
         ref={toastRef}
         direction=""
@@ -391,7 +391,7 @@ const BtnLogOut = ({ className, onClick }) => {
         className={`btn btn-logout w-100 btn-outline-warning ${className ? ` ${className}` : ""}`}>
         Log Out
       </button>
-    </div>
+    </React.Fragment>
   );
 };
 

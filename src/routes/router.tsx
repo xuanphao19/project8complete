@@ -27,7 +27,7 @@ const nestedRoutes = (isVip: boolean, data: UI[]): JSX.Element => {
       id="root"
       path={"/"}
       element={<Root />}
-      errorElement={<ErrorPages />}
+      errorElement={<Loading />}
       loader={rootLoader}>
       {data.map((page, i) => {
         const Layouts: React.JSX.Element = layoutSwitcher(page.layout);
@@ -57,7 +57,7 @@ const nestedRoutes = (isVip: boolean, data: UI[]): JSX.Element => {
       })}
       <Route
         path="*"
-        element={!isVip ? <Loading /> : <Welcome />}
+        element={!isVip ? <InviteLogIn /> : <Welcome />}
       />
     </Route>
   );

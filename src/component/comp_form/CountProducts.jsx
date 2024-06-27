@@ -35,9 +35,9 @@ const CountProducts = memo(
           <button
             type="button"
             name="minus"
-            className="count-btn icon-ctrl ctrl-minus flex-center p-2 rounded-3 bg-body border">
+            className="count-btn ctrl-minus flex-center rounded-3 bg-body border">
             <IconSvg
-              className="icon"
+              className="icon icon-ctrl fs-1"
               link="minus-small"
             />
           </button>
@@ -45,9 +45,9 @@ const CountProducts = memo(
           <button
             type="button"
             name="increase"
-            className="count-btn icon-ctrl ctrl-plus flex-center p-2 rounded-3 bg-body border">
+            className="count-btn ctrl-plus flex-center rounded-3 bg-body border">
             <IconSvg
-              className="icon"
+              className="icon icon-ctrl fs-1"
               link="plus"
             />
           </button>

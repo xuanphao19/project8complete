@@ -47,6 +47,7 @@
   --bs-dark-bg-subtle: #292e39;
 }
 
+[data-bs-theme="dark"] .arrow,
 [data-bs-theme="dark"] #arrow {
   --color-arrow: #292e39;
 }

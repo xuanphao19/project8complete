@@ -71,4 +71,9 @@ const getWifeNeighbors = (array: any, id: any, x = 1) => {
   return array.slice(start, end);
 };
 
+// const getDate = (string) => {
+//   let [_, month, day, year] = /(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(string);
+//   return new Date(year, month - 1, day);
+// };
+
 export { callPhone, getRandomNumber, getRandomItems, removePreloader, appendSymbol, getWifeNeighbors };

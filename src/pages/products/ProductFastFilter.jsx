@@ -6,8 +6,7 @@ import { fetchData } from "@/api";
 import { TippyCustom } from "@/vendor/";
 import { Image } from "@/assets/images/";
 import { getRandomItems } from "@/utils";
-import { IconSvg, InputRangeDouble } from "@/component/";
-
+import { IconSvg, InputRangeDouble, Loading } from "@/component/";
 import "./_products.min.css";
 
 const loader = async ({ params }) => {
@@ -28,11 +27,16 @@ const ProductFastFilter = () => {
   const products = useMemo(() => getRandomItems(3, data), []);
 
   useEffect(() => {
-    paramId && setTotal(Number(paramId.slice(0, 2)) * 750);
+    const random = Math.floor(Math.random() * (700 - 200) + 200);
+    paramId && setTotal(Number(paramId.slice(0, 2)) * random);
   }, [paramId]);
 
   const handleClose = useCallback(() => setShowModal(false), []);
   const toggleModal = useCallback(() => setShowModal(!showModal), [showModal]);
+
+  if (!products || products.length <= 0) {
+    return <Loading className="vh-60 flex-center" />;
+  }
 
   return (
     <Fragment>
@@ -40,28 +44,30 @@ const ProductFastFilter = () => {
         <div className="mt-3 pt-4">
           <h2 className="">Browse Categories</h2>
           <Row className="show-result-filter mt-2 row-cols-1 row-cols-md-2 row-cols-lg-3 g-5 py-4">
-            {products.map((product, i) => {
-              return (
-                <Col
-                  key={`${product.id}-00${i}`}
-                  className={`result-item d-flex m-auto mb-5${i === 1 ? " d-lg-flex d-md-none" : ""}`}>
-                  <Link
-                    to={`products/${product.id}/details`}
-                    className="fast-result flex-center w-100 rounded-4 bg-secondary-subtle shadow-sm">
-                    <span className="thumb bg-body p-3">
-                      <Image
-                        src={`/assets/images/product/product${product.id}.png`}
-                        alt="Image"
-                      />
-                    </span>
-                    <div className="w-100 ms-2 ps-4">
-                      <span className="price">$24 - $150</span>
-                      <p className="desc mb-0">New sumatra mandeling coffee blend</p>
-                    </div>
-                  </Link>
-                </Col>
-              );
-            })}
+            {products &&
+              products.length > 0 &&
+              products.map((product, i) => {
+                return (
+                  <Col
+                    key={`${product.id}-00${i}`}
+                    className={`result-item d-flex m-auto mb-5${i === 1 ? " d-lg-flex d-md-none" : ""}`}>
+                    <Link
+                      to={`products/${product.id}/details`}
+                      className="fast-result flex-center w-100 rounded-4 bg-secondary-subtle shadow-sm">
+                      <span className="thumb bg-body p-3">
+                        <Image
+                          src={`/assets/images/product/product${product.id}.png`}
+                          alt="Image"
+                        />
+                      </span>
+                      <div className="w-100 ms-2 ps-4">
+                        <span className="price">$24 - $150</span>
+                        <p className="desc mb-0">New sumatra mandeling coffee blend</p>
+                      </div>
+                    </Link>
+                  </Col>
+                );
+              })}
           </Row>
         </div>
       )}
@@ -72,14 +78,15 @@ const ProductFastFilter = () => {
           <span className="total shadow fs-4 fw-medium fst-italic ms-3 py-2 px-4 text-bg-primary rounded-3">{total}</span>
         </span>
         <TippyCustom
-          className="modal-filter-product my-4 w-100 rounded-5 bg-dark-subtle"
+          className="modal-filter-product"
           visible={showModal}
           arrow={true}
           interactive="true"
           placement="bottom-end"
           onClickOutside={handleClose}
+          appendTo={document.querySelector(".product-filter")}
           content=<ProductModal
-            className="modal-content p-3 w-100"
+            className="modal-content my-4 p-4 ps-5 rounded-5 bg-dark-subtle"
             onClick={handleClose}
           />>
           <div
@@ -191,24 +198,17 @@ const ProductModal = memo(({ className, onClick }) => {
         <Button
           onClick={onClick}
           variant="text"
-          className="py-3 border-opacity-0 px-4 fs-5 shadow rounded-3">
+          className="fastfilter-ctrl py-3 border px-4 fs-5 shadow rounded-3">
           Cancel
         </Button>
 
-        <Button
-          variant="warning"
-          className="p-0">
-          <Link
-            onClick={onClick}
-            className="py-3 px-4 fs-5 rounded-3"
-            to="/23/fastfilter">
-            <span>Show Result</span>
-          </Link>
-        </Button>
+        <Link
+          onClick={onClick}
+          className="fastfilter-ctrl flex-center py-3 px-4 fs-5 text-bg-warning rounded-3"
+          to="/23/fastfilter">
+          <span>Show Result</span>
+        </Link>
       </Modal.Footer>
-      <div
-        className="modal-arrow"
-        data-popper-arrow></div>
     </div>
   );
 });
