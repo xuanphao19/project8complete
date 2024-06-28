@@ -52,7 +52,7 @@ const appSlice = createSlice({
       updatedData("userData", action.payload);
     },
 
-    logout: (state) => {
+    logout: (state, action) => {
       state.user = action.payload;
       updatedData("userData", action.payload);
     },

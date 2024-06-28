@@ -7,6 +7,7 @@ import { DestroyProduct, CheckoutAll, ProductDetails } from "@/pages";
 import { loaderFastFilter, loaderProduct, checkoutAction } from "@/pages";
 import { shippingAction, paymentAction, destroyAction } from "@/pages";
 import { actionCheckoutAll, UserProfile, ContactPage } from "@/pages";
+import { Welcome as Maintenance, ProhibitedAreas } from "@/pages";
 import { routesConfig } from "@/config";
 const { home, login, register, forgotpw, team, about, testimonials, history, products, contact } = routesConfig;
 
@@ -58,7 +59,9 @@ const publicRoute: UI[] = [
       { id: "details", access: "public", path: ":paramId/details", loader: loaderProduct, component: ProductDetails },
     ],
   },
-  { id: "profile", path: "/profile", access: "private", component: UserProfile },
+  { id: "profile", access: "private", path: "/profile", component: UserProfile },
+  { id: "maintenance", access: "public", path: "/maintenance", component: Maintenance },
+  { id: "senior-members", access: "public", path: "/senior-members", component: ProhibitedAreas },
 ];
 
 export default publicRoute;

@@ -1,6 +1,6 @@
 export { DownloadButton, DownloadPage } from "./problem";
 export { NotFoundPage, ErrorPages, UploadPage } from "./problem";
-export { Welcome, InviteLogIn, HomePage } from "./home";
+export { Welcome, InviteLogIn, ProhibitedAreas, HomePage } from "./home";
 export { LoginPage, BtnLogOut, BtnLogin, actionLogin } from "./authPages";
 export { RegisterPage, BtnRegister, ForgotPw } from "./authPages";
 

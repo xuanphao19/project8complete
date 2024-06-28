@@ -1,16 +1,16 @@
 // Welcome.jsx
-import React, { Fragment, memo } from "react";
+import React, { Fragment } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-const Welcome = memo(() => {
+const Welcome = () => {
   return (
     <React.Fragment>
       <div className="container pt-5">
         <div className="pt-5 welcome-page text-center text-danger">
           <h1 className="p-3 mt-5 pt-5 fs-12 text-center">Welcome to NB website BN</h1>
           <h2 className="p-3 mt-5 fs-13">Hệ thống đang bảo trì. Vui lòng quay lại sau!</h2>
-          <h2 className="pt-3 mt-5 mb-0 fs-15 fst-italic">The system is maintenance. Please come back later!</h2>
-          <p className="pb-3 fs-1 fw-light text-primary fst-italic">We sincerely thank you very much!</p>
+          <h2 className="pt-3 mt-5 mb-0 fs-15 text-info fst-italic">The system is maintenance. Please come back later!</h2>
+          <p className="pb-3 fs-1 fw-light text-info fst-italic">We sincerely thank you very much!</p>
         </div>
         <div className="mt-5 pt-5 text-capitalize text-center">
           <Link
@@ -22,18 +22,19 @@ const Welcome = memo(() => {
       </div>
     </React.Fragment>
   );
-});
+};
 
-const InviteLogIn = memo(() => {
+const InviteLogIn = () => {
   const navigate = useNavigate();
   const handlePress = () => {
     navigate(-1);
   };
+
   return (
     <Fragment>
       <div className="container d-flex flex-column pt-5 text-center vh-100">
-        <h1 className="mt-5 pt-5 fst-italic fw-medium">🌜 Invite Users to login! 🌙</h1>
-        <h2 className="px-4 py-5 fs-4 fw-lighter fst-italic text-center">Rất tiếc, bạn chưa đăng nhập nên không thể trải nghiệm dịch vụ này!</h2>
+        <h1 className="mt-5 pt-5 fw-medium">🌜 Invite Users to login! 🌙</h1>
+        <h2 className="px-4 py-5 fs-4 fw-lighter text-center">Rất tiếc, bạn chưa đăng nhập nên không thể trải nghiệm dịch vụ này!</h2>
         <div className="d-flex align-items-center justify-content-center gap-4">
           <button
             className="px-5 py-2 fs-3 btn btn-outline-danger"
@@ -43,13 +44,13 @@ const InviteLogIn = memo(() => {
           </button>
           <Link
             to="/login"
-            className="btn btn-outline-info px-5 py-2 fs-3 fst-italic rounded-3"
+            className="btn btn-outline-info px-5 py-2 fs-3 rounded-3"
             type="button">
             Đăng nhập!
           </Link>
           <Link
             to="/register"
-            className="btn btn-outline-primary px-5 py-2 fs-3 fst-italic rounded-3"
+            className="btn btn-outline-primary px-5 py-2 fs-3 rounded-3"
             type="button">
             Đăng ký Free!
           </Link>
@@ -79,7 +80,29 @@ const InviteLogIn = memo(() => {
       </div>
     </Fragment>
   );
-});
+};
 
-export { InviteLogIn };
+const ProhibitedAreas = () => {
+  return (
+    <React.Fragment>
+      <div className="container pt-5 fst-italic">
+        <div className="pt-5 welcome-page text-center text-danger">
+          <h1 className="p-3 mt-5 mb-0 pt-5 fs-13 text-center">Tài khoản không đủ điều kiện</h1>
+          <h2 className="p-3 fs-13">Truy cập khu vực dành cho thành viên cao cấp!</h2>
+          <h2 className="pt-3 mt-5 mb-0 fs-15 text-info fst-italic">Liên hệ quản trị viên để biết thêm điều kiện sử dụng!</h2>
+          <p className="pb-3 fs-1 fw-light text-info fst-italic">We sincerely thank you very much!</p>
+        </div>
+        <div className="mt-5 pt-5 text-capitalize text-center">
+          <Link
+            to="/"
+            className="btn btn-info py-3 px-5 rounded-3 fs-2 fst-italic">
+            Quay lại trang chủ
+          </Link>
+        </div>
+      </div>
+    </React.Fragment>
+  );
+};
+
+export { InviteLogIn, ProhibitedAreas };
 export default Welcome;

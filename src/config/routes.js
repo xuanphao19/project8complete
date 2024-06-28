@@ -20,5 +20,6 @@ const routes = {
   changepw: "changepw",
   upload: "upload",
   download: "download",
+  maintenance: "maintenance",
 };
 export { routes as routesConfig };

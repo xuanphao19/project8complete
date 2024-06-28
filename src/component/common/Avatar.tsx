@@ -90,7 +90,7 @@ const ContentModalAvatar = memo(({ src, onHide }: { src?: string; onHide?: FC })
       </span>
 
       <Link
-        to={`/${dashboard}`}
+        to="/senior-members"
         onClick={redirectDashboard}
         className="user-menu d-flex align-items-center justify-content-between p-3 shadow-sm">
         <span className="fs-4">Settings</span>
