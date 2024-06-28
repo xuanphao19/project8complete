@@ -73,6 +73,10 @@ const ForgotPasswordPage = () => {
     setValue("");
   };
 
+  const resetState = (state) => {
+    !state && navigate("/", { replace: true });
+  };
+
   return (
     <MainSection
       id="forgotPw"
@@ -109,6 +113,7 @@ const ForgotPasswordPage = () => {
               variant="success"
               showForever={true}
               overlayOpacity={50}
+              resetState={resetState}
               className="flex-center p-5 rounded-4 border border-1">
               <div className="rounded-4 py-3">
                 <div className="message mb-5 py-4 w-100 fs-3 fst-italic">{state.message}</div>
@@ -118,7 +123,7 @@ const ForgotPasswordPage = () => {
                       type="button"
                       className="dreams-ctrl btn-outline-warning text-warning cancel-mail w-100 fs-3 rounded-4"
                       onClick={handleToggleToast}>
-                      Cancel
+                      Để sau!
                     </Button>
                   </Col>
                   <Col>

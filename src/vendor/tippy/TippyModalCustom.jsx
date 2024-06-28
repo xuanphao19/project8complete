@@ -16,7 +16,7 @@ const TippyCustom = forwardRef(
       isTriggerClick = false,
       appendTo = document.body,
       overlayClass = "bg-opacity-50",
-      arrowClass = "d-none  d-lg-inline-flex align-items-start",
+      arrowClass = "d-none d-lg-inline-flex align-items-start",
       className = "flex-center bg-body shadow-sm rounded-4",
       ...props
     },
@@ -98,7 +98,7 @@ const TippyCustom = forwardRef(
                   <div
                     id="arrow"
                     data-popper-arrow
-                    className={`tippy-arrow z-3 ${arrowClass ? ` ${arrowClass}` : ""}`}>
+                    className={`tippy-arrow z-3 ${arrowClass}`}>
                     <IconSvg
                       className={`arrow position-relative`}
                       link="arrow-up-triangle"

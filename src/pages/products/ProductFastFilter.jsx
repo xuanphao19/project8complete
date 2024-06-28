@@ -82,6 +82,7 @@ const ProductFastFilter = () => {
           visible={showModal}
           arrow={true}
           interactive="true"
+          arrowClass="d-inline-flex align-items-start"
           placement="bottom-end"
           onClickOutside={handleClose}
           appendTo={document.querySelector(".product-filter")}
