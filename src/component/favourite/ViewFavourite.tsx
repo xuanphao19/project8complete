@@ -95,7 +95,7 @@ const ContentModalFavourite = memo(({ data, handleOnHide }: { data?: any; handle
                 thumbClass="position-relative pt-100 mb-2 border border-black border-opacity-50 rounded-4"
                 linkClass="position-absolute inset-full flex-center p-2"
                 imgClass="object-fit-contain p-4 bg-black bg-opacity-05 rounded-4"
-                src={`/assets/images/product/product${i === 1 ? "f8" : product.id}.png`}
+                src={`/assets/images/product/${i === 1 ? "f8" : "product" + product.id}.png`}
                 contentClass="w-100 px-2 d-flex flex-column justify-content-between flex-grow-1"
                 cardTitle={() => <h3 className="card-title py-3 fs-4 fw-normal">{`${product.name}`}</h3>}
                 cardBody={() => (
@@ -107,7 +107,7 @@ const ContentModalFavourite = memo(({ data, handleOnHide }: { data?: any; handle
               />
             </Fragment>
           ))}
-      </Row>
+      </Row> 
 
       <Form
         className="d-flex w-100"
