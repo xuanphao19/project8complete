@@ -55,10 +55,10 @@ const nestedRoutes = (isVip: boolean, data: UI[]): JSX.Element => {
           </Route>
         );
       })}
-      <Route
+      {/* <Route
         path="*"
         element={!isVip ? <InviteLogIn /> : <Welcome />}
-      />
+      /> */}
     </Route>
   );
 };

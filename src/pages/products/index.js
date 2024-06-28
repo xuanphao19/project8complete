@@ -13,3 +13,5 @@ export { default as OrderStatus } from "./order_status/OrderStatus";
 export { action as shippingAction } from "./order_status/OrderStatus";
 export { default as CheckoutAll } from "./order_status/CheckoutAll";
 export { action as actionCheckoutAll } from "./order_status/CheckoutAll";
+export { default as PaymentMethod } from "./order_status/PaymentMethod";
+export { action as paymentAction } from "./order_status/PaymentMethod";

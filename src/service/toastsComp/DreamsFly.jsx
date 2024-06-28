@@ -1,6 +1,6 @@
-// DreamsFly.js
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import { useImperativeHandle, forwardRef, memo } from "react";
+import { useOverlay } from "@/hooks/";
 import "./_toast.min.css";
 
 const DreamsFly = forwardRef(
@@ -9,6 +9,8 @@ const DreamsFly = forwardRef(
       resetState,
       timer = 3000,
       duration = 500,
+      width = "50rem",
+      overlayPosition = "fixed",
       overlayOpacity = 0,
       showForever = false,
       outsideCtrl = false,
@@ -23,6 +25,7 @@ const DreamsFly = forwardRef(
     const overlayRef = useRef(null);
     const [isClicked, setIsClicked] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+    const { showOverlay, hideOverlay } = useOverlay();
 
     useEffect(() => {
       let timeout;
@@ -40,7 +43,6 @@ const DreamsFly = forwardRef(
     useImperativeHandle(ref, () => ({
       toggleToast: toggleVisibility,
     }));
-
     const handleClose = () => {
       if (toastRef.current) {
         requestAnimationFrame(() => {
@@ -52,12 +54,15 @@ const DreamsFly = forwardRef(
         overlayRef.current?.classList.add("opacity-out");
       }
       const hideTimeout = setTimeout(() => {
+        if (overlayRef.current) {
+          document.body.removeChild(overlayRef.current);
+          overlayRef.current = null;
+        }
         setIsVisible(false);
         reverseToastState(false);
         clearTimeout(hideTimeout);
       }, duration);
     };
-
     const toggleVisibility = () => {
       if (isClicked) {
         handleClose();
@@ -80,23 +85,25 @@ const DreamsFly = forwardRef(
       }
     };
 
+    useEffect(() => {
+      if (isVisible) {
+        showOverlay({ position: overlayPosition, opacity: overlayOpacity });
+      } else {
+        hideOverlay();
+      }
+    }, [isVisible, showOverlay, overlayPosition, overlayOpacity]);
+
     const toastClass = `${variant} border-${variant} ${className}${direction ? ` appear-${direction}` : " center"}`;
+
     return (
       isVisible && (
         <div
           className="toast-container"
           onClick={outsideCtrl ? outsideClose : () => {}}>
-          {!!overlayOpacity && (
-            <div
-              ref={overlayRef}
-              className="overlay"
-              style={{ opacity: overlayOpacity }}
-            />
-          )}
           <div
             ref={toastRef}
             className={`popup-toast dreams-fly ${toastClass}`}
-            style={{ "--duration": `${duration}ms` }}>
+            style={{ "--width": width, "--duration": `${duration}ms` }}>
             <div className="toast-content">{children}</div>
           </div>
         </div>

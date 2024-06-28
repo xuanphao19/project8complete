@@ -3,7 +3,7 @@ import { Form, Link, useNavigate, redirect } from "react-router-dom";
 import { Row, Col, FormCheck, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 
-import { reduxLogin, getData } from "@/vendor";
+import { reduxLogin, getData, reduxLogout } from "@/vendor";
 import { handleQuickTestForm, validateForm } from "@/utils/";
 import { DreamsFly, authUserLogin, logoutUser } from "@/service";
 import { MainSection, FormInput, IconSvg, LoadingSvg } from "@/component";
@@ -29,8 +29,8 @@ const LoginPage = () => {
     reminder: "",
     isChecked: false,
     spinning: false,
+    success: false,
     error: false,
-    isVideoPlaying: false,
   });
 
   const handleFocus = useCallback((name, event) => {
@@ -76,7 +76,7 @@ const LoginPage = () => {
 
     if (result && result.success) {
       setUserInfo((prev) => ({ ...prev, ["userId"]: result.localId }));
-      setSubInfo((prev) => ({ ...prev, message: result.message, ["success"]: result.success }));
+      setSubInfo((prev) => ({ ...prev, message: result.message, success: true }));
 
       handleToggleToast();
 
@@ -103,7 +103,6 @@ const LoginPage = () => {
         if (localUser && userInfo.userId) {
           const userLogged = { ...localUser, isVip: true };
           dispatch(reduxLogin(userLogged));
-          setSubInfo((prev) => ({ ...prev, success: true }));
         }
       };
       getLocalUser();
@@ -117,16 +116,19 @@ const LoginPage = () => {
       reminder: "",
       isChecked: false,
       spinning: false,
+      success: false,
       error: false,
-      isVideoPlaying: false,
     });
   };
 
-  const resetState = (state) => {
-    if (state === false) {
-      formRef.current?.reset();
-    }
-  };
+  const resetState = useCallback(
+    (state) => {
+      if (state === false) {
+        formRef.current?.reset();
+      }
+    },
+    [formRef.current],
+  );
 
   const handleCloseError = useCallback(() => {
     if (subInfo.reminder === "Email & password is required!") {
@@ -136,17 +138,13 @@ const LoginPage = () => {
     setSubInfo((prev) => ({ ...prev, reminder: "" }));
   }, [subInfo.reminder]);
 
-  const handleToggleToast = () => {
+  const handleToggleToast = useCallback(() => {
     toastRef.current?.toggleToast();
-  };
+  }, [toastRef.current]);
 
   const gotoProducts = () => {
     handleToggleToast();
     navigate(`/${products}`, { replace: true });
-  };
-
-  const resetVideoState = (state) => {
-    setSubInfo((prev) => ({ ...prev, spinning: false, isVideoPlaying: state }));
   };
 
   return (
@@ -221,7 +219,7 @@ const LoginPage = () => {
                   <Row>
                     <Col className="col-6">
                       <span
-                        className="dreams-ctrl view-products btn flex-center btn-outline-primary w-100 py-3 px-3 fs-4 fst-italic fw-light rounded-4 flex-shrink-0"
+                        className="dreams-ctrl view-products btn flex-center btn-outline-primary text-primary w-100 py-3 px-3 fs-4 fst-italic fw-light rounded-4 flex-shrink-0"
                         onClick={gotoProducts}>
                         View Products!
                       </span>
@@ -231,11 +229,11 @@ const LoginPage = () => {
                       <div className="dreams-ctrl flex-center w-100 ps-4 pe-2 rounded-4 flex-shrink-0">
                         <ModalVideojs
                           startVolume={100}
-                          reverseState={resetVideoState}
+                          overlayOpacity={70}
                           videoUrl="/assets/video/phuongphahoclaptrinh.mp4">
                           <button
                             type="button"
-                            className="dreams-ctrl btn btn-outline-info flex-center gap-3 px-3 rounded-4">
+                            className="dreams-ctrl btn btn-outline-info flex-center text-info gap-3 px-3 rounded-4">
                             <span className="fst-italic fs-4 fw-light">Video Intros</span>
                             <IconSvg
                               className={`icon-ctrl text-info fs-2`}
@@ -286,9 +284,10 @@ const LoginPage = () => {
                 type="submit">
                 Login
               </Button>
+
               <Link
                 className="btn btn-outline-primary w-50 py-3 fs-4"
-                to={`${forgotpw}`}>
+                to={`/${forgotpw}`}>
                 Forgot password?
               </Link>
             </div>
@@ -310,7 +309,6 @@ const LoginPage = () => {
           </Col>
         </Row>
       </Form>
-      {subInfo.isVideoPlaying && <div className="overlay bg-opacity-80"></div>}
     </MainSection>
   );
 };
@@ -339,14 +337,15 @@ const BtnLogOut = ({ className, onClick }) => {
     if (typeof onClick === "function") {
       onClick && onClick();
     }
-    const userLogOut = { ...user, isVip: false, password: "", email: "", username: "", firstName: "" };
-    dispatch(reduxLogin(userLogOut));
+    const userLogOut = { ...user, isVip: false, password: "", firstName: "" };
+    dispatch(reduxLogout(userLogOut));
     logoutUser();
     navigate(home, { replace: true });
   };
-  const handleToggleToast = () => {
+
+  const handleToggleToast = useCallback(() => {
     toastRef.current?.toggleToast();
-  };
+  }, [toastRef.current]);
 
   const resetState = (state) => {
     if (state === false && typeof onClick === "function") {

@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 
 import { AutoScrollToTop } from "@/utils";
+import { OverlayProvider } from "@/hooks/";
 import { BackToTop } from "@/component/";
 import { fetchLoaderRootData } from "@/api";
 
@@ -13,9 +14,11 @@ export const loader = async () => {
 const Root = () => {
   return (
     <React.Fragment>
-      <AutoScrollToTop top={0} />
-      <Outlet />
-      <BackToTop />
+      <OverlayProvider>
+        <AutoScrollToTop top={0} />
+        <Outlet />
+        <BackToTop />
+      </OverlayProvider>
     </React.Fragment>
   );
 };

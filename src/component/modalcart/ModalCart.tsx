@@ -39,7 +39,7 @@ const ContentModalCart = memo(({ data, onHide }: { data?: any; onHide: FC }): Re
   }, [data]);
 
   return (
-    <div className="cart-modal-content d-flex flex-column gap-3 px-5 fs-5">
+    <div className="cart-modal-content w-100 d-flex flex-column gap-3 px-5 fs-5">
       <div className="modal-titles d-flex align-items-center justify-content-between py-2">
         <h2 className="modal-title fs-3">You have {`${3}`} item(s)</h2>
         <Link

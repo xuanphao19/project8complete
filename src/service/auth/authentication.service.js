@@ -129,18 +129,14 @@ const reAuthUser = async (email, password) => {
   }
 };
 
-const sendPasswordReset = async (email, password) => {
-  if (!email || !password) return { success: false, message: "Email & password is required!" };
-  if (!authF8.currentUser) {
-    return { success: false, message: "Người dùng chưa đăng nhập!" };
-  } else signOut(authF8);
-
+const sendPasswordReset = async (email) => {
+  if (!email) return { success: false, message: "Email & password is required!" };
   try {
     await resetPassword(authF8, email);
-    alert("Password Reset Email Sent!");
 
     return { success: true, message: `Đã gửi email tới ${email}. Vui lòng kiểm tra và làm theo hướng dẫn!` };
   } catch (error) {
+    alert("Error code::", error.code, "\nError message::", error.message);
     return returnError(error, "Error sendPasswordReset:");
   }
 };

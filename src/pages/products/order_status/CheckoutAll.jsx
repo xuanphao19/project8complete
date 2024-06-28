@@ -321,7 +321,7 @@ const CheckoutAll = memo(() => {
                   <span>{`$ ${total.price && (total.price + ship.shipping).toFixed(2)}`}</span>
                 </div>
 
-                <div className="ctrl-btn col-12 col-lg-8 col-xl-6 d-flex align-items-center justify-content-end mt-md-auto px-0 text-center text-md-end ms-auto">
+                <div className="ctrl-btn col-12 col-lg-8 col-xxl-6 d-flex align-items-center justify-content-end mt-md-auto px-0 text-center text-md-end ms-auto">
                   <Link
                     to={"/products/checkout/"}
                     type="button"

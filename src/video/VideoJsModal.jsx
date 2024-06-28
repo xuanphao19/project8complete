@@ -1,13 +1,15 @@
 import React, { Fragment, useEffect, useState, memo, useCallback, useRef } from "react";
 import { IconSvg } from "@/component/";
 import { TippyCustom } from "@/vendor/";
+import { useOverlay } from "@/hooks/";
 import VideoJs from "./VideoJs";
 /*
 
 */
-const ModalVideo = memo(({ children, videoUrl, reverseState, playback = true, startVolume = 19 }) => {
+const ModalVideo = memo(({ children, videoUrl, overlayOpacity, reverseState, playback = true, startVolume = 19 }) => {
   const videoRef = useRef(null);
   const progressBarRef = useRef(null);
+  const { showOverlay, hideOverlay } = useOverlay();
   const [isVisible, setIsVisible] = useState(false);
   const [volume, setVolume] = useState(startVolume);
   const [isPlay, setIsPlay] = useState(false);
@@ -30,6 +32,14 @@ const ModalVideo = memo(({ children, videoUrl, reverseState, playback = true, st
   }, [startVolume]);
 
   const handleVisible = useCallback(() => setIsVisible(!isVisible), [isVisible]);
+
+  useEffect(() => {
+    if (isVisible) {
+      showOverlay({ opacity: overlayOpacity });
+    } else {
+      hideOverlay();
+    }
+  }, [isVisible, showOverlay, hideOverlay, overlayOpacity]);
 
   const stateOnThumb = useCallback((state) => {
     setIsPlay(state);
@@ -104,7 +114,7 @@ const ModalVideo = memo(({ children, videoUrl, reverseState, playback = true, st
     setIsVisible(!isVisible);
   };
 
-  const handleClose = () => {};
+  const handleStop = () => {};
 
   return (
     <Fragment>

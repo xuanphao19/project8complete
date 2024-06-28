@@ -68,6 +68,8 @@ const TippyCustom = forwardRef(
       [target, tippyRef],
     );
 
+    // const Content = typeof content === "function" ? content() : content;
+
     return (
       <Fragment>
         <Tippy

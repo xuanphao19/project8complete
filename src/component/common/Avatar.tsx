@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import React, { forwardRef, useRef, memo, FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { routesConfig } from "@/config";
 import { Image } from "@/assets/images";
@@ -8,7 +8,7 @@ import { TippyCustom } from "@/vendor/";
 import { IconSvg } from "@/component/";
 import { ThemeSwitch } from "@/themes";
 import { BtnLogOut } from "@/pages";
-const { profile } = routesConfig;
+const { profile, dashboard } = routesConfig;
 
 const Avatar = memo(
   forwardRef(({ isVip, src, className }: { isVip: boolean; src: string; className: string }, ref?: React.LegacyRef<HTMLSpanElement>) => {
@@ -28,11 +28,17 @@ const Avatar = memo(
 );
 
 const ContentModalAvatar = memo(({ src, onHide }: { src?: string; onHide?: FC }): React.JSX.Element => {
+  const navigate = useNavigate();
   const [avatar, setAvatar] = useState<string>("");
 
   useEffect(() => {
     src && setAvatar(src);
   }, [src]);
+
+  const redirectDashboard = () => {
+    onHide(1);
+    navigate("/", { replace: true });
+  };
 
   return (
     <div className="modal-avatar-content d-flex flex-column p-5 gap-3 fs-3 rounded-4 bg-body">
@@ -84,8 +90,8 @@ const ContentModalAvatar = memo(({ src, onHide }: { src?: string; onHide?: FC })
       </span>
 
       <Link
-        to=""
-        onClick={onHide}
+        to={`/${dashboard}`}
+        onClick={redirectDashboard}
         className="user-menu d-flex align-items-center justify-content-between p-3 shadow-sm">
         <span className="fs-4">Settings</span>
         <IconSvg

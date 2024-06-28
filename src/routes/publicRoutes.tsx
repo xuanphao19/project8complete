@@ -1,14 +1,13 @@
 // src/routers/PublicRoute.js
 
-import { RegisterPage, LoginPage } from "@/pages";
-import { HomePage, Welcome, InviteLogIn } from "@/pages";
-
+import { HomePage, RegisterPage, LoginPage, ForgotPw } from "@/pages";
 import { ProductPage, ProductResults, ProductHeader } from "@/pages";
-import { ProductCheckout } from "@/pages";
+import { ProductCheckout, OrderStatus, PaymentMethod } from "@/pages";
+import { DestroyProduct, CheckoutAll, ProductDetails } from "@/pages";
 import { loaderFastFilter, loaderProduct, checkoutAction } from "@/pages";
-import { ContactPage } from "@/pages";
+import { shippingAction, paymentAction, destroyAction } from "@/pages";
+import { actionCheckoutAll, UserProfile, ContactPage } from "@/pages";
 import { routesConfig } from "@/config";
-import { actionLogin } from "@/pages";
 const { home, login, register, forgotpw, team, about, testimonials, history, products, contact } = routesConfig;
 
 interface UI {
@@ -33,6 +32,7 @@ const publicRoute: UI[] = [
   { id: "contact", path: contact, access: "private", component: ContactPage },
   { id: "register", path: register, access: "public", component: RegisterPage, layout: null },
   { id: "login", path: login, access: "public", component: LoginPage, layout: null },
+  { id: "forgotpw", path: forgotpw, access: "public", component: ForgotPw, layout: null },
   {
     id: "products*",
     path: `/${products}/*`,
@@ -47,28 +47,18 @@ const publicRoute: UI[] = [
         component: ProductCheckout,
         action: checkoutAction,
         loader: loaderProduct,
+        children: [
+          { id: "shipping", access: "private", path: ":shipping", action: shippingAction, component: OrderStatus },
+          { id: "payment", access: "private", path: "shipping/:payId", component: PaymentMethod, action: paymentAction },
+          { id: "destroyFavourite", access: "private", path: ":favouriteId/destroyFavourite", action: destroyAction, component: DestroyProduct },
+        ],
       },
-      //   // children: [
-      //   //   { id: "shipping", path: ":shipping", action: shippingAction, component: OrderStatus },
-      //   //   { id: "payment", path: "shipping/:payId", component: PaymentMethod, action: paymentAction },
-      //   //   { id: "destroyFavourite", path: ":favouriteId/destroyFavourite", action: destroyAction, component: DestroyProduct },
-      //   //   { id: "destroyCart", path: ":cartId/destroyCart", action: destroyAction, component: DestroyProduct },
-      //   // ],
-      // },
-
-      // { id: "checkout-all", path: "checkout/all", component: CheckoutAll, action: actionCheckoutAll },
-
-      // { id: "exit-product", path: ":paramId", component: ProductPage },
-      // { id: "", path: ":paramId/cart", component: ProductPage },
-      // { id: "", path: ":paramId/details", loader: loaderProduct, component: ProductDetails },
+      { id: "checkout-all", access: "private", path: "checkout/all", component: CheckoutAll, action: actionCheckoutAll },
+      { id: "cart", access: "private", path: ":cartId/cart", component: ProductPage },
+      { id: "details", access: "public", path: ":paramId/details", loader: loaderProduct, component: ProductDetails },
     ],
   },
-  /*
-
-  */
-  { id: "", path: testimonials, access: "public", component: InviteLogIn, layout: "default" },
-
-  { id: "about*", path: "/about/*", access: "public", component: Welcome },
+  { id: "profile", path: "/profile", access: "private", component: UserProfile },
 ];
 
 export default publicRoute;

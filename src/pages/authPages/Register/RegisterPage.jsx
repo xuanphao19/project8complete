@@ -18,10 +18,8 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { home, login } = routesConfig;
-  const user = useSelector((s) => s.app.user);
 
   const [error, setError] = useState("");
-  const [isConfirmed, setIsConfirmed] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [subInfo, setSubInfo] = useState({
     reminder: "",
@@ -70,7 +68,6 @@ const RegisterPage = () => {
 
   const handleReset = (event) => {
     event.preventDefault();
-    setIsConfirmed(false);
     setUserInfo(initialUserState);
     setSubInfo({ reminder: "", isNotRobot: false, isAgreeTerms: false, message: "" });
   };
@@ -148,16 +145,10 @@ const RegisterPage = () => {
   };
 
   const gotoEmailAdd = () => {
+    dispatch(reduxRegister(userInfo));
     handleToggleToast();
-    setIsConfirmed(true);
     navigate(`/${login}`, { replace: true });
   };
-
-  useEffect(() => {
-    if (isConfirmed) {
-      dispatch(reduxRegister(userInfo));
-    }
-  }, [isConfirmed]);
 
   return (
     <MainSection

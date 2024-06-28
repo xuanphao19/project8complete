@@ -4,10 +4,8 @@ import { Form, useFetcher, useMatch } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 import { TippyCustom } from "@/vendor";
-import { cityName } from "@/api";
+import { formFields, addFields, cityName } from "@/api";
 import { IconSvg, FormInput, FormInputSelect } from "@/component/";
-
-const dataInput = [];
 
 const UpdateAddress = forwardRef(({ children, newContent }, ref) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,7 +31,7 @@ const UpdateAddress = forwardRef(({ children, newContent }, ref) => {
   return (
     <TippyCustom
       ref={refTippy}
-      className="modal-address w-100 h-100 flex-center"
+      className="modal-address w-100 h-100"
       visible={isModalOpen}
       arrow={false}
       interactive="true"
@@ -122,7 +120,8 @@ const Content = memo(({ className, onClick }) => {
 
           <div className="py-3">
             <div className="row row-cols-2 gx-5 w-100">
-              {dataInput
+              {formFields
+                .filter((field) => addFields.includes(field.id))
                 .filter((field) => {
                   if (!matchProfile) {
                     return field.id !== "email";
@@ -276,7 +275,7 @@ const ConfirmDelete = ({ id, message = "", label = "Delete", action, children })
       <div
         className="toggle-modal"
         onClick={toggleModal}>
-        {showModal && <div className="overlay"></div>}
+        {showModal && <div className="overlay bg-opacity-50"></div>}
         {children}
       </div>
     </TippyCustom>

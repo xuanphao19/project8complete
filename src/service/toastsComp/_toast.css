@@ -27,7 +27,7 @@
   position: fixed;
   top: 3.2rem;
   right: 3.2rem;
-  width: Min(50rem, 100%);
+  width: Min(var(--width), 100%);
   background-clip: padding-box;
   opacity: 0;
   transform: translateX(0) translateY(0);
@@ -37,6 +37,7 @@
 
 .popup-toast .dreams-ctrl:active,
 .popup-toast .dreams-ctrl {
+  user-select: none;
   background-color: transparent;
 }
 
@@ -50,9 +51,9 @@
   background: #fff8ed;
 }
 
-.popup-toast.warning .dreams-ctrl {
+.popup-toast.warning .dreams-ctrl:not(.btn) {
   color: #d88700;
-  border-color: currentColor;
+  border-color: currentColor !important;
 }
 
 .popup-toast.success {
@@ -60,9 +61,9 @@
   background: #ecfff8;
 }
 
-.popup-toast.success .dreams-ctrl {
-  color: #00985f;
-  border-color: currentColor;
+.popup-toast.success .dreams-ctrl:not(.btn) {
+  color: #00985f !important;
+  border-color: currentColor !important;
 }
 
 .popup-toast.danger {
@@ -70,13 +71,14 @@
   background: #ffe3e3;
 }
 
-.popup-toast.danger .dreams-ctrl {
+.popup-toast.danger .dreams-ctrl:not(.btn) {
   color: #c50000;
-  border-color: currentColor;
+  border-color: currentColor !important;
 }
 
 .dreams-fly .dreams-ctrl {
   height: 4.6rem !important;
+  min-width: 12rem;
 }
 
 .popup-toast.center {
@@ -87,7 +89,7 @@
   left: 50%;
   translate: -50% -50%;
   transition: opacity 300ms, transform 300ms;
-  animation: opacity-in var(--duration, 0.3s) linear forwards;
+  animation: opacity-in var(--duration, 0.3s) linear forwards, center-scale var(--duration, 0.3s) linear forwards;
 }
 
 .popup-toast.appear-top {
@@ -242,6 +244,17 @@
   100% {
     transform: translateX(-100%);
     opacity: 0;
+  }
+}
+
+@keyframes center-scale {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 

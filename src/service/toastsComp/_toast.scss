@@ -27,7 +27,7 @@
   position: fixed;
   top: 3.2rem;
   right: 3.2rem;
-  width: Min(50rem, 100%);
+  width: Min(var(--width), 100%);
   background-clip: padding-box;
   opacity: 0;
   transform: translateX(0) translateY(0);
@@ -36,6 +36,7 @@
 
   .dreams-ctrl:active,
   .dreams-ctrl {
+    user-select: none;
     background-color: transparent;
   }
   .dreams-ctrl:active {
@@ -46,31 +47,32 @@
   &.warning {
     color: #d88700;
     background: #fff8ed;
-    .dreams-ctrl {
+    .dreams-ctrl:not(.btn) {
       color: #d88700;
-      border-color: currentColor;
+      border-color: currentColor !important;
     }
   }
   &.success {
     color: #00985f;
     background: #ecfff8;
-    .dreams-ctrl {
-      color: #00985f;
-      border-color: currentColor;
+    .dreams-ctrl:not(.btn) {
+      color: #00985f !important;
+      border-color: currentColor !important;
     }
   }
   &.danger {
     color: #c50000;
     background: #ffe3e3;
 
-    .dreams-ctrl {
+    .dreams-ctrl:not(.btn) {
       color: #c50000;
-      border-color: currentColor;
+      border-color: currentColor !important;
     }
   }
 }
 .dreams-fly .dreams-ctrl {
   height: 4.6rem !important;
+  min-width: 12rem;
 }
 .popup-toast {
   &.center {
@@ -81,7 +83,7 @@
     left: 50%;
     translate: -50% -50%;
     transition: opacity 300ms, transform 300ms;
-    animation: opacity-in var(--duration, 0.3s) linear forwards;
+    animation: opacity-in var(--duration, 0.3s) linear forwards, center-scale var(--duration, 0.3s) linear forwards;
   }
 
   &.appear-top {
@@ -218,6 +220,16 @@
   100% {
     transform: translateX(-100%);
     opacity: 0;
+  }
+}
+@keyframes center-scale {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 

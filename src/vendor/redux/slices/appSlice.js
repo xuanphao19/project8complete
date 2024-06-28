@@ -54,7 +54,6 @@ const appSlice = createSlice({
 
     logout: (state) => {
       state.user = action.payload;
-      console.log("str1", action.payload);
       updatedData("userData", action.payload);
     },
 

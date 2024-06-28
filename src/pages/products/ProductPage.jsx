@@ -12,10 +12,10 @@ const loader = async ({ params }) => {
   try {
     const id = params?.paramId;
     const loaderData = await fetchData("productsData", id);
-
     return loaderData;
   } catch (error) {
     console.log("Error in loader Products:", error);
+    return;
   }
 };
 

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, memo, useEffect } from "react";
 import { IconSvg } from "@/component";
 
-const OpenYourMail = memo(({ email, onClose }) => {
+const OpenYourMail = memo(({ email, className, onClose }) => {
   const [urlEmail, setUrlEmail] = useState("");
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const OpenYourMail = memo(({ email, onClose }) => {
 
   return (
     <a
-      className="open-mail btn flex-center btn-outline-primary w-100 p-3 fs-5"
+      className={`${className ? className : "open-mail btn flex-center btn-outline-primary w-100 p-3 fs-5"}`}
       href={urlEmail}
       target="_blank"
       rel="noopener noreferrer"

@@ -115,13 +115,13 @@ const formFields = [
     name: "fullName",
     label: "Full Name",
     type: "text",
-    placeholder: "Enter Full Name",
+    placeholder: "Enter Name",
     autoComplete: "on",
     required: true,
 
     icon: "Admin",
     classIcon: "text-success fs-4 cursor-pointer-auto",
-    iconError: "",
+    iconError: "icon-error",
   },
   {
     id: "username",
@@ -134,6 +134,19 @@ const formFields = [
 
     icon: "Admin",
     classIcon: "text-danger fs-4 cursor-pointer-auto",
+    iconError: "icon-error",
+  },
+  {
+    id: "phone",
+    name: "phone",
+    label: "Phone:",
+    type: "tel",
+    placeholder: "Enter Phone",
+    autoComplete: "off",
+    required: true,
+
+    icon: "phone",
+    classIcon: "text-primary fs-4 cursor-pointer-auto",
     iconError: "icon-error",
   },
   {
@@ -173,19 +186,7 @@ const formFields = [
     icon: true,
     iconError: "icon-error",
   },
-  {
-    id: "phone",
-    name: "phone",
-    label: "Phone:",
-    type: "tel",
-    placeholder: "Enter Phone",
-    autoComplete: "off",
-    required: true,
 
-    icon: "phone",
-    classIcon: "text-primary fs-4 cursor-pointer-auto",
-    iconError: "icon-error",
-  },
   {
     id: "address",
     name: "address",
@@ -198,6 +199,7 @@ const formFields = [
     as: "textarea",
     rows: 3,
   },
+
   {
     id: "holder",
     name: "card-holder",
@@ -232,6 +234,7 @@ const formFields = [
 ];
 
 const loginFields = ["email", "password"];
+const addFields = ["fullName", "phone", "email", "address"];
 const registerFieldLeft = ["firstName", "lastName", "username"];
 const registerFieldRight = ["email", "password", "confirmPassword"];
 const dataPayment = ["email", "holder", "cardNumber", "expire", "cvc", "icon-error"];
@@ -248,4 +251,15 @@ const genderOptions = [
   { id: "other", label: "Other", value: "other" },
 ];
 
-export { cityName, genderOptions, socialRegister, formFields, initialUserState, registerFieldLeft, registerFieldRight, loginFields, dataPayment };
+export {
+  cityName,
+  genderOptions,
+  socialRegister,
+  formFields,
+  initialUserState,
+  registerFieldLeft,
+  registerFieldRight,
+  loginFields,
+  dataPayment,
+  addFields,
+};
