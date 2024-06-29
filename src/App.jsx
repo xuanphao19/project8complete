@@ -42,6 +42,10 @@ function App() {
 
   const routerNested = useMemo(() => create(routers(nested(isVip, pages))), [isVip, pages]);
 
+  if (!user) {
+    return <Spinner className="vh-60 flex-center" />;
+  }
+
   return (
     routerNested && (
       <div

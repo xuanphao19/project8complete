@@ -45,7 +45,6 @@ const ProductPage = memo(() => {
   const checkoutAll = useMatch("products/checkout/all");
   const matchCheckout = useMatch("/products/checkout");
   const matchPay = useMatch("/products/checkout/shipping/payment");
-  const matchShipping = useMatch("/products/checkout/shipping");
 
   useEffect(() => {
     (async () => {
@@ -83,14 +82,13 @@ const ProductPage = memo(() => {
     if (matchCheckout) setProducts([getRandomItems(4, data)]);
   }, [matchCheckout]);
 
-  const renderProduct = useMemo(
-    () =>
-      products.length > 0 &&
-      products.map((items, i) => (
+  const renderProduct = useMemo(() => {
+    if (products.length > 0)
+      return products?.map((items, i) => (
         <Row
           key={i}
           className={`product-row0${i + 1} group-items synthetic mt-1 row-cols-1 row-cols-md-4 g-5 py-4 row-gap-5`}>
-          {items.map((product) => {
+          {items?.map((product) => {
             return (
               <React.Fragment key={`product${product.id}`}>
                 <CategoriesCards
@@ -128,11 +126,10 @@ const ProductPage = memo(() => {
             );
           })}
         </Row>
-      )),
-    [products],
-  );
+      ));
+  }, [products]);
 
-  if (!data || data.length <= 0) {
+  if (!data || data.length <= 0 || products.length <= 0) {
     return <Loading className="vh-60 flex-center" />;
   }
 

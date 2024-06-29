@@ -432,6 +432,12 @@
         background: rgba(0, 255, 38, 0.106) !important;
         border-color: rgb(180, 135, 0) !important;
       }
+      .count-btn .count {
+        width: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
 
     .ctrl-btn .btn {
@@ -464,7 +470,14 @@
     }
   }
 }
-
+.ctrl-item .count {
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
 body:has([data-tippy-root] .modal-address) {
   overflow-y: hidden;
 

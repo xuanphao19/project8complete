@@ -16,15 +16,17 @@ const loader = async ({ params }) => {
 };
 
 const ProductFastFilter = () => {
-  // Thanh Filter nhỏ hiển thị tại trang chủ!
   const [showModal, setShowModal] = useState(false);
   const [total, setTotal] = useState(1975);
   const { pathname } = useLocation();
   const { paramId } = useParams();
-  const { productsData } = useRouteLoaderData("root");
   const exactly = pathname.includes("/fastfilter");
-  const data = productsData.Grocery;
-  const products = useMemo(() => getRandomItems(3, data), []);
+  const { productsData } = useRouteLoaderData("root");
+  const [products, setProducts] = useState(null);
+  
+  useEffect(() => {
+    if (productsData) setProducts(getRandomItems(3, productsData.Grocery));
+  }, [productsData]);
 
   useEffect(() => {
     const random = Math.floor(Math.random() * (700 - 200) + 200);

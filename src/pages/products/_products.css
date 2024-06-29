@@ -484,6 +484,13 @@
   border-color: #b48700 !important;
 }
 
+.product-checkout .content .ctrl .count-btn .count-btn .count {
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .product-checkout .content .ctrl-btn .btn {
   color: #969696 !important;
   font-weight: 300;
@@ -517,6 +524,15 @@
 
 .product-checkout .select-all:hover {
   color: #0d6efd;
+}
+
+.ctrl-item .count {
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  flex-grow: 0;
 }
 
 body:has([data-tippy-root] .modal-address) {

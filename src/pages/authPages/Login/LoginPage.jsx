@@ -228,7 +228,7 @@ const LoginPage = () => {
                     <Col className="col-6">
                       <div className="dreams-ctrl flex-center w-100 ps-4 pe-2 rounded-4 flex-shrink-0">
                         <ModalVideojs
-                          startVolume={100}
+                          startVolume={95}
                           overlayOpacity={70}
                           videoUrl="/assets/video/phuongphahoclaptrinh.mp4">
                           <button

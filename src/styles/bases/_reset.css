@@ -555,6 +555,9 @@ input[data-autocompleted] {
     opacity: var(--opacity);
   }
 }
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 .anchor-point {
   width: 0;
   height: 0;

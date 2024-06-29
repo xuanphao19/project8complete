@@ -9,7 +9,8 @@ const VideoJs = forwardRef(
       height = "519",
       volValue = 10,
       classVideo,
-      playback = false,
+      muted = false,
+      isPlayback = false,
       getState = () => {},
       onTimeUpdate = () => {},
       srcThumb = "https://files.fullstack.edu.vn/f8-prod/public-images/65b67e8b9f5a4.png",
@@ -18,103 +19,154 @@ const VideoJs = forwardRef(
   ) => {
     const videoRef = useRef(null);
     const [isPlay, setIsPlay] = useState(false);
-    const [volume, setVolume] = useState(100);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isMuted, setIsMuted] = useState(muted);
+    const [volume, setVolume] = useState(volValue);
 
     useEffect(() => {
       setVolume(volValue);
-      if (videoRef.current) videoRef.current.volume = volValue * 0.01;
     }, [volValue]);
 
+    useEffect(() => {
+      if (videoRef.current) {
+        videoRef.current.muted = muted;
+        setIsMuted(muted);
+      }
+    }, [muted]);
+
     useImperativeHandle(ref, () => ({
-      play() {
-        handlePlay();
-      },
-      pause() {
-        handlePause();
-      },
-      playback() {
-        handlePlayback();
-      },
-      replay(timeReplay) {
-        if (timeReplay) videoRef.current.currentTime = timeReplay;
-      },
-      togglePlay() {
-        handleTogglePlay();
-      },
-      getCurrentTime() {
-        return videoRef.current ? videoRef.current.currentTime : 0;
-      },
-      getDuration() {
-        return videoRef.current ? videoRef.current.duration : 0;
-      },
-      volume(event) {
-        if (!videoRef.current || !event) return;
-        videoRef.current.volume = volume * 0.01;
-        const videoId = videoRef.current.id;
-        const volumeBtn = event.target?.closest(".volume-ctrl");
-        if (!volumeBtn) return {};
-        const btnName = volumeBtn?.getAttribute("name");
-        const currVolume = videoRef.current.volume;
-        if ((btnName === "increase" && volume === 100 && currVolume === 1) || (btnName === "minus" && volume === 0 && currVolume === 0)) {
-          volumeBtn?.classList.remove("counting");
-          return {};
-        } else {
-          const newNum = btnName === "increase" ? volume + 1 : btnName === "minus" && volume - 1;
-          volumeBtn?.classList.add("counting");
-          setVolume(newNum);
-          return { name: btnName, value: newNum, videoId: videoId };
-        }
-      },
+      play,
+      pause,
+      playback,
+      replay,
+      getVolume,
+      togglePlayPause,
+      getCurrentTime: () => videoRef.current?.currentTime || 0,
+      getDuration: () => videoRef.current?.duration || 0,
     }));
 
-    const handlePlay = useCallback(() => {
+    const play = useCallback(() => {
       if (videoRef.current) {
-        videoRef.current.volume = volume * 0.01;
+        videoRef.current.volume = volume / 100;
         videoRef.current.play();
-        setIsPlay(true);
-        getState(true);
+        setIsPlaying(true);
       }
-    }, [videoRef.current, volume]);
+    }, [volume]);
 
-    const handlePause = useCallback(() => {
+    const pause = useCallback(() => {
       if (videoRef.current) {
         videoRef.current.pause();
-        setIsPlay(false);
-        getState(false);
+        setIsPlaying(false);
       }
-    }, [videoRef.current]);
+    }, []);
 
-    const handlePlayback = useCallback(() => {
-      if (videoRef.current && playback) {
+    const playback = useCallback(() => {
+      if (videoRef.current && isPlayback) {
         videoRef.current.currentTime = 0;
-        handlePlay();
+        play();
       }
-    }, [videoRef.current, playback]);
+    }, [videoRef.current, isPlayback]);
+
+    const replay = useCallback(
+      (time) => {
+        if (videoRef.current && typeof time === "number") {
+          videoRef.current.currentTime = time;
+          play();
+        }
+      },
+      [play],
+    );
+
+    const togglePlayPause = useCallback(() => {
+      if (isPlaying) {
+        pause();
+      } else {
+        play();
+      }
+    }, [isPlaying, play, pause]);
+
+    const getVolume = useCallback(
+      (action) => {
+        let newVolume;
+        const videoId = videoRef.current?.id;
+        if (action === "increase") {
+          newVolume = Math.min(volume + 1, 100);
+        } else if (action === "minus") {
+          newVolume = Math.max(volume - 1, 0);
+        } else return {};
+
+        setVolume(newVolume);
+        videoRef.current.volume = newVolume / 100;
+        return { name: action, value: Math.floor(newVolume), videoId: videoId };
+      },
+      [volume],
+    );
+
+    useEffect(() => {
+      const video = videoRef.current;
+
+      const handlePlay = () => setIsPlaying(true);
+      const handlePause = () => setIsPlaying(false);
+      const handleVolumeChange = () => {
+        setVolume(video.volume * 100);
+        setIsMuted(video.muted);
+      };
+
+      video.addEventListener("play", handlePlay);
+      video.addEventListener("pause", handlePause);
+      video.addEventListener("volumechange", handleVolumeChange);
+
+      return () => {
+        video.removeEventListener("play", handlePlay);
+        video.removeEventListener("pause", handlePause);
+        video.removeEventListener("volumechange", handleVolumeChange);
+      };
+    }, []);
 
     const handleOnEnded = useCallback(() => {
-      if (videoRef.current && playback) {
+      if (videoRef.current && isPlayback) {
         videoRef.current.currentTime = 0;
-        handlePlay();
+        play();
       } else {
         videoRef.current.currentTime = 0;
-        handlePause();
+        pause();
       }
-    }, [videoRef.current, playback]);
-
-    const handleTogglePlay = useCallback(() => {
-      if (!videoRef.current) return;
-      if (isPlay) {
-        handlePause();
-      } else {
-        handlePlay();
-      }
-    }, [videoRef.current, isPlay, handlePause, handlePlay]);
+    }, [videoRef.current, isPlayback]);
 
     const getTimeUpdate = useCallback(() => {
       if (onTimeUpdate) {
         onTimeUpdate(videoRef.current.currentTime);
       }
     }, [videoRef.current, onTimeUpdate]);
+
+    useEffect(() => {
+      if (videoRef.current) videoRef.current.volume = volume / 100;
+    }, [volume]);
+
+    useEffect(() => {
+      const video = videoRef.current;
+
+      const handlePlay = () => setIsPlay(true);
+      const handlePause = () => setIsPlay(false);
+      const handleVolumeChange = () => {
+        setVolume(video.volume * 100);
+        setIsMuted(video.muted);
+      };
+
+      video.addEventListener("play", handlePlay);
+      video.addEventListener("pause", handlePause);
+      video.addEventListener("volumechange", handleVolumeChange);
+
+      return () => {
+        video.removeEventListener("play", handlePlay);
+        video.removeEventListener("pause", handlePause);
+        video.removeEventListener("volumechange", handleVolumeChange);
+      };
+    }, []);
+
+    useEffect(() => {
+      getState({ isPlaying: isPlay, volume: Math.floor(volume), isMuted: isMuted });
+    }, [isPlay, volume, isMuted]);
 
     return (
       <div className="video-js position-relative flex-center user-select-none">
@@ -135,7 +187,7 @@ const VideoJs = forwardRef(
               alt="thumbnail"
               style={{ transition: "opacity 0.8s ease-in-out" }}
               className={`thumb-img w-100 h-100 object-fit-cover ${isPlay ? " opacity-0" : ""}`}
-              onClick={handleTogglePlay}
+              onClick={togglePlayPause}
             />
           </div>
         )}
@@ -143,4 +195,5 @@ const VideoJs = forwardRef(
     );
   },
 );
+
 export default memo(VideoJs);

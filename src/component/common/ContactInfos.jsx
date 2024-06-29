@@ -14,6 +14,8 @@ const ContactInfo = ({ title = "", address = "", email = "", phone = "", childre
       {address && <span className="address ps-3">{address}</span>}
       {email && (
         <a
+          target="_blank"
+          rel="noopener noreferrer"
           className="email fs-4 ps-3 fst-italic d-flex align-items-end"
           href={`mailto:${email}?subject=Chào bạn&body= %0A%0A%0A--Vui lòng nhập phản hồi của bạn ở đây--%0A`}>
           <span className="fs-3 pe-3">

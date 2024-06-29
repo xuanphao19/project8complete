@@ -5,11 +5,11 @@ const callPhone = (phoneNumber = "0979351075") => {
   window.location.href = `tel:+84 ${phoneNumber}`;
 };
 
-const removePreloader = (selector: string) => {
+const removePreloader = (selector) => {
   selectElement(selector)?.remove();
 };
 
-const appendSymbol = (source: any, data: any) => {
+const appendSymbol = (source, data) => {
   const symbol = data.getElementById(`${source}`);
   if (!symbol) return `Not found symbol: ${source}`;
 
@@ -32,7 +32,7 @@ const appendSymbol = (source: any, data: any) => {
   }
 };
 
-const getRandomItems = (quota: 0, data: any) => {
+const getRandomItems = (quota, data) => {
   const remainingItems = [...data];
   const randomItems = [];
   for (let i = 0; i < quota; i++) {
@@ -44,7 +44,7 @@ const getRandomItems = (quota: 0, data: any) => {
   return randomItems;
 };
 
-const getRandomNumber = (min: number, max: number) => {
+const getRandomNumber = (min, max) => {
   const numbers = Array.from({ length: max - min + 1 }, (_, i) => min + i);
   let number = 0;
   while (numbers.length > 0) {
@@ -55,8 +55,8 @@ const getRandomNumber = (min: number, max: number) => {
   return number;
 };
 
-const getWifeNeighbors = (array: any, id: any, x = 1) => {
-  const index = array.findIndex((item: any) => item.id === id);
+const getWifeNeighbors = (array, id, x = 1) => {
+  const index = array.findIndex((item) => item.id === id);
   if (index === -1) return ["ID không hợp lệ"];
 
   const half = Math.floor((x - 1) / 2);
@@ -71,9 +71,22 @@ const getWifeNeighbors = (array: any, id: any, x = 1) => {
   return array.slice(start, end);
 };
 
-// const getDate = (string) => {
-//   let [_, month, day, year] = /(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(string);
-//   return new Date(year, month - 1, day);
-// };
+const handleFullscreen = (id) => {
+  const node = document.getElementById(id);
+  if (node.requestFullscreen) {
+    node.requestFullscreen();
+  } else if (node.mozRequestFullScreen) {
+    node.mozRequestFullScreen();
+  } else if (node.webkitRequestFullscreen) {
+    node.webkitRequestFullscreen();
+  } else if (node.msRequestFullscreen) {
+    node.msRequestFullscreen();
+  }
+};
 
-export { callPhone, getRandomNumber, getRandomItems, removePreloader, appendSymbol, getWifeNeighbors };
+const getDate = (string) => {
+  let [_, month, day, year] = /(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(string);
+  return new Date(year, month - 1, day);
+};
+
+export { callPhone, getRandomNumber, getRandomItems, removePreloader, appendSymbol, getWifeNeighbors, getDate, handleFullscreen };

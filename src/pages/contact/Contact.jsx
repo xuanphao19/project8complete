@@ -1,11 +1,20 @@
-import React, { useState } from "react";
-import { Col, Row, Button, Form, FormControl, FormGroup } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Col, Row, Button, Form } from "react-bootstrap";
+import { FormControl, FormGroup } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { MainSection, IconSvg } from "@/component";
+import { handleFullscreen } from "@/utils/";
 
 const Contact = () => {
   const [loading, setLoading] = useState();
   const [success, setSuccess] = useState();
+  const [email, setEmail] = useState("nguyenthanhhoa075@gmail.com");
+  const user = useSelector((state) => state.app.user);
   const [error, setError] = useState();
+
+  useEffect(() => {
+    if (user && user.email) setEmail(user.email);
+  }, [user]);
 
   return (
     <MainSection
@@ -30,6 +39,7 @@ const Contact = () => {
                 <IconSvg
                   link="map-pin"
                   className="icon-ctrl p-3 fs-12 bg-info-subtle bg-opacity-25 border border-info border-opacity-50 rounded-pill"
+                  onClick={() => handleFullscreen("google-map")}
                 />
                 <h3 className="mt-4 fs-4 fw-lighter">Our Address</h3>
                 <p className="mt-2 fs-6 fw-lighter">Yên Bình Yên Nghĩa Hà Nội Việt Nam</p>
@@ -38,10 +48,16 @@ const Contact = () => {
 
             <Col className="col-12 col-sm-10 col-md-5 ms-md-auto me-md-0 col-lg-3 mt-5 mt-lg-0 mx-auto">
               <div className="py-4 rounded-4 border shadow">
-                <IconSvg
-                  link="envelope"
-                  className="icon-ctrl p-3 fs-12 bg-warning-subtle bg-opacity-25 border border-warning border-opacity-50 rounded-pill"
-                />
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`mailto:${email}?subject=Chào bạn&body= %0A%0A%0A--Vui lòng nhập phản hồi của bạn ở đây--%0A`}
+                  className="">
+                  <IconSvg
+                    link="envelope"
+                    className="icon-ctrl p-3 fs-12 bg-warning-subtle bg-opacity-25 border border-warning border-opacity-50 rounded-pill"
+                  />
+                </a>
                 <h3 className="mt-4 fs-4 fw-lighter">Email Us</h3>
                 <p className="mt-2 fs-6 fw-lighter">contact@example.com</p>
               </div>
@@ -49,12 +65,18 @@ const Contact = () => {
 
             <Col className="col-12 col-sm-10 col-md-5 me-md-auto ms-md-0 col-lg-3 mt-5 mt-lg-0 mx-auto">
               <div className="py-4 rounded-4 border shadow">
-                <IconSvg
-                  link="phone-arrow-up-right"
-                  className="icon-ctrl p-3 fs-12 bg-info-subtle bg-opacity-25 border border-info border-opacity-50 rounded-pill"
-                />
+                <a
+                  className="tel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="tel:+84979351075">
+                  <IconSvg
+                    link="phone-arrow-up-right"
+                    className="icon-ctrl p-3 fs-12 bg-info-subtle bg-opacity-25 border border-info border-opacity-50 rounded-pill"
+                  />
+                </a>
                 <h3 className="mt-4 fs-4 fw-lighter">Call Us</h3>
-                <p className="mt-2 fs-6 fw-lighter">+ 84 09793 . 51075</p>
+                <p className="mt-2 fs-6 fw-lighter">+ 84 9999 . 999 . 999</p>
               </div>
             </Col>
           </Row>
@@ -63,6 +85,7 @@ const Contact = () => {
             <Col className="col-12 col-sm-10 col-lg-6 mt-5 mt-lg-0 mx-auto">
               <div className="p-4 border rounded-4 shadow">
                 <iframe
+                  id="google-map"
                   loading="lazy"
                   allowFullScreen=""
                   className="rounded-4 shadow-sm"
