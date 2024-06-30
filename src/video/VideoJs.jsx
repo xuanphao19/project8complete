@@ -18,7 +18,6 @@ const VideoJs = forwardRef(
     ref,
   ) => {
     const videoRef = useRef(null);
-    const [isPlay, setIsPlay] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(muted);
     const [volume, setVolume] = useState(volValue);
@@ -144,29 +143,8 @@ const VideoJs = forwardRef(
     }, [volume]);
 
     useEffect(() => {
-      const video = videoRef.current;
-
-      const handlePlay = () => setIsPlay(true);
-      const handlePause = () => setIsPlay(false);
-      const handleVolumeChange = () => {
-        setVolume(video.volume * 100);
-        setIsMuted(video.muted);
-      };
-
-      video.addEventListener("play", handlePlay);
-      video.addEventListener("pause", handlePause);
-      video.addEventListener("volumechange", handleVolumeChange);
-
-      return () => {
-        video.removeEventListener("play", handlePlay);
-        video.removeEventListener("pause", handlePause);
-        video.removeEventListener("volumechange", handleVolumeChange);
-      };
-    }, []);
-
-    useEffect(() => {
-      getState({ isPlaying: isPlay, volume: Math.floor(volume), isMuted: isMuted });
-    }, [isPlay, volume, isMuted]);
+      getState({ isPlaying: isPlaying, volume: Math.floor(volume), isMuted: isMuted });
+    }, [isPlaying, volume, isMuted]);
 
     return (
       <div className="video-js position-relative flex-center user-select-none">
@@ -177,17 +155,17 @@ const VideoJs = forwardRef(
           src={videoUrl}
           width={width}
           height={height}
+          onClick={togglePlayPause}
           onEnded={handleOnEnded}
           onTimeUpdate={getTimeUpdate}
         />
         {srcThumb && (
-          <div className="thumb-video position-absolute inset-full">
+          <div className={`thumb-video${isPlaying ? " hidden" : "z-3"} position-absolute inset-full`}>
             <img
               src={srcThumb}
               alt="thumbnail"
-              style={{ transition: "opacity 0.8s ease-in-out" }}
-              className={`thumb-img w-100 h-100 object-fit-cover ${isPlay ? " opacity-0" : ""}`}
-              onClick={togglePlayPause}
+              style={{ transition: "opacity 1s ease-in-out" }}
+              className={`thumb-img w-100 h-100 object-fit-cover ${isPlaying ? " opacity-0" : ""}`}
             />
           </div>
         )}

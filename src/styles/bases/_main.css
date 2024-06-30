@@ -589,6 +589,20 @@ input#password[type="text"] + .custom-control label {
   display: none;
 }
 
+.thumb-video.hidden {
+  animation: index-hidden 1.5s linear forwards !important;
+}
+
+.thumb-video .thumb-img {
+  transition: opacity 1s linear;
+}
+
+@keyframes index-hidden {
+  to {
+    z-index: -1;
+  }
+}
+
 /* ** section-home */
 #footer [name="TikTok-icon-color"] {
   transform: translateY(-50%) rotate(10deg);

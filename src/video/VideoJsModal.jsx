@@ -223,7 +223,7 @@ const ModalVideo = memo(({ videoId = "video1", children, videoUrl, overlayOpacit
             {videoState.isPlay && (
               <Fragment>
                 <div
-                  className="progress-bar pt-3 pb-4 px-5 w-100 position-absolute start-0 bottom-0 cursor-pointer opacity-10 hover-100 z-9"
+                  className={`progress-bar pt-3 pb-4 px-5 w-100 position-absolute start-0 bottom-0 cursor-pointer opacity-10 hover-100 z-9 bg-black bg-opacity-10`}
                   style={{ transition: "opacity 0.35s ease-in-out" }}
                   onClick={handleProgressBar}>
                   <div
