@@ -141,12 +141,11 @@
     height: 96%;
   }
   .nav-item {
-    margin-top: 6px;
     &:nth-child(even) a {
       --bs-bg-opacity: 1;
     }
     .nav-link {
-      border: 1px solid transparent;
+      margin: 0 !important;
       height: 5.6rem;
     }
   }

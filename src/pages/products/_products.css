@@ -162,16 +162,12 @@
   height: 96%;
 }
 
-.nav-sidebar .nav-item {
-  margin-top: 6px;
-}
-
 .nav-sidebar .nav-item:nth-child(even) a {
   --bs-bg-opacity: 1;
 }
 
 .nav-sidebar .nav-item .nav-link {
-  border: 1px solid transparent;
+  margin: 0 !important;
   height: 5.6rem;
 }
 
