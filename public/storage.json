@@ -21,9 +21,9 @@
   },
 
   "themeData": {
-    "icon": "Sun",
-    "iconFill": "text-danger",
-    "theme": "light"
+    "iconFill": "text-warning",
+    "icon": "Mon-and-star",
+    "theme": "dark"
   },
 
   "productsData": {
